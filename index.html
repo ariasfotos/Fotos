@@ -46,11 +46,37 @@ section{padding:7rem 5%}
 .hero-right{overflow:hidden;position:relative}
 .hero-right-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.04)}
 
+/* ====== FONDOS CON TEXTURA ====== */
+/* Patron de puntos — secciones claras */
+.bg-dots{
+  background-color:#f7f7f7;
+  background-image:radial-gradient(circle,#d0d0d0 1px,transparent 1px);
+  background-size:22px 22px;
+}
+/* Patron de lineas diagonales — secciones alternadas */
+.bg-lines{
+  background-color:#fafafa;
+  background-image:repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(0,0,0,.028) 8px,
+    rgba(0,0,0,.028) 9px
+  );
+}
+/* Grid fino — secciones blancas */
+.bg-grid{
+  background-color:#fff;
+  background-image:
+    linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);
+  background-size:32px 32px;
+}
 /* COTIZADOR */
-#servicios{background:#fafafa}
+#servicios{background-color:#f7f7f7;background-image:radial-gradient(circle,#d0d0d0 1px,transparent 1px);background-size:22px 22px;}
 .cot-intro{font-size:.84rem;color:#666;margin-bottom:2.5rem;max-width:540px;line-height:1.8}
 .srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8}
-.srv-card{background:#fff;padding:2.4rem 2.2rem;cursor:pointer;user-select:none;transition:background .2s;position:relative}
+.srv-card{background:#fff;padding:2.4rem 2.2rem;cursor:pointer;user-select:none;transition:background .2s;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .srv-card:hover{background:#f8f8f8}
 .srv-card.active{background:#1a3a6b}
 .srv-check{position:absolute;top:1.2rem;right:1.2rem;width:20px;height:20px;border:1.5px solid #d0d0d0;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:transparent;transition:all .2s}
@@ -82,7 +108,7 @@ section{padding:7rem 5%}
 .btn-bar-white:hover{background:#eee}
 
 /* PORTFOLIO */
-#portfolio{background:#fff;padding-bottom:5rem}
+#portfolio{background-color:#fff;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:32px 32px;padding-bottom:5rem}
 .gal{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-top:3rem}
 .gi{overflow:hidden}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease,filter .3s;filter:brightness(.96) grayscale(.08)}
@@ -92,27 +118,31 @@ section{padding:7rem 5%}
 .g3,.g4,.g5{grid-column:span 4;height:290px}
 
 /* SOBRE MI */
-#sobre{background:#fafafa}
+#sobre{background-color:#fafafa;background-image:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(0,0,0,.025) 8px,rgba(0,0,0,.025) 9px);}
 .sobre-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3rem}
 .sobre-img{height:520px;overflow:hidden;position:relative}
 .sobre-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
 .sobre-text h3{font-size:1.6rem;font-weight:700;line-height:1.2;margin-bottom:1.2rem}
 .sobre-text p{color:#666;font-size:.86rem;line-height:1.9;margin-bottom:1.2rem}
 .sobre-text strong{color:#111;font-weight:700}
+.sobre-stats{display:flex;gap:2.5rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #ececec}
+.stat-item{display:flex;flex-direction:column;gap:.2rem}
+.stat-n{font-size:2rem;font-weight:700;color:#1a3a6b;line-height:1}
+.stat-l{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#aaa}
 
 /* ENTREGA */
-#entrega{background:#fff}
+#entrega{background-color:#fff;background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);background-size:28px 28px;}
 .del-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;margin-top:3rem}
-.del-item{background:#fff;padding:2.2rem 1.8rem;transition:background .2s}
+.del-item{background:#fff;padding:2.2rem 1.8rem;transition:background .2s;box-shadow:0 2px 10px rgba(0,0,0,.055)}
 .del-item:hover{background:#fafafa}
 .del-n{font-size:2.6rem;font-weight:700;color:#ececec;line-height:1;margin-bottom:1.2rem}
 .del-t{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
 .del-d{font-size:.78rem;color:#777;line-height:1.8}
 
 /* RESERVAS */
-#reservas{background:#fafafa}
+#reservas{background-color:#f5f5f5;background-image:radial-gradient(circle,#c8c8c8 1px,transparent 1px);background-size:20px 20px;}
 .res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
-.cal-widget{border:1px solid #e8e8e8;background:#fff}
+.cal-widget{border:1px solid #e8e8e8;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.07)}
 .cal-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.6rem;border-bottom:1px solid #e8e8e8;background:#fafafa}
 .cal-head h3{font-size:.95rem;font-weight:700;letter-spacing:.04em}
 .cal-nav{display:flex;gap:.4rem}
@@ -357,11 +387,10 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <div class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">CABA y Provincia de Buenos Aires</p>
-    <h1 class="hero-title">Fotos<br>Arias.</h1>
-    <p class="hero-story">Empecé a fotografiar porque creía que los momentos más importantes de la vida se merecen algo más que un recuerdo borroso. Hoy trabajo bodas, quinceañeras y sesiones de pareja con una sola obsesión: que cada foto cuente lo que las palabras no pueden.</p>
-    <p class="hero-tagline">Estoy acá para capturar los mejores momentos de tu vida.</p>
+    <h1 class="hero-title">Tu<br>momento<br>merece<br>quedar.</h1>
+    <p class="hero-tagline">Bodas · Quinceañeras · Sesiones · Invitaciones digitales</p>
     <div class="hero-btns">
-      <a href="#servicios" class="btn btn-dark">Ver servicios</a>
+      <a href="#servicios" class="btn btn-dark">Ver qué hago</a>
       <a href="#reservas" class="btn btn-outline">Reservar fecha</a>
     </div>
   </div>
@@ -371,10 +400,10 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <!-- COTIZADOR -->
 <section id="servicios">
   <div class="mx">
-    <p class="sec-label rev">Servicios y precios</p>
-    <h2 class="sec-title rev">Armá tu paquete</h2>
+    <p class="sec-label rev">¿Qué necesitás?</p>
+    <h2 class="sec-title rev">Elegí y listo.</h2>
     <div class="sec-line rev"></div>
-    <p class="cot-intro rev">Seleccioná uno o varios servicios — el total se calcula solo. Podés combinar lo que quieras.</p>
+    <p class="cot-intro rev">Tocá los que necesitás — el precio se calcula solo. Podés combinar todo lo que quieras.</p>
     <div class="srv-grid rev" id="srvGrid">
 
       <div class="srv-card d1" data-id="boda" data-price="560000" data-name="Boda" onclick="toggleSrv(this)">
@@ -477,7 +506,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <section id="portfolio">
   <div class="mx">
     <p class="sec-label rev">Portfolio</p>
-    <h2 class="sec-title rev">El trabajo habla solo.</h2>
+    <h2 class="sec-title rev">Las fotos no mienten.</h2>
     <div class="sec-line rev"></div>
     <div class="gal rev">
       <div class="gi g1"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Boda"><div class="gi-overlay"><span>Boda</span></div></div>
@@ -493,18 +522,22 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <section id="sobre">
   <div class="mx">
     <p class="sec-label rev">Sobre mí</p>
-    <h2 class="sec-title rev">Quién está detrás de la cámara</h2>
+    <h2 class="sec-title rev">Hola, soy Elias.</h2>
     <div class="sec-line rev"></div>
     <div class="sobre-wrap">
       <div class="sobre-img rev-left">
         <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80" alt="Fotografo trabajando">
       </div>
       <div class="sobre-text rev-right">
-        <h3>Hola, soy Arias.<br>Fotógrafo de momentos que importan.</h3>
-        <p>Empecé en la fotografía sin saber bien que era una vocación. Con el tiempo entendí que lo que me mueve no es la técnica — es estar en el lugar exacto cuando algo real sucede.</p>
-        <p>Trabajo en <strong>CABA y toda la provincia de Buenos Aires</strong>, cubriendo bodas, quinceañeras y sesiones familiares o de pareja. Cada trabajo es diferente. Cada historia merece ser contada con honestidad.</p>
-        <p>Mi objetivo es simple: que cuando veas las fotos, vuelvas a sentir lo que sentiste ese día.</p>
-        <a href="#reservas" class="btn btn-outline" style="margin-top:.8rem">Reservar fecha</a>
+        <h3>Fotógrafo de eventos<br>en CABA y toda la provincia.</h3>
+        <p>Bodas, quinceañeras, sesiones de pareja o familia. Trabajo en <strong>CABA y toda la provincia de Buenos Aires</strong> con un solo objetivo: que cada foto sea un recuerdo que valga la pena guardar.</p>
+        <p>Sin poses raras. Sin fotos aburridas. Solo momentos reales, bien capturados.</p>
+        <div class="sobre-stats">
+          <div class="stat-item"><span class="stat-n">100+</span><span class="stat-l">Eventos</span></div>
+          <div class="stat-item"><span class="stat-n">7</span><span class="stat-l">Días de entrega</span></div>
+          <div class="stat-item"><span class="stat-n">∞</span><span class="stat-l">Fotos editadas</span></div>
+        </div>
+        <a href="#reservas" class="btn btn-outline" style="margin-top:1.5rem">Reservar fecha</a>
       </div>
     </div>
   </div>
@@ -514,7 +547,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <section id="entrega">
   <div class="mx">
     <p class="sec-label rev">Entrega</p>
-    <h2 class="sec-title rev">Cómo recibís tus fotos</h2>
+    <h2 class="sec-title rev">Así recibís todo.</h2>
     <div class="sec-line rev"></div>
     <div class="del-grid rev">
       <div class="del-item">
@@ -545,7 +578,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <section id="reservas">
   <div class="mx">
     <p class="sec-label rev">Disponibilidad</p>
-    <h2 class="sec-title rev">Reservá tu fecha</h2>
+    <h2 class="sec-title rev">¿Cuándo es tu evento?</h2>
     <div class="sec-line rev"></div>
     <div class="res-wrap">
       <div class="cal-widget rev">
@@ -590,7 +623,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
     <div class="ct-grid">
       <div class="rev">
         <p class="sec-label">Contacto</p>
-        <h2 class="ct-big">Hablemos<br>de tu<br>evento.</h2>
+        <h2 class="ct-big">¿Hablamos<br>de tu<br>evento?</h2>
       </div>
       <div class="ct-info rev">
         <div class="ct-item">
@@ -894,7 +927,13 @@ function submitBooking(){
 }
 
 // ====== CONTRATO OVERLAY ======
-function openContract(){ syncSelToContract(); document.getElementById('ctrOverlay').classList.add('open'); document.body.style.overflow='hidden'; initSigPad(); setStep(1); }
+function openContract(){
+  syncSelToContract();
+  document.getElementById('ctrOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  initSigPad();
+  setStep(1);
+}
 function closeContract(){ document.getElementById('ctrOverlay').classList.remove('open'); document.body.style.overflow=''; }
 
 function setStep(n){
@@ -1124,7 +1163,8 @@ function buildPDF(){
   doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...BK);
   doc.text('FOTOS ARIAS — PRESTADOR', 112, sigBaseY + 8);
   doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GY);
-  doc.text('Arias Fotografía', 112, sigBaseY + 14);
+  doc.text('Elias Arias', 112, sigBaseY + 14);
+  doc.text('DNI: 42.663.250', 112, sigBaseY + 20);
   doc.text('ariasfotos6@gmail.com', 112, sigBaseY + 20);
 
   // Footer
