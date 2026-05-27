@@ -4,389 +4,507 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fotos Arias</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0d0b09;--bg2:#161410;--bg3:#1e1b17;
-  --text:#e4ddd3;--muted:#9a9088;
-  --gold:#c9a96e;--gold-l:#e0c99a;
-  --border:rgba(201,169,110,0.18);
-  --fd:'Cormorant Garamond',Georgia,serif;
-  --fb:'Jost',sans-serif;
-}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;line-height:1.65;overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.6rem 4rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(13,11,9,.9),transparent);transition:all .4s}
-nav.sc{background:rgba(13,11,9,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 4rem}
-.nav-logo{font-family:var(--fd);font-size:1.5rem;font-weight:400;letter-spacing:.15em;color:var(--gold);text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:#fff;border-bottom:1px solid #ececec;padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:62px}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#111;text-decoration:none}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:var(--text);text-decoration:none;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;transition:color .3s}
-.nav-links a:hover{color:var(--gold)}
+.nav-links a{color:#666;text-decoration:none;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:#111}
+.nav-cta{background:#1a3a6b;color:#fff;padding:.5rem 1.4rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .2s;cursor:pointer;border:none;font-family:Arial}
+.nav-cta:hover{background:#0f2648}
+
+/* UTILS */
+.btn{display:inline-block;padding:.8rem 2.2rem;font-family:Arial,Helvetica,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
+.btn-dark{background:#1a3a6b;color:#fff}
+.btn-dark:hover{background:#0f2648}
+.btn-outline{background:transparent;color:#111;border:1.5px solid #111}
+.btn-outline:hover{background:#111;color:#fff}
+.btn-white{background:#fff;color:#111}
+.btn-white:hover{background:#f0f0f0}
+.btn-full{width:100%;display:block;text-align:center}
+
+section{padding:7rem 5%}
+.mx{max-width:1200px;margin:0 auto}
+.sec-label{font-size:.62rem;letter-spacing:.45em;text-transform:uppercase;color:#aaa;margin-bottom:.8rem}
+.sec-title{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:700;line-height:1.05;margin-bottom:1.2rem}
+.sec-line{width:36px;height:2px;background:#1a3a6b;margin-bottom:3rem}
+.muted{color:#888}
 
 /* HERO */
-.hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,11,9,.25) 0%,rgba(13,11,9,.75) 100%),url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1600&q=80') center/cover no-repeat}
-.hero-c{position:relative;text-align:center;padding:2rem}
-.eyebrow{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fu 1s .3s forwards}
-.hero-title{font-family:var(--fd);font-size:clamp(4rem,11vw,10rem);font-weight:300;line-height:.95;margin-bottom:1.5rem;opacity:0;animation:fu 1s .5s forwards}
-.hero-title em{font-style:italic;color:var(--gold-l)}
-.hero-sub{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:3rem;opacity:0;animation:fu 1s .7s forwards}
-.hero-cta{display:inline-flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fu 1s .9s forwards}
-.btn{display:inline-block;padding:.85rem 2.4rem;font-family:var(--fb);font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
-.btn-gold{background:var(--gold);color:var(--bg);border:1px solid var(--gold)}
-.btn-gold:hover{background:var(--gold-l);border-color:var(--gold-l)}
-.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(228,221,211,.3)}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fu 1s 1.2s forwards}
-.scroll-hint span{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:62px}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 6% 5rem 5%;background:#fff}
+.hero-eyebrow{font-size:.64rem;letter-spacing:.4em;text-transform:uppercase;color:#aaa;margin-bottom:1.8rem}
+.hero-title{font-size:clamp(3rem,6vw,5.8rem);font-weight:700;line-height:.95;margin-bottom:1.8rem;letter-spacing:-.02em}
+.hero-story{font-size:.88rem;color:#555;margin-bottom:.8rem;line-height:1.85;max-width:440px;border-left:2px solid #1a3a6b;padding-left:1.2rem}
+.hero-tagline{font-size:.82rem;color:#111;font-weight:700;margin-bottom:2.5rem;letter-spacing:.04em}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-right{overflow:hidden;position:relative}
+.hero-right-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.04)}
 
-/* SECTIONS */
-section{padding:7rem 4rem}
-.mx{max-width:1200px;margin:0 auto}
-.label{font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.stitle{font-family:var(--fd);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.1;margin-bottom:1.5rem}
-.stitle em{font-style:italic;color:var(--gold-l)}
-.divider{width:56px;height:1px;background:var(--gold);margin-bottom:3.5rem}
+/* COTIZADOR */
+#servicios{background:#fafafa}
+.cot-intro{font-size:.84rem;color:#666;margin-bottom:2.5rem;max-width:540px;line-height:1.8}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8}
+.srv-card{background:#fff;padding:2.4rem 2.2rem;cursor:pointer;user-select:none;transition:background .2s;position:relative}
+.srv-card:hover{background:#f8f8f8}
+.srv-card.active{background:#1a3a6b}
+.srv-check{position:absolute;top:1.2rem;right:1.2rem;width:20px;height:20px;border:1.5px solid #d0d0d0;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:transparent;transition:all .2s}
+.srv-card.active .srv-check{background:#fff;border-color:#fff;color:#1a3a6b}
+.srv-num{font-size:2.6rem;font-weight:700;color:#f0f0f0;line-height:1;margin-bottom:1.2rem;transition:color .2s}
+.srv-card.active .srv-num{color:rgba(255,255,255,.12)}
+.srv-name{font-size:1.2rem;font-weight:700;margin-bottom:.3rem;transition:color .2s}
+.srv-card.active .srv-name{color:#fff}
+.srv-price-tag{font-size:.8rem;font-weight:700;color:#888;margin-bottom:.9rem;transition:color .2s}
+.srv-card.active .srv-price-tag{color:#bbb}
+.srv-desc{font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.75;transition:color .2s}
+.srv-card.active .srv-desc{color:#999}
+.srv-det{display:flex;flex-direction:column;gap:.3rem}
+.srv-det span{font-size:.73rem;color:#aaa;display:flex;align-items:baseline;gap:.5rem;transition:color .2s}
+.srv-det span::before{content:'';width:10px;height:1px;background:#ddd;flex-shrink:0}
+.srv-card.active .srv-det span{color:#777}
+.srv-card.active .srv-det span::before{background:#555}
 
-/* ====== SERVICIOS ====== */
-#servicios{background:var(--bg2)}
-.srv-intro{max-width:600px;color:var(--muted);font-size:.88rem;line-height:1.9;margin-bottom:3.5rem}
+/* TOTAL BAR */
+.total-bar{position:sticky;bottom:0;z-index:50;background:#1a3a6b;padding:1.1rem 5%;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;transform:translateY(100%);transition:transform .35s}
+.total-bar.show{transform:translateY(0)}
+.total-info{display:flex;flex-direction:column;gap:.2rem}
+.total-services-txt{font-size:.73rem;color:#888;letter-spacing:.04em}
+.total-price{font-size:1.55rem;font-weight:700;color:#fff}
+.total-actions{display:flex;gap:.8rem;align-items:center}
+.btn-wout{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:.7rem 1.8rem;font-family:Arial;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-wout:hover{border-color:#fff}
+.btn-bar-white{background:#fff;color:#111;padding:.7rem 1.8rem;font-family:Arial;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s}
+.btn-bar-white:hover{background:#eee}
 
-/* Package selector */
-.pkg-section{margin-bottom:4rem}
-.pkg-title{font-family:var(--fd);font-size:1.1rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
-.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border)}
-
-.pkg-card{background:var(--bg2);padding:2.2rem 2rem;cursor:pointer;transition:background .3s;position:relative;user-select:none}
-.pkg-card:hover{background:var(--bg3)}
-.pkg-card.selected{background:var(--bg3)}
-.pkg-card.selected::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
-.pkg-check{position:absolute;top:1.4rem;right:1.4rem;width:22px;height:22px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:.8rem;color:transparent}
-.pkg-card.selected .pkg-check{border-color:var(--gold);background:var(--gold);color:var(--bg)}
-.pkg-name{font-family:var(--fd);font-size:1.4rem;font-weight:400;margin-bottom:.5rem;padding-right:2rem}
-.pkg-price{font-size:.82rem;color:var(--gold);letter-spacing:.08em;margin-bottom:1rem}
-.pkg-details{display:flex;flex-direction:column;gap:.35rem}
-.pkg-det-item{font-size:.78rem;color:var(--muted);display:flex;align-items:flex-start;gap:.7rem;line-height:1.5}
-.pkg-det-item::before{content:'—';color:var(--gold);flex-shrink:0;margin-top:.05em}
-
-/* Total */
-.total-bar{position:sticky;bottom:0;background:rgba(13,11,9,.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:1.4rem 0;margin-top:3rem;display:flex;justify-content:space-between;align-items:center;z-index:50}
-.total-left{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.total-selected{font-size:.78rem;color:var(--muted);margin-top:.3rem;min-height:1.2em}
-.total-amount{font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--gold-l)}
-.total-amount span{font-size:.75rem;letter-spacing:.1em;vertical-align:middle;margin-right:.3rem;color:var(--muted)}
-.total-actions{display:flex;gap:1rem;align-items:center}
-
-/* GALLERY */
-#portfolio{background:var(--bg)}
-.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin-top:3.5rem}
+/* PORTFOLIO */
+#portfolio{background:#fff;padding-bottom:5rem}
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-top:3rem}
 .gi{overflow:hidden}
-.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease,filter .4s;filter:brightness(.88)}
-.gi:hover img{transform:scale(1.04);filter:brightness(1)}
-.g1{grid-column:span 7;height:420px}
-.g2{grid-column:span 5;height:420px}
-.g3,.g4,.g5{grid-column:span 4;height:300px}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease,filter .3s;filter:brightness(.96) grayscale(.08)}
+.gi:hover img{transform:scale(1.04);filter:brightness(1) grayscale(0)}
+.g1{grid-column:span 7;height:440px}
+.g2{grid-column:span 5;height:440px}
+.g3,.g4,.g5{grid-column:span 4;height:290px}
 
-/* INVITACION */
-#invitacion{background:var(--bg2)}
-.inv-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
-.inv-preview{position:relative;border:1px solid var(--border);overflow:hidden;height:580px}
-.inv-preview iframe{width:200%;height:200%;border:0;transform:scale(.5);transform-origin:top left;pointer-events:none}
-.inv-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:2rem;background:linear-gradient(to top,rgba(13,11,9,.85) 0%,transparent 50%)}
-.inv-text h3{font-family:var(--fd);font-size:2.1rem;font-weight:300;line-height:1.2;margin-bottom:1.2rem}
-.inv-text p{color:var(--muted);font-size:.85rem;line-height:1.9;margin-bottom:1.8rem}
-.inv-feat{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.2rem}
-.inv-feat-item{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:1rem}
-.inv-feat-item::before{content:'';width:18px;height:1px;background:var(--gold);flex-shrink:0}
+/* SOBRE MI */
+#sobre{background:#fafafa}
+.sobre-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3rem}
+.sobre-img{height:520px;overflow:hidden;position:relative}
+.sobre-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
+.sobre-text h3{font-size:1.6rem;font-weight:700;line-height:1.2;margin-bottom:1.2rem}
+.sobre-text p{color:#666;font-size:.86rem;line-height:1.9;margin-bottom:1.2rem}
+.sobre-text strong{color:#111;font-weight:700}
 
 /* ENTREGA */
-#entrega{background:var(--bg)}
-.del-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3.5rem}
-.del-item{padding:2.4rem 2rem;border:1px solid var(--border);transition:border-color .3s}
-.del-item:hover{border-color:var(--gold)}
-.del-n{font-family:var(--fd);font-size:3rem;color:var(--gold);line-height:1;margin-bottom:1.4rem;opacity:.6}
-.del-t{font-family:var(--fd);font-size:1.3rem;margin-bottom:.7rem}
-.del-d{font-size:.82rem;color:var(--muted);line-height:1.85}
+#entrega{background:#fff}
+.del-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;margin-top:3rem}
+.del-item{background:#fff;padding:2.2rem 1.8rem;transition:background .2s}
+.del-item:hover{background:#fafafa}
+.del-n{font-size:2.6rem;font-weight:700;color:#ececec;line-height:1;margin-bottom:1.2rem}
+.del-t{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.del-d{font-size:.78rem;color:#777;line-height:1.8}
 
 /* RESERVAS */
-#reservas{background:var(--bg2)}
-.res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3.5rem;align-items:start}
-.cal-widget{border:1px solid var(--border)}
-.cal-head{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 1.8rem;border-bottom:1px solid var(--border)}
-.cal-head h3{font-family:var(--fd);font-weight:400;font-size:1.25rem}
-.cal-nav-btns{display:flex;gap:.4rem}
-.cnav{background:none;border:1px solid var(--border);color:var(--text);width:30px;height:30px;cursor:pointer;transition:all .2s;font-size:.9rem}
-.cnav:hover{border-color:var(--gold);color:var(--gold)}
-.cal-body{padding:1.4rem}
-.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
-.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cd{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer;transition:all .2s;border:1px solid transparent}
-.cd:hover:not(.dis):not(.bk){border-color:var(--gold);color:var(--gold)}
-.cd.sel{background:var(--gold);color:var(--bg)}
-.cd.bk{text-decoration:line-through;color:var(--muted);cursor:not-allowed;opacity:.35}
-.cd.dis{opacity:.2;cursor:not-allowed}
+#reservas{background:#fafafa}
+.res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
+.cal-widget{border:1px solid #e8e8e8;background:#fff}
+.cal-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.6rem;border-bottom:1px solid #e8e8e8;background:#fafafa}
+.cal-head h3{font-size:.95rem;font-weight:700;letter-spacing:.04em}
+.cal-nav{display:flex;gap:.4rem}
+.cnav{background:#fff;border:1px solid #e0e0e0;color:#111;width:30px;height:30px;cursor:pointer;transition:all .2s;font-size:.9rem}
+.cnav:hover{background:#111;color:#fff;border-color:#111}
+.cal-body{padding:1.2rem}
+.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#ccc;margin-bottom:.5rem}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cd{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer;transition:all .18s;border:1px solid transparent}
+.cd:hover:not(.dis):not(.bk){border-color:#111;background:#f8f8f8}
+.cd.sel{background:#111;color:#fff}
+.cd.bk{text-decoration:line-through;color:#ddd;cursor:not-allowed}
+.cd.dis{opacity:.3;cursor:not-allowed}
 .cd.emp{cursor:default}
-.cd.tdy{color:var(--gold);font-weight:500}
-.cal-leg{display:flex;gap:1.5rem;padding:.9rem 1.4rem;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted)}
-.ld{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.3rem}
-
-.bk-form{display:flex;flex-direction:column;gap:1.1rem}
-.fg{display:flex;flex-direction:column;gap:.35rem}
-.fg label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.85rem 1.1rem;font-family:var(--fb);font-size:.84rem;outline:none;transition:border .3s;width:100%}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
-.fg select option{background:var(--bg3)}
-.fg textarea{resize:vertical;min-height:75px}
-.date-display{font-size:.8rem;color:var(--muted);padding:.8rem 1.1rem;background:var(--bg3);border:1px solid var(--border)}
-.date-display span{color:var(--gold)}
-
-/* CONTRATO */
-#contrato{background:var(--bg)}
-.ctr-wrap{max-width:780px;margin:3.5rem auto 0}
-.ctr-box{border:1px solid var(--border);padding:3.5rem}
-.ctr-box h3{font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:.4rem}
-.ctr-box .sub{font-size:.8rem;color:var(--muted);margin-bottom:2.2rem}
-.fr{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.terms-box{font-size:.77rem;color:var(--muted);line-height:1.85;padding:1.3rem;background:var(--bg3);border:1px solid var(--border);max-height:175px;overflow-y:auto}
-.terms-box::-webkit-scrollbar{width:3px}
-.terms-box::-webkit-scrollbar-thumb{background:var(--border)}
-.check-row{display:flex;align-items:flex-start;gap:.9rem;font-size:.8rem;color:var(--muted)}
-.check-row input{accent-color:var(--gold);width:14px;height:14px;margin-top:3px;flex-shrink:0}
-.sig-wrap{border:1px solid var(--border);background:var(--bg3)}
-.sig-lbl{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:.7rem 1.1rem;border-bottom:1px solid var(--border)}
-.sig-wrap canvas{display:block;width:100%;height:140px}
-.sig-ctrl{display:flex;justify-content:flex-end;padding:.45rem 1rem;border-top:1px solid var(--border)}
-.sig-clr{background:none;border:none;font-size:.7rem;color:var(--muted);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.sig-clr:hover{color:var(--gold)}
+.cd.tdy{font-weight:700;color:#111}
+.cal-leg{display:flex;gap:1.5rem;padding:.8rem 1.2rem;border-top:1px solid #e8e8e8;font-size:.66rem;color:#aaa;background:#fafafa}
+.ld{display:inline-block;width:8px;height:8px;margin-right:.3rem}
+.bk-form{display:flex;flex-direction:column;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.3rem}
+.fg label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#999;font-weight:700}
+.fg input,.fg select,.fg textarea{background:#fff;border:1px solid #e0e0e0;color:#111;padding:.8rem 1rem;font-family:Arial;font-size:.84rem;outline:none;transition:border .2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#111}
+.fg textarea{resize:vertical;min-height:70px}
+.info-box{font-size:.8rem;color:#777;padding:.8rem 1rem;background:#fafafa;border:1px solid #e8e8e8;min-height:2.8rem;line-height:1.6}
+.info-box strong{color:#111}
 
 /* CONTACTO */
-#contacto{background:var(--bg2)}
-.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3.5rem;align-items:center}
-.ct-big{font-family:var(--fd);font-size:clamp(2rem,4.5vw,3.8rem);font-weight:300;line-height:1.2}
-.ct-big em{font-style:italic;color:var(--gold-l)}
+#contacto{background:#111;color:#fff}
+#contacto .sec-label{color:#666}
+#contacto .sec-title{color:#fff}
+#contacto .sec-line{background:#fff}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;align-items:center}
+.ct-big{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1;letter-spacing:-.02em;color:#fff}
 .ct-info{display:flex;flex-direction:column;gap:2rem}
-.ct-item{display:flex;flex-direction:column;gap:.3rem}
-.ct-item-l{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-.ct-item-v{font-family:var(--fd);font-size:1.3rem;font-weight:300;color:var(--text);text-decoration:none;transition:color .2s}
-.ct-item-v:hover{color:var(--gold)}
+.ct-item{display:flex;flex-direction:column;gap:.25rem}
+.ct-item-l{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#666}
+.ct-item-v{font-size:1.05rem;color:#fff;text-decoration:none;transition:color .2s;font-weight:700}
+.ct-item-v:hover{color:#bbb}
 
-footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
-.fl{font-family:var(--fd);font-size:1.2rem;color:var(--gold);text-decoration:none}
+footer{padding:1.5rem 5%;border-top:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:#555;background:#111}
+.fl{font-size:.95rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.14em;text-transform:uppercase}
 
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--gold);color:var(--text);padding:1rem 1.5rem;font-size:.8rem;z-index:9999;opacity:0;transform:translateY(16px);transition:all .35s;pointer-events:none;max-width:320px}
+/* ============================================================
+   CONTRATO — OVERLAY DE PAGINA COMPLETA
+   ============================================================ */
+#ctrOverlay{
+  position:fixed;inset:0;z-index:500;
+  background:#fff;overflow-y:auto;
+  opacity:0;pointer-events:none;transform:translateY(30px);
+  transition:opacity .35s,transform .35s;
+}
+#ctrOverlay.open{opacity:1;pointer-events:all;transform:translateY(0)}
+
+.ctr-nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #ececec;padding:0 5%;height:58px;display:flex;align-items:center;justify-content:space-between}
+.ctr-nav-logo{font-size:.95rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.ctr-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#111;padding:.3rem .6rem;transition:color .2s}
+.ctr-close:hover{color:#e00}
+
+/* Steps */
+.ctr-steps{display:flex;align-items:center;justify-content:center;gap:0;border-bottom:1px solid #ececec;padding:.9rem 5%}
+.step{display:flex;align-items:center;gap:.6rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ccc;padding:.4rem 1.2rem}
+.step.active{color:#111}
+.step.done{color:#888}
+.step-n{width:22px;height:22px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.63rem;flex-shrink:0}
+.step.done .step-n{background:#1a3a6b;border-color:#1a3a6b;color:#fff}
+.step-sep{width:36px;height:1px;background:#e0e0e0}
+
+/* Step content */
+.ctr-body{max-width:820px;margin:0 auto;padding:3.5rem 5% 5rem}
+.ctr-step-panel{display:none}
+.ctr-step-panel.active{display:block}
+
+/* Step 1 */
+.ctr-section-title{font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#aaa;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid #ececec;display:block}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.terms{font-size:.76rem;color:#666;line-height:1.85;padding:1.2rem;background:#fafafa;border:1px solid #ececec;max-height:160px;overflow-y:auto;margin-bottom:1rem}
+.terms::-webkit-scrollbar{width:3px}
+.terms::-webkit-scrollbar-thumb{background:#ddd}
+.check-row{display:flex;align-items:flex-start;gap:.8rem;font-size:.8rem;color:#555;margin-bottom:1.5rem}
+.check-row input{accent-color:#111;width:14px;height:14px;margin-top:3px;flex-shrink:0}
+.sig-wrap{border:1.5px solid #e0e0e0;margin-bottom:.5rem}
+.sig-lbl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#aaa;padding:.6rem 1rem;border-bottom:1px solid #ececec;background:#fafafa;display:flex;justify-content:space-between;align-items:center}
+.sig-clr{background:none;border:none;font-size:.66rem;color:#aaa;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;transition:color .2s}
+.sig-clr:hover{color:#111}
+.sig-wrap canvas{display:block;width:100%;height:130px;background:#fff}
+.sig-note{font-size:.7rem;color:#ccc;margin-bottom:2rem}
+
+/* Step 2 — Pago */
+.pay-box{border:1.5px solid #e0e0e0;padding:2.5rem}
+.pay-summary{margin-bottom:2.2rem}
+.pay-row{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid #f0f0f0;font-size:.85rem}
+.pay-row:last-child{border-bottom:none}
+.pay-total-row{display:flex;justify-content:space-between;padding:.8rem 0;border-top:2px solid #111;margin-top:.5rem;font-size:1.1rem;font-weight:700}
+.pay-sena-row{display:flex;justify-content:space-between;padding:.5rem 0;font-size:.82rem;color:#777}
+.pay-inst{background:#fafafa;border:1px solid #ececec;padding:1.2rem;font-size:.8rem;color:#555;line-height:1.75;margin-bottom:1.5rem}
+.pay-inst strong{color:#111}
+
+/* Step 3 — Confirmacion */
+.confirm-box{text-align:center;padding:4rem 2rem}
+.confirm-icon{width:56px;height:56px;border:2px solid #111;display:inline-flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:2rem}
+.confirm-box h3{font-size:1.7rem;font-weight:700;margin-bottom:.8rem}
+.confirm-box p{color:#666;font-size:.88rem;line-height:1.8;max-width:440px;margin:0 auto 2rem}
+.confirm-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:#111;color:#fff;padding:1rem 1.5rem;font-size:.78rem;z-index:999;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;max-width:300px;font-family:Arial}
 .toast.show{opacity:1;transform:translateY(0)}
 
-@keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.rev{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
-.rev.vis{opacity:1;transform:translateY(0)}
+/* ====== CURSOR PERSONALIZADO ====== */
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+.cursor-ring{width:38px;height:38px;border:1.5px solid rgba(255,255,255,.65);border-radius:50%;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+.cursor-ring.hovered{width:54px;height:54px;border-color:rgba(255,255,255,.95)}
+.cursor-dot.hovered{width:4px;height:4px}
 
+/* ====== LOADER ====== */
+#loader{position:fixed;inset:0;z-index:9000;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .7s .1s,transform .7s .1s}
+#loader.out{opacity:0;transform:translateY(-100%);pointer-events:none}
+.loader-logo{font-size:1.3rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#111;opacity:0;animation:loaderIn .6s .2s forwards}
+.loader-sub{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:#aaa;opacity:0;animation:loaderIn .6s .4s forwards}
+.loader-bar-wrap{width:180px;height:1px;background:#ececec;overflow:hidden}
+.loader-bar{height:100%;background:#1a3a6b;width:0;animation:loaderFill 1.4s .5s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes loaderIn{to{opacity:1}}
+@keyframes loaderFill{to{width:100%}}
+
+/* ====== REVEAL ====== */
+.rev{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.rev.vis{opacity:1;transform:translateY(0)}
+.rev-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.rev-left.vis{opacity:1;transform:translateX(0)}
+.rev-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.rev-right.vis{opacity:1;transform:translateX(0)}
+.rev-scale{opacity:0;transform:scale(.93);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.rev-scale.vis{opacity:1;transform:scale(1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.7s}
+
+/* ====== HERO ANIMACIONES ====== */
+.hero-eyebrow,.hero-title,.hero-story,.hero-tagline,.hero-btns{opacity:0;transform:translateY(24px)}
+.hero-eyebrow{animation:heroIn .75s .35s cubic-bezier(.4,0,.2,1) forwards}
+.hero-title{animation:heroIn .85s .55s cubic-bezier(.4,0,.2,1) forwards}
+.hero-story{animation:heroIn .85s .75s cubic-bezier(.4,0,.2,1) forwards}
+.hero-tagline{animation:heroIn .75s .92s cubic-bezier(.4,0,.2,1) forwards}
+.hero-btns{animation:heroIn .75s 1.08s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
+.hero-right{overflow:hidden;position:relative}
+.hero-right-img{width:100%;height:100%;background:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&q=85') center/cover no-repeat;transform:scale(1.08);animation:heroImgIn 1.4s .2s cubic-bezier(.4,0,.2,1) forwards;will-change:transform}
+@keyframes heroImgIn{to{transform:scale(1)}}
+
+/* ====== NAV SCROLL ====== */
+nav{transition:box-shadow .4s,background .4s,border-color .4s}
+nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
+
+/* ====== CARDS HOVER ====== */
+.srv-card{transition:background .25s,transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
+.srv-card:hover:not(.active){transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.09)}
+.srv-card.active{transform:translateY(-4px);box-shadow:0 16px 40px rgba(26,58,107,.25)}
+.del-item{transition:background .2s,transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
+.del-item:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.08)}
+
+/* ====== PORTFOLIO ====== */
+.gi{position:relative;overflow:hidden}
+.gi-overlay{position:absolute;inset:0;background:rgba(26,58,107,.72);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s cubic-bezier(.4,0,.2,1)}
+.gi:hover .gi-overlay{opacity:1}
+.gi-overlay span{color:#fff;font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;transform:translateY(12px);transition:transform .42s cubic-bezier(.4,0,.2,1) .05s;opacity:0;transition:transform .42s cubic-bezier(.4,0,.2,1),opacity .42s cubic-bezier(.4,0,.2,1)}
+.gi:hover .gi-overlay span{transform:translateY(0);opacity:1}
+.gi img{transition:transform .65s cubic-bezier(.4,0,.2,1),filter .4s}
+.gi:hover img{transform:scale(1.07);filter:brightness(1)}
+
+/* ====== BOTONES RIPPLE ====== */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.14);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.btn:hover::after{transform:scaleX(1)}
+.btn-outline::after{background:rgba(26,58,107,.07)}
+
+/* ====== LÍNEA ANIMADA ====== */
+.sec-line{width:0;transition:width .9s .2s cubic-bezier(.4,0,.2,1)}
+.sec-line.vis{width:36px}
+
+/* ====== SOBRE ====== */
+.sobre-img img{transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.sobre-img:hover img{transform:scale(1.04)}
+
+/* ====== INPUTS ====== */
+.fg input,.fg select,.fg textarea{transition:border .25s,box-shadow .25s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#1a3a6b;box-shadow:0 0 0 3px rgba(26,58,107,.09)}
+
+/* ====== CONTRATO ====== */
+#ctrOverlay{transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1)}
+
+/* RESPONSIVE */
 @media(max-width:900px){
-  nav{padding:1.2rem 1.5rem}nav.sc{padding:.8rem 1.5rem}.nav-links{display:none}
-  section{padding:5rem 1.5rem}
+  nav{padding:0 4%}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:5rem 4% 3rem}
+  .hero-right{height:55vw;min-height:260px}
+  section{padding:4rem 4%}
+  .srv-grid,.del-grid{grid-template-columns:1fr;background:none;border:none;gap:1px}
+  .srv-card,.del-item{border:1px solid #e8e8e8}
   .gal{grid-template-columns:1fr 1fr}.g1,.g2,.g3,.g4,.g5{grid-column:span 1;height:180px}
-  .inv-wrap,.res-wrap,.ct-grid{grid-template-columns:1fr}
-  .inv-preview{height:340px}.fr{grid-template-columns:1fr}
-  .ctr-box{padding:2rem 1.4rem}
-  footer{flex-direction:column;gap:.8rem;text-align:center}
-  .hero-cta{flex-direction:column;align-items:center}
-  .total-bar{flex-direction:column;gap:1rem;text-align:center;position:relative}
-  .total-actions{width:100%;justify-content:center}
+  .sobre-wrap,.res-wrap,.ct-grid{grid-template-columns:1fr}
+  .sobre-img{height:300px}
+  .fr2{grid-template-columns:1fr}
+  .ctr-body{padding:2rem 4% 4rem}
+  footer{flex-direction:column;gap:.6rem;text-align:center}
+  .total-bar{padding:1rem 4%}
+  .step-sep{width:16px}
+  .step span:not(.step-n){display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- CURSOR -->
+<div class="cursor" id="cursorWrap">
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Fotos Arias</div>
+  <div class="loader-sub">Fotografía</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Fotos Arias</a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#invitacion">Invitaciones</a></li>
+    <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="#entrega">Entrega</a></li>
     <li><a href="#reservas">Reservar</a></li>
-    <li><a href="#contrato">Contrato</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
+  <button class="nav-cta" onclick="openContract()">Cerrar contrato</button>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-c">
-    <p class="eyebrow">CABA y Provincia de Buenos Aires</p>
-    <h1 class="hero-title">Fotos<br><em>Arias</em></h1>
-    <p class="hero-sub">Bodas · Quinceañeras · Sesiones · Invitaciones digitales</p>
-    <div class="hero-cta">
-      <a href="#servicios" class="btn btn-gold">Ver servicios y precios</a>
+  <div class="hero-left">
+    <p class="hero-eyebrow">CABA y Provincia de Buenos Aires</p>
+    <h1 class="hero-title">Fotos<br>Arias.</h1>
+    <p class="hero-story">Empecé a fotografiar porque creía que los momentos más importantes de la vida se merecen algo más que un recuerdo borroso. Hoy trabajo bodas, quinceañeras y sesiones de pareja con una sola obsesión: que cada foto cuente lo que las palabras no pueden.</p>
+    <p class="hero-tagline">Estoy acá para capturar los mejores momentos de tu vida.</p>
+    <div class="hero-btns">
+      <a href="#servicios" class="btn btn-dark">Ver servicios</a>
       <a href="#reservas" class="btn btn-outline">Reservar fecha</a>
     </div>
   </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="hero-right"><div class="hero-right-img"></div></div>
 </div>
 
-<!-- SERVICIOS -->
+<!-- COTIZADOR -->
 <section id="servicios">
   <div class="mx">
-    <p class="label rev">Servicios</p>
-    <h2 class="stitle rev">Arma tu<br><em>paquete ideal</em></h2>
-    <div class="divider rev"></div>
-    <p class="srv-intro rev">Selecciona uno o varios servicios y el total se calcula automaticamente. Podes combinar lo que quieras.</p>
+    <p class="sec-label rev">Servicios y precios</p>
+    <h2 class="sec-title rev">Armá tu paquete</h2>
+    <div class="sec-line rev"></div>
+    <p class="cot-intro rev">Seleccioná uno o varios servicios — el total se calcula solo. Podés combinar lo que quieras.</p>
+    <div class="srv-grid rev" id="srvGrid">
 
-    <!-- EVENTOS -->
-    <div class="pkg-section rev">
-      <div class="pkg-title">Eventos</div>
-      <div class="pkg-grid" id="pkgGrid">
-
-        <div class="pkg-card" data-id="boda" data-price="560000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">Boda</div>
-          <div class="pkg-price">$560.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Cobertura completa: ceremonia y fiesta</div>
-            <div class="pkg-det-item">Toda la duracion del evento</div>
-            <div class="pkg-det-item">Fotos ilimitadas editadas</div>
-            <div class="pkg-det-item">Entrega digital por mail y Lightroom</div>
-            <div class="pkg-det-item">Plazo de entrega: 1 semana</div>
-          </div>
+      <div class="srv-card d1" data-id="boda" data-price="560000" data-name="Boda" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">01</div>
+        <div class="srv-name">Boda</div>
+        <div class="srv-price-tag">$560.000</div>
+        <p class="srv-desc">Cobertura completa del día, desde la preparación hasta el cierre de la fiesta.</p>
+        <div class="srv-det">
+          <span>Ceremonia civil o religiosa</span>
+          <span>Fiesta sin límite de horas</span>
+          <span>Fotos ilimitadas editadas</span>
+          <span>Entrega en 7 días hábiles</span>
         </div>
-
-        <div class="pkg-card" data-id="preboda" data-price="250000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">Pre boda</div>
-          <div class="pkg-price">$250.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Sesion fotografica previa al casamiento</div>
-            <div class="pkg-det-item">Duracion: 2 horas</div>
-            <div class="pkg-det-item">Locacion a eleccion del cliente</div>
-            <div class="pkg-det-item">Viaticos a cargo del cliente</div>
-            <div class="pkg-det-item">Fotos ilimitadas editadas</div>
-            <div class="pkg-det-item">Entrega digital por mail y Lightroom</div>
-            <div class="pkg-det-item">Plazo de entrega: 1 semana</div>
-          </div>
-        </div>
-
-        <div class="pkg-card" data-id="quince" data-price="560000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">15 años</div>
-          <div class="pkg-price">$560.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Cobertura completa de la fiesta</div>
-            <div class="pkg-det-item">Toda la duracion del evento</div>
-            <div class="pkg-det-item">Fotos ilimitadas editadas</div>
-            <div class="pkg-det-item">Entrega digital por mail y Lightroom</div>
-            <div class="pkg-det-item">Plazo de entrega: 1 semana</div>
-          </div>
-        </div>
-
-        <div class="pkg-card" data-id="prefiesta" data-price="150000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">Pre fiesta</div>
-          <div class="pkg-price">$150.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Sesion fotografica previa al festejo de 15</div>
-            <div class="pkg-det-item">Duracion: 2 horas</div>
-            <div class="pkg-det-item">Locacion a eleccion del cliente</div>
-            <div class="pkg-det-item">Viaticos a cargo del cliente</div>
-            <div class="pkg-det-item">Fotos ilimitadas editadas</div>
-            <div class="pkg-det-item">Entrega digital por mail y Lightroom</div>
-            <div class="pkg-det-item">Plazo de entrega: 1 semana</div>
-          </div>
-        </div>
-
-        <div class="pkg-card" data-id="sesion" data-price="180000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">Sesion de fotos</div>
-          <div class="pkg-price">$180.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Parejas, familias o individuales</div>
-            <div class="pkg-det-item">Duracion: 3 horas</div>
-            <div class="pkg-det-item">Locacion a eleccion del cliente</div>
-            <div class="pkg-det-item">Fotos ilimitadas editadas</div>
-            <div class="pkg-det-item">Entrega digital por mail y Lightroom</div>
-            <div class="pkg-det-item">Plazo de entrega: 1 semana</div>
-          </div>
-        </div>
-
-        <div class="pkg-card" data-id="invitacion" data-price="40000" onclick="togglePkg(this)">
-          <div class="pkg-check">&#10003;</div>
-          <div class="pkg-name">Invitacion web</div>
-          <div class="pkg-price">$40.000</div>
-          <div class="pkg-details">
-            <div class="pkg-det-item">Pagina web personalizada para tu evento</div>
-            <div class="pkg-det-item">Diseno unico segun tu paleta y estilo</div>
-            <div class="pkg-det-item">Animaciones y musica de fondo</div>
-            <div class="pkg-det-item">Link propio para compartir</div>
-            <div class="pkg-det-item">Listo para enviar por WhatsApp</div>
-          </div>
-        </div>
-
       </div>
+
+      <div class="srv-card d2" data-id="preboda" data-price="250000" data-name="Pre boda" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">02</div>
+        <div class="srv-name">Pre boda</div>
+        <div class="srv-price-tag">$250.000</div>
+        <p class="srv-desc">Sesión artística antes del casamiento en la locación que elijan.</p>
+        <div class="srv-det">
+          <span>Duración: 2 horas</span>
+          <span>Locación a elección</span>
+          <span>Fotos ilimitadas editadas</span>
+          <span>Entrega en 7 días hábiles</span>
+        </div>
+      </div>
+
+      <div class="srv-card d3" data-id="quince" data-price="560000" data-name="15 años" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">03</div>
+        <div class="srv-name">15 años</div>
+        <div class="srv-price-tag">$560.000</div>
+        <p class="srv-desc">Cobertura completa de la fiesta de quince, desde la llegada hasta el cierre.</p>
+        <div class="srv-det">
+          <span>Fiesta completa</span>
+          <span>Fotos ilimitadas editadas</span>
+          <span>Entrega en 7 días hábiles</span>
+        </div>
+      </div>
+
+      <div class="srv-card d4" data-id="prefiesta" data-price="150000" data-name="Pre fiesta 15" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">04</div>
+        <div class="srv-name">Pre fiesta 15</div>
+        <div class="srv-price-tag">$150.000</div>
+        <p class="srv-desc">Sesión antes del festejo en la locación que elijan. Un recuerdo antes de la gran noche.</p>
+        <div class="srv-det">
+          <span>Duración: 2 horas</span>
+          <span>Locación a elección</span>
+          <span>Fotos ilimitadas editadas</span>
+        </div>
+      </div>
+
+      <div class="srv-card d5" data-id="sesion" data-price="180000" data-name="Sesion de fotos" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">05</div>
+        <div class="srv-name">Sesión de fotos</div>
+        <div class="srv-price-tag">$180.000</div>
+        <p class="srv-desc">Para parejas, familias o individuos. Natural, sin poses forzadas, en locación a elección.</p>
+        <div class="srv-det">
+          <span>Duración: 3 horas</span>
+          <span>Fotos ilimitadas editadas</span>
+          <span>Entrega en 7 días hábiles</span>
+        </div>
+      </div>
+
+      <div class="srv-card d6" data-id="invitacion" data-price="40000" data-name="Invitacion digital" onclick="toggleSrv(this)">
+        <div class="srv-check">&#10003;</div>
+        <div class="srv-num">06</div>
+        <div class="srv-name">Invitación digital</div>
+        <div class="srv-price-tag">$40.000</div>
+        <p class="srv-desc">Página web personalizada para tu evento. Elegante, animada y lista para compartir.</p>
+        <div class="srv-det">
+          <span>Diseño personalizado</span>
+          <span>Animaciones y música</span>
+          <span>Link propio para compartir</span>
+        </div>
+      </div>
+
     </div>
-
-    <!-- TOTAL BAR -->
-    <div class="total-bar rev">
-      <div>
-        <div class="total-left">Total seleccionado</div>
-        <div class="total-selected" id="selectedList">Ningún servicio seleccionado</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
-        <div class="total-amount"><span>$</span><span id="totalAmt">0</span></div>
-        <div class="total-actions">
-          <a href="#reservas" class="btn btn-outline" id="btnReservar" style="opacity:.4;pointer-events:none">Reservar</a>
-          <button class="btn btn-gold" id="btnWA" onclick="consultarWA()" style="opacity:.4;pointer-events:none">Consultar por WhatsApp</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
+
+<!-- TOTAL BAR -->
+<div class="total-bar" id="totalBar">
+  <div class="total-info">
+    <span class="total-services-txt" id="totalServicesTxt"></span>
+    <span class="total-price" id="totalPrice"></span>
+  </div>
+  <div class="total-actions">
+    <button class="btn-wout" onclick="document.getElementById('reservas').scrollIntoView({behavior:'smooth'})">Reservar fecha</button>
+    <button class="btn-bar-white" onclick="openContract()">Cerrar contrato</button>
+  </div>
+</div>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
   <div class="mx">
-    <p class="label rev">Portfolio</p>
-    <h2 class="stitle rev">El trabajo<br><em>habla solo</em></h2>
-    <div class="divider rev"></div>
+    <p class="sec-label rev">Portfolio</p>
+    <h2 class="sec-title rev">El trabajo habla solo.</h2>
+    <div class="sec-line rev"></div>
     <div class="gal rev">
-      <div class="gi g1"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Boda"></div>
-      <div class="gi g2"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=80" alt="Quinceañera"></div>
-      <div class="gi g3"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Sesion"></div>
-      <div class="gi g4"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Boda 2"></div>
-      <div class="gi g5"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Pareja"></div>
+      <div class="gi g1"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Boda"><div class="gi-overlay"><span>Boda</span></div></div>
+      <div class="gi g2"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=80" alt="Quinceañera"><div class="gi-overlay"><span>Quinceañera</span></div></div>
+      <div class="gi g3"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Sesion"><div class="gi-overlay"><span>Sesión</span></div></div>
+      <div class="gi g4"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Boda 2"><div class="gi-overlay"><span>Boda</span></div></div>
+      <div class="gi g5"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Pareja"><div class="gi-overlay"><span>Pareja</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- INVITACION -->
-<section id="invitacion">
+<!-- SOBRE MI -->
+<section id="sobre">
   <div class="mx">
-    <p class="label rev">Invitaciones digitales</p>
-    <h2 class="stitle rev">Una invitacion<br><em>que se comparte</em></h2>
-    <div class="divider rev"></div>
-    <div class="inv-wrap">
-      <div class="inv-preview rev">
-        <iframe src="https://xiomara15-source.github.io/15xiomara/" loading="lazy" scrolling="no" title="Ejemplo de invitacion digital"></iframe>
-        <div class="inv-overlay">
-          <a href="https://xiomara15-source.github.io/15xiomara/" target="_blank" class="btn btn-gold">Ver invitacion completa</a>
-        </div>
+    <p class="sec-label rev">Sobre mí</p>
+    <h2 class="sec-title rev">Quién está detrás de la cámara</h2>
+    <div class="sec-line rev"></div>
+    <div class="sobre-wrap">
+      <div class="sobre-img rev-left">
+        <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80" alt="Fotografo trabajando">
       </div>
-      <div class="inv-text rev">
-        <h3>Invitaciones personalizadas para cada evento</h3>
-        <p>Paginas web de invitacion para XV, bodas o cualquier celebracion. Se comparten con un link, se ven en cualquier celular y estan pensadas para sorprender a cada invitado.</p>
-        <div class="inv-feat">
-          <div class="inv-feat-item">Diseno unico segun tu evento y paleta de colores</div>
-          <div class="inv-feat-item">Animaciones y musica de fondo incluidas</div>
-          <div class="inv-feat-item">Link personalizado para compartir por WhatsApp</div>
-          <div class="inv-feat-item">Sin costos de impresion ni reparto</div>
-          <div class="inv-feat-item">Compatible con cualquier celular</div>
-        </div>
-        <a href="#servicios" class="btn btn-outline">Ver precio</a>
+      <div class="sobre-text rev-right">
+        <h3>Hola, soy Arias.<br>Fotógrafo de momentos que importan.</h3>
+        <p>Empecé en la fotografía sin saber bien que era una vocación. Con el tiempo entendí que lo que me mueve no es la técnica — es estar en el lugar exacto cuando algo real sucede.</p>
+        <p>Trabajo en <strong>CABA y toda la provincia de Buenos Aires</strong>, cubriendo bodas, quinceañeras y sesiones familiares o de pareja. Cada trabajo es diferente. Cada historia merece ser contada con honestidad.</p>
+        <p>Mi objetivo es simple: que cuando veas las fotos, vuelvas a sentir lo que sentiste ese día.</p>
+        <a href="#reservas" class="btn btn-outline" style="margin-top:.8rem">Reservar fecha</a>
       </div>
     </div>
   </div>
@@ -395,29 +513,29 @@ footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justi
 <!-- ENTREGA -->
 <section id="entrega">
   <div class="mx">
-    <p class="label rev">Entrega</p>
-    <h2 class="stitle rev">Como recibis<br><em>tus fotos</em></h2>
-    <div class="divider rev"></div>
+    <p class="sec-label rev">Entrega</p>
+    <h2 class="sec-title rev">Cómo recibís tus fotos</h2>
+    <div class="sec-line rev"></div>
     <div class="del-grid rev">
       <div class="del-item">
         <div class="del-n">I</div>
         <div class="del-t">Por mail y Lightroom</div>
-        <p class="del-d">Recibes todas tus fotos por dos vias: directamente a tu email y por un link privado de Adobe Lightroom. Podes verlas y descargarlas desde cualquier dispositivo.</p>
+        <p class="del-d">Todas las fotos por un link privado de Adobe Lightroom y por mail. Acceso desde cualquier dispositivo.</p>
       </div>
       <div class="del-item">
         <div class="del-n">II</div>
         <div class="del-t">Fotos ilimitadas</div>
-        <p class="del-d">Todas las fotos del evento editadas en alta resolucion y sin marcas de agua. Listas para imprimir, publicar o guardar. Completamente tuyas.</p>
+        <p class="del-d">Todas las fotos del evento editadas en alta resolución, sin marcas de agua. Listas para imprimir o publicar.</p>
       </div>
       <div class="del-item">
         <div class="del-n">III</div>
-        <div class="del-t">Una semana de plazo</div>
-        <p class="del-d">La entrega se realiza dentro de los 7 dias del evento o sesion. Todos los servicios tienen el mismo plazo, excepto los que incluyen invitacion web, donde el tiempo puede variar segun el diseno.</p>
+        <div class="del-t">En 7 días hábiles</div>
+        <p class="del-d">Plazo de entrega desde el evento o sesión. Si incluye invitación digital puede variar.</p>
       </div>
       <div class="del-item">
         <div class="del-n">IV</div>
         <div class="del-t">Fotos impresas</div>
-        <p class="del-d">Podes agregar un pack de fotos impresas como servicio adicional. Precio y tamanos disponibles a consultar directamente con el fotografo.</p>
+        <p class="del-d">Podés agregar un pack de fotos impresas. Precio y tamaños a consultar.</p>
       </div>
     </div>
   </div>
@@ -426,144 +544,41 @@ footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justi
 <!-- RESERVAS -->
 <section id="reservas">
   <div class="mx">
-    <p class="label rev">Disponibilidad</p>
-    <h2 class="stitle rev">Reserva<br><em>tu fecha</em></h2>
-    <div class="divider rev"></div>
+    <p class="sec-label rev">Disponibilidad</p>
+    <h2 class="sec-title rev">Reservá tu fecha</h2>
+    <div class="sec-line rev"></div>
     <div class="res-wrap">
       <div class="cal-widget rev">
         <div class="cal-head">
           <h3 id="calTitle"></h3>
-          <div class="cal-nav-btns">
+          <div class="cal-nav">
             <button class="cnav" id="calP">&#8249;</button>
             <button class="cnav" id="calN">&#8250;</button>
           </div>
         </div>
         <div class="cal-body">
-          <div class="cal-wd">
-            <div>Dom</div><div>Lun</div><div>Mar</div><div>Mie</div><div>Jue</div><div>Vie</div><div>Sab</div>
-          </div>
+          <div class="cal-wd"><div>Dom</div><div>Lun</div><div>Mar</div><div>Mie</div><div>Jue</div><div>Vie</div><div>Sab</div></div>
           <div class="cal-days" id="calDays"></div>
         </div>
         <div class="cal-leg">
-          <span><span class="ld" style="background:var(--gold)"></span>Seleccionado</span>
-          <span><span class="ld" style="background:#3a3530"></span>No disponible</span>
+          <span><span class="ld" style="background:#111"></span>Seleccionado</span>
+          <span><span class="ld" style="background:#ddd"></span>No disponible</span>
         </div>
       </div>
-
       <div class="bk-form rev">
         <div class="fg">
           <label>Fecha seleccionada</label>
-          <div class="date-display" id="dateDisp">Selecciona una fecha en el calendario <span></span></div>
+          <div class="info-box" id="dateDisp">Seleccioná una fecha en el calendario</div>
         </div>
         <div class="fg">
-          <label>Nombre completo</label>
-          <input type="text" id="bName" placeholder="Tu nombre y apellido">
+          <label>Servicios seleccionados</label>
+          <div class="info-box" id="bkServDisp">Ningún servicio seleccionado. Elegir arriba.</div>
         </div>
-        <div class="fg">
-          <label>WhatsApp</label>
-          <input type="tel" id="bPhone" placeholder="11 xxxx-xxxx">
-        </div>
-        <div class="fg">
-          <label>Email</label>
-          <input type="email" id="bEmail" placeholder="tu@email.com">
-        </div>
-        <div class="fg">
-          <label>Servicio</label>
-          <select id="bService">
-            <option value="">Selecciona un servicio</option>
-            <option>Boda</option>
-            <option>Boda + Pre boda</option>
-            <option>15 años</option>
-            <option>15 años + Pre fiesta</option>
-            <option>Sesion de fotos</option>
-            <option>Invitacion web</option>
-            <option>Otro (especificar en mensaje)</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label>Mensaje (opcional)</label>
-          <textarea id="bMsg" placeholder="Contame brevemente sobre tu evento..."></textarea>
-        </div>
-        <button class="btn btn-gold" onclick="submitBooking()" style="width:100%">Enviar consulta por WhatsApp</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRATO -->
-<section id="contrato">
-  <div class="mx">
-    <p class="label rev">Contrato</p>
-    <h2 class="stitle rev">Cerramos<br><em>todo por escrito</em></h2>
-    <div class="divider rev"></div>
-    <div class="ctr-wrap">
-      <div class="ctr-box rev">
-        <h3>Contrato de servicio fotografico</h3>
-        <p class="sub">Completa los datos, acepta los terminos, firma y descarga el PDF. Ambas partes se quedan con una copia.</p>
-        <div style="display:flex;flex-direction:column;gap:1.1rem">
-          <div class="fr">
-            <div class="fg"><label>Nombre del cliente</label><input type="text" id="cName" placeholder="Nombre y apellido"></div>
-            <div class="fg"><label>DNI</label><input type="text" id="cDni" placeholder="XX.XXX.XXX"></div>
-          </div>
-          <div class="fr">
-            <div class="fg"><label>Telefono</label><input type="tel" id="cPhone" placeholder="11 xxxx-xxxx"></div>
-            <div class="fg"><label>Email</label><input type="email" id="cEmail" placeholder="tu@email.com"></div>
-          </div>
-          <div class="fr">
-            <div class="fg">
-              <label>Servicio contratado</label>
-              <select id="cService">
-                <option value="">Seleccionar</option>
-                <option>Boda — $560.000</option>
-                <option>Pre boda — $250.000</option>
-                <option>Boda + Pre boda — $810.000</option>
-                <option>15 años — $560.000</option>
-                <option>Pre fiesta — $150.000</option>
-                <option>15 años + Pre fiesta — $710.000</option>
-                <option>Sesion de fotos — $180.000</option>
-                <option>Invitacion web — $40.000</option>
-                <option>Otro (especificar)</option>
-              </select>
-            </div>
-            <div class="fg"><label>Fecha del evento</label><input type="date" id="cDate"></div>
-          </div>
-          <div class="fr">
-            <div class="fg"><label>Lugar del evento</label><input type="text" id="cLoc" placeholder="Salon, locacion, direccion"></div>
-            <div class="fg"><label>Monto de señia</label><input type="text" id="cDep" placeholder="$ 00.000"></div>
-          </div>
-          <div class="fg">
-            <label>Terminos y condiciones</label>
-            <div class="terms-box">
-              CONTRATO DE SERVICIOS FOTOGRAFICOS — FOTOS ARIAS<br><br>
-              1. PARTES: El presente contrato se celebra entre el fotografo (PRESTADOR) y el cliente indicado a continuacion (CLIENTE).<br><br>
-              2. SERVICIO: El PRESTADOR se compromete a brindar los servicios de fotografia descriptos en este contrato en la fecha, horario y lugar pactados.<br><br>
-              3. RESERVA DE FECHA: Para confirmar la fecha se requiere el pago de una sena del 25% o 50% del valor total segun lo acordado. La fecha no se considera reservada hasta acreditado dicho pago.<br><br>
-              4. ENTREGA: Las fotografias editadas se entregaran dentro de los 7 dias habiles desde la realizacion del evento o sesion, por email y mediante link privado de Adobe Lightroom. Si el servicio incluye invitacion web, el plazo puede variar segun la complejidad del diseno.<br><br>
-              5. FOTOS IMPRESAS: En caso de solicitarse, el precio de impresion se acuerda por separado y no esta incluido en el servicio base.<br><br>
-              6. VIATICOS: En los servicios de pre boda y pre fiesta, los viaticos de traslado corren por cuenta del cliente.<br><br>
-              7. DERECHOS DE IMAGEN: El CLIENTE autoriza al PRESTADOR a utilizar las fotografias con fines de difusion en redes sociales y portfolio profesional, salvo indicacion expresa en contrario al momento de la firma.<br><br>
-              8. CANCELACION: En caso de cancelacion con menos de 15 dias de anticipacion, la sena abonada no sera reintegrada. Cancelaciones con mayor anticipacion seran evaluadas segun el caso.<br><br>
-              9. IMPREVISTOS: El PRESTADOR no se responsabiliza por imprevistos ajenos a su voluntad, pero se compromete a ofrecer solucion o reprogramacion en la medida de lo posible.<br><br>
-              10. SALDO FINAL: El saldo restante debe abonarse el dia del evento antes del inicio del servicio.<br><br>
-              11. VIGENCIA: Este contrato tiene vigencia desde su firma hasta el cumplimiento total de las obligaciones de ambas partes.
-            </div>
-          </div>
-          <div class="check-row">
-            <input type="checkbox" id="cAgree">
-            <label for="cAgree">Lei y acepto los terminos y condiciones del contrato de servicio fotografico de Fotos Arias.</label>
-          </div>
-          <div class="fg">
-            <label>Firma del cliente</label>
-            <div class="sig-wrap">
-              <div class="sig-lbl">Firma con el dedo o mouse</div>
-              <canvas id="sigCanvas"></canvas>
-              <div class="sig-ctrl">
-                <button class="sig-clr" onclick="clearSig()">Borrar firma</button>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-gold" onclick="genPDF()" style="width:100%">Descargar contrato firmado (PDF)</button>
-        </div>
+        <div class="fg"><label>Nombre completo</label><input type="text" id="bName" placeholder="Tu nombre y apellido"></div>
+        <div class="fg"><label>WhatsApp</label><input type="tel" id="bPhone" placeholder="11 xxxx-xxxx"></div>
+        <div class="fg"><label>Email</label><input type="email" id="bEmail" placeholder="tu@email.com"></div>
+        <div class="fg"><label>Mensaje (opcional)</label><textarea id="bMsg" placeholder="Contame sobre tu evento..."></textarea></div>
+        <button class="btn btn-dark btn-full" onclick="submitBooking()">Enviar consulta por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -574,8 +589,8 @@ footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <div class="mx">
     <div class="ct-grid">
       <div class="rev">
-        <p class="label">Contacto</p>
-        <h2 class="ct-big">Hablemos<br>de tu<br><em>evento</em></h2>
+        <p class="sec-label">Contacto</p>
+        <h2 class="ct-big">Hablemos<br>de tu<br>evento.</h2>
       </div>
       <div class="ct-info rev">
         <div class="ct-item">
@@ -590,7 +605,7 @@ footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justi
           <span class="ct-item-l">Zona de cobertura</span>
           <span class="ct-item-v" style="cursor:default">CABA y Provincia de Buenos Aires</span>
         </div>
-        <a href="https://wa.me/541132137848?text=Hola%2C%20me%20interesa%20consultar%20por%20un%20servicio%20de%20fotograf%C3%ADa" target="_blank" class="btn btn-gold" style="margin-top:.5rem">Escribir por WhatsApp</a>
+        <a href="https://wa.me/541132137848?text=Hola%2C%20me%20interesa%20consultar%20por%20un%20servicio%20de%20fotografia" target="_blank" class="btn btn-white" style="display:inline-block;padding:.8rem 2.2rem;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer">Escribir por WhatsApp</a>
       </div>
     </div>
   </div>
@@ -602,221 +617,525 @@ footer{padding:1.8rem 4rem;border-top:1px solid var(--border);display:flex;justi
   <span>ariasfotos6@gmail.com</span>
 </footer>
 
+<!-- ============================================================
+     CONTRATO — OVERLAY PAGINA COMPLETA
+     ============================================================ -->
+<div id="ctrOverlay">
+
+  <div class="ctr-nav">
+    <span class="ctr-nav-logo">Fotos Arias — Contrato</span>
+    <button class="ctr-close" onclick="closeContract()" title="Cerrar">&#215;</button>
+  </div>
+
+  <div class="ctr-steps">
+    <div class="step active" id="step-ind-1">
+      <div class="step-n">1</div><span>Datos y firma</span>
+    </div>
+    <div class="step-sep"></div>
+    <div class="step" id="step-ind-2">
+      <div class="step-n">2</div><span>Pago de seña</span>
+    </div>
+    <div class="step-sep"></div>
+    <div class="step" id="step-ind-3">
+      <div class="step-n">3</div><span>Confirmación</span>
+    </div>
+  </div>
+
+  <div class="ctr-body">
+
+    <!-- STEP 1: FORMULARIO -->
+    <div class="ctr-step-panel active" id="ctr-panel-1">
+      <span class="ctr-section-title">Datos del cliente</span>
+      <div class="fr2">
+        <div class="fg"><label>Nombre completo</label><input type="text" id="cName" placeholder="Nombre y apellido"></div>
+        <div class="fg"><label>DNI</label><input type="text" id="cDni" placeholder="XX.XXX.XXX"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>WhatsApp</label><input type="tel" id="cPhone" placeholder="11 xxxx-xxxx"></div>
+        <div class="fg"><label>Email</label><input type="email" id="cEmail" placeholder="tu@email.com"></div>
+      </div>
+
+      <span class="ctr-section-title" style="margin-top:2rem">Servicios contratados</span>
+      <div class="fg" style="margin-bottom:1rem">
+        <div class="info-box" id="cServicesDisp" style="cursor:pointer" onclick="closeContract();setTimeout(()=>document.getElementById('servicios').scrollIntoView({behavior:'smooth'}),400)">
+          Ningún servicio seleccionado. Cerrá este panel y elegí arriba.
+        </div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Fecha del evento</label><input type="date" id="cDate"></div>
+        <div class="fg"><label>Lugar / locación</label><input type="text" id="cLoc" placeholder="Salón, dirección..."></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label>Total acordado</label><input type="text" id="cTotal" readonly placeholder="Se calcula automáticamente" style="cursor:default;background:#fafafa"></div>
+        <div class="fg"><label>Monto de seña</label><input type="text" id="cDep" placeholder="$ 00.000"></div>
+      </div>
+
+      <span class="ctr-section-title" style="margin-top:2rem">Términos y condiciones</span>
+      <div class="terms">
+        CONTRATO DE SERVICIOS FOTOGRÁFICOS — FOTOS ARIAS<br><br>
+        1. PARTES: El presente contrato se celebra entre el fotógrafo (PRESTADOR: Fotos Arias, ariasfotos6@gmail.com, +54 11 3213-7848) y el CLIENTE individualizado precedentemente.<br><br>
+        2. OBJETO: El PRESTADOR se compromete a brindar los servicios de fotografía descriptos en este contrato en la fecha, horario y lugar pactados.<br><br>
+        3. RESERVA DE FECHA: Para confirmar la fecha se requiere el pago de una seña del 25% o 50% del valor total según lo acordado. La fecha no se considera reservada hasta acreditado dicho pago.<br><br>
+        4. ENTREGA: Las fotografías editadas se entregarán dentro de los 7 días hábiles desde el evento, por mail y Adobe Lightroom. Fotos ilimitadas editadas en alta resolución.<br><br>
+        5. VIÁTICOS: Para sesiones fuera del área habitual, los viáticos corren por cuenta del CLIENTE.<br><br>
+        6. DERECHOS DE IMAGEN: El CLIENTE autoriza al PRESTADOR a utilizar las fotografías en redes sociales y portfolio profesional, salvo indicación contraria al momento de la firma.<br><br>
+        7. CANCELACIÓN: Con menos de 15 días de anticipación, la seña abonada no será reintegrada. Cancelaciones con mayor anticipación se evalúan caso a caso.<br><br>
+        8. SALDO FINAL: El saldo restante debe abonarse el día del evento antes del inicio del servicio.<br><br>
+        9. VIGENCIA: Este contrato tiene vigencia desde su firma hasta el cumplimiento total de las obligaciones de ambas partes.
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="cAgree">
+        <label for="cAgree">Leí, entendí y acepto los términos y condiciones del contrato de servicio fotográfico de Fotos Arias.</label>
+      </div>
+
+      <span class="ctr-section-title">Firma del cliente</span>
+      <div class="sig-wrap">
+        <div class="sig-lbl">
+          <span>Firmá con el dedo o mouse</span>
+          <button class="sig-clr" onclick="clearSig()">Borrar</button>
+        </div>
+        <canvas id="sigCanvas"></canvas>
+      </div>
+      <p class="sig-note">Al firmar confirmás que los datos son correctos y aceptás los términos.</p>
+
+      <button class="btn btn-dark btn-full" onclick="goToPayment()">Cerrar contrato y pagar seña &rarr;</button>
+    </div>
+
+    <!-- STEP 2: PAGO -->
+    <div class="ctr-step-panel" id="ctr-panel-2">
+      <span class="ctr-section-title">Resumen del contrato</span>
+      <div class="pay-box">
+        <div class="pay-summary" id="paySummary"></div>
+        <div class="pay-inst">
+          <strong>Paso 1:</strong> Hacé clic en el botón de pago para abonar la seña y confirmar tu fecha.<br>
+          <strong>Paso 2:</strong> Una vez realizado el pago, volvé acá y hacé clic en "Ya pagué — confirmar".<br>
+          <strong>Paso 3:</strong> Se descarga el contrato firmado y te llega una copia por mail.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:.8rem">
+          <a id="payLink" href="#" target="_blank" class="btn btn-dark btn-full" style="text-align:center">Pagar seña ahora →</a>
+          <button class="btn btn-outline btn-full" onclick="confirmPayment()">Ya pagué — confirmar y enviar contrato</button>
+        </div>
+      </div>
+      <p style="font-size:.73rem;color:#aaa;margin-top:1rem;text-align:center">Dudas antes de pagar: <a href="https://wa.me/541132137848" target="_blank" style="color:#111">+54 11 3213-7848</a></p>
+    </div>
+
+    <!-- STEP 3: CONFIRMACION -->
+    <div class="ctr-step-panel" id="ctr-panel-3">
+      <div class="confirm-box">
+        <div class="confirm-icon">&#10003;</div>
+        <h3>¡Contrato cerrado!</h3>
+        <p>El contrato fue generado y descargado. Se enviaron los mails de confirmación a vos y al fotógrafo. Tu fecha queda reservada una vez acreditado el pago.</p>
+        <div class="confirm-actions">
+          <button class="btn btn-dark" onclick="downloadPDFAgain()">Descargar PDF de nuevo</button>
+          <button class="btn btn-outline" onclick="closeContract()">Volver a la página</button>
+        </div>
+        <p style="font-size:.72rem;color:#ccc;margin-top:2rem">Recibís las fotos dentro de los 7 días hábiles del evento por mail y Adobe Lightroom.</p>
+      </div>
+    </div>
+
+  </div><!-- /ctr-body -->
+</div><!-- /ctrOverlay -->
+
 <div class="toast" id="toast"></div>
 
+<!-- SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js"></script>
 <script>
-// NAV
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>80));
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
+
+// ====== LOADER ======
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('out');
+  }, 1900);
+});
+
+// ====== CURSOR ======
+const ring = document.getElementById('cursorRing');
+const dot  = document.getElementById('cursorDot');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left  = mx + 'px';
+  dot.style.top   = my + 'px';
+});
+
+(function animCursor(){
+  rx += (mx - rx) * 0.13;
+  ry += (my - ry) * 0.13;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+document.querySelectorAll('a,button,.srv-card,.gi,.del-item,.cd:not(.dis):not(.bk)').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.classList.add('hovered'); dot.classList.add('hovered'); });
+  el.addEventListener('mouseleave', () => { ring.classList.remove('hovered'); dot.classList.remove('hovered'); });
+});
+
+// ====== NAV SCROLL ======
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
+
+// ====== PARALLAX HERO ======
+const heroImg = document.querySelector('.hero-right-img');
+window.addEventListener('scroll', () => {
+  if(heroImg && window.scrollY < window.innerHeight) {
+    heroImg.style.transform = `scale(1) translateY(${window.scrollY * 0.18}px)`;
+  }
+}, {passive:true});
+
+/* ============================================================
+   CONFIGURACION — EDITÁ ESTOS VALORES
+   ============================================================ */
+const PAYMENT_LINK = 'https://link.mercadopago.com.ar/elcielitoaqui';
+const FOTO_EMAIL   = 'ariasfotos6@gmail.com';
+const FOTO_PHONE   = '541132137848';
+/* ============================================================ */
 
 // REVEAL
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.07});
-document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis') }), {threshold:.08});
+document.querySelectorAll('.rev,.rev-left,.rev-right,.rev-scale,.sec-line').forEach(el => obs.observe(el));
 
-// ====== PACKAGE SELECTOR ======
-const PRICES={boda:560000,preboda:250000,quince:560000,prefiesta:150000,sesion:180000,invitacion:40000};
-const NAMES={boda:'Boda',preboda:'Pre boda',quince:'15 años',prefiesta:'Pre fiesta',sesion:'Sesion de fotos',invitacion:'Invitacion web'};
-let selected=new Set();
+// ====== COTIZADOR ======
+let sel = {};
+function fmt(n){ return '$' + n.toLocaleString('es-AR') }
 
-function togglePkg(card){
-  const id=card.dataset.id;
-  if(selected.has(id)){selected.delete(id);card.classList.remove('selected');}
-  else{selected.add(id);card.classList.add('selected');}
-  updateTotal();
+function toggleSrv(card){
+  const id = card.dataset.id, price = parseInt(card.dataset.price), name = card.dataset.name;
+  if(sel[id]){ delete sel[id]; card.classList.remove('active'); }
+  else { sel[id] = {price, name}; card.classList.add('active'); }
+  updateTotal(); syncSelToContract();
 }
-
-function fmt(n){return n.toLocaleString('es-AR');}
 
 function updateTotal(){
-  let total=0;
-  selected.forEach(id=>total+=PRICES[id]);
-  document.getElementById('totalAmt').textContent=fmt(total);
-  const list=selected.size?[...selected].map(id=>NAMES[id]).join(' + '):'Ningun servicio seleccionado';
-  document.getElementById('selectedList').textContent=list;
-  const active=selected.size>0;
-  const btnR=document.getElementById('btnReservar');
-  const btnW=document.getElementById('btnWA');
-  btnR.style.opacity=active?'1':'.4';
-  btnR.style.pointerEvents=active?'auto':'none';
-  btnW.style.opacity=active?'1':'.4';
-  btnW.style.pointerEvents=active?'auto':'none';
+  const keys = Object.keys(sel);
+  const bar = document.getElementById('totalBar');
+  if(!keys.length){ bar.classList.remove('show'); return; }
+  bar.classList.add('show');
+  const total = keys.reduce((s,k) => s + sel[k].price, 0);
+  document.getElementById('totalServicesTxt').textContent = keys.map(k=>sel[k].name).join(' + ');
+  document.getElementById('totalPrice').textContent = fmt(total);
 }
 
-function consultarWA(){
-  if(!selected.size) return;
-  const lista=[...selected].map(id=>`${NAMES[id]}: $${fmt(PRICES[id])}`).join('\n');
-  const total=[...selected].reduce((a,id)=>a+PRICES[id],0);
-  const msg=encodeURIComponent(`Hola! Quiero consultar por los siguientes servicios:\n\n${lista}\n\nTotal: $${fmt(total)}\n\n¿Podemos coordinar?`);
-  window.open(`https://wa.me/541132137848?text=${msg}`,'_blank');
+function syncSelToContract(){
+  const keys = Object.keys(sel);
+  const total = keys.reduce((s,k) => s + sel[k].price, 0);
+  const html = keys.length
+    ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>')
+    : 'Ningún servicio seleccionado. Cerrá este panel y elegí arriba.';
+  document.getElementById('cServicesDisp').innerHTML = html;
+  document.getElementById('bkServDisp').innerHTML = keys.length
+    ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>')
+    : 'Ningún servicio seleccionado. Elegir arriba.';
+  if(keys.length) document.getElementById('cTotal').value = fmt(total);
 }
 
 // ====== CALENDAR ======
-let curDate=new Date(), selDate=null;
-const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const booked=[];
+let curDate = new Date(), selDate = null;
+const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const booked = [];
 
 function renderCal(){
-  const y=curDate.getFullYear(),m=curDate.getMonth();
-  document.getElementById('calTitle').textContent=`${MONTHS[m]} ${y}`;
-  const firstDay=new Date(y,m,1).getDay();
-  const total=new Date(y,m+1,0).getDate();
-  const today=new Date();today.setHours(0,0,0,0);
-  let html='';
-  for(let i=0;i<firstDay;i++) html+='<div class="cd emp"></div>';
+  const y = curDate.getFullYear(), m = curDate.getMonth();
+  document.getElementById('calTitle').textContent = `${MONTHS[m]} ${y}`;
+  const firstDay = new Date(y,m,1).getDay();
+  const total = new Date(y,m+1,0).getDate();
+  const today = new Date(); today.setHours(0,0,0,0);
+  let html = '';
+  for(let i=0;i<firstDay;i++) html += '<div class="cd emp"></div>';
   for(let d=1;d<=total;d++){
-    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dt=new Date(y,m,d);
-    const isTdy=dt.getTime()===today.getTime();
-    const isPast=dt<today;
-    const isBk=booked.includes(ds);
-    const isSel=selDate===ds;
-    let cls='cd';
-    if(isPast) cls+=' dis';
-    else if(isBk) cls+=' bk';
-    else if(isSel) cls+=' sel';
-    if(isTdy&&!isPast) cls+=' tdy';
-    html+=`<div class="${cls}" data-d="${ds}" onclick="pickDate(this)">${d}</div>`;
+    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dt = new Date(y,m,d);
+    let cls = 'cd';
+    if(dt < today) cls += ' dis';
+    else if(booked.includes(ds)) cls += ' bk';
+    else if(selDate === ds) cls += ' sel';
+    if(dt.getTime() === today.getTime()) cls += ' tdy';
+    html += `<div class="${cls}" data-d="${ds}" onclick="pickDate(this)">${d}</div>`;
   }
-  document.getElementById('calDays').innerHTML=html;
+  document.getElementById('calDays').innerHTML = html;
 }
-
 function pickDate(el){
   if(el.classList.contains('dis')||el.classList.contains('bk')||el.classList.contains('emp')) return;
   document.querySelectorAll('.cd').forEach(d=>d.classList.remove('sel'));
-  el.classList.add('sel');
-  selDate=el.dataset.d;
-  const[y,m,d]=selDate.split('-');
-  document.getElementById('dateDisp').innerHTML=`Fecha: <span>${d} de ${MONTHS[parseInt(m)-1]} de ${y}</span>`;
+  el.classList.add('sel'); selDate = el.dataset.d;
+  const [y,m,d] = selDate.split('-');
+  document.getElementById('dateDisp').innerHTML = `<strong>${d} de ${MONTHS[parseInt(m)-1]} de ${y}</strong>`;
 }
-
-document.getElementById('calP').onclick=()=>{curDate.setMonth(curDate.getMonth()-1);renderCal()};
-document.getElementById('calN').onclick=()=>{curDate.setMonth(curDate.getMonth()+1);renderCal()};
+document.getElementById('calP').onclick = () => { curDate.setMonth(curDate.getMonth()-1); renderCal(); };
+document.getElementById('calN').onclick = () => { curDate.setMonth(curDate.getMonth()+1); renderCal(); };
 renderCal();
 
 // ====== TOAST ======
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),4000);
-}
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),4500); }
 
 // ====== BOOKING ======
 function submitBooking(){
   const n=document.getElementById('bName').value.trim();
   const p=document.getElementById('bPhone').value.trim();
   const e=document.getElementById('bEmail').value.trim();
-  const s=document.getElementById('bService').value;
-  if(!n||!p||!e||!s||!selDate){toast('Completa todos los campos y selecciona una fecha.');return;}
-  const[y,m,d]=selDate.split('-');
+  const keys=Object.keys(sel);
+  if(!n||!p||!e){ toast('Completá nombre, WhatsApp y email.'); return; }
+  if(!keys.length){ toast('Seleccioná al menos un servicio arriba.'); return; }
+  if(!selDate){ toast('Seleccioná una fecha en el calendario.'); return; }
+  const [y,m,d]=selDate.split('-');
   const df=`${d} de ${MONTHS[parseInt(m)-1]} de ${y}`;
-  const msg=encodeURIComponent(`Hola! Quiero reservar una fecha.\n\nNombre: ${n}\nServicio: ${s}\nFecha: ${df}\nTelefono: ${p}\nEmail: ${e}\nMensaje: ${document.getElementById('bMsg').value||'—'}`);
-  window.open(`https://wa.me/541132137848?text=${msg}`,'_blank');
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  const names=keys.map(k=>sel[k].name).join(', ');
+  const msg=encodeURIComponent(`Hola! Quiero consultar disponibilidad.\n\nNombre: ${n}\nServicios: ${names}\nTotal: ${fmt(total)}\nFecha: ${df}\nWhatsApp: ${p}\nEmail: ${e}\nMensaje: ${document.getElementById('bMsg').value||'—'}`);
+  window.open(`https://wa.me/${FOTO_PHONE}?text=${msg}`,'_blank');
 }
 
-// ====== SIGNATURE ======
-let sigPad;
-window.addEventListener('load',()=>{
-  const cv=document.getElementById('sigCanvas');
-  if(!cv)return;
+// ====== CONTRATO OVERLAY ======
+function openContract(){ syncSelToContract(); document.getElementById('ctrOverlay').classList.add('open'); document.body.style.overflow='hidden'; initSigPad(); setStep(1); }
+function closeContract(){ document.getElementById('ctrOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById(`ctr-panel-${i}`).classList.toggle('active', i===n);
+    const ind=document.getElementById(`step-ind-${i}`);
+    ind.classList.remove('active','done');
+    if(i===n) ind.classList.add('active');
+    if(i<n) ind.classList.add('done');
+  });
+  document.getElementById('ctrOverlay').scrollTo({top:0,behavior:'smooth'});
+}
+
+// ====== SIGNATURE PAD ======
+let sigPad = null;
+function initSigPad(){
+  const cv = document.getElementById('sigCanvas');
   function resize(){
-    const r=Math.max(window.devicePixelRatio||1,1);
-    const rect=cv.getBoundingClientRect();
-    cv.width=rect.width*r;cv.height=rect.height*r;
+    const r = Math.max(window.devicePixelRatio||1,1);
+    const rect = cv.getBoundingClientRect();
+    cv.width = rect.width*r; cv.height = rect.height*r;
     cv.getContext('2d').scale(r,r);
-    if(sigPad)sigPad.clear();
+    if(sigPad) sigPad.clear();
+  }
+  if(!sigPad){
+    sigPad = new SignaturePad(cv,{backgroundColor:'rgba(255,255,255,1)',penColor:'#111',minWidth:1.2,maxWidth:2.8});
   }
   resize();
-  window.addEventListener('resize',resize);
-  sigPad=new SignaturePad(cv,{backgroundColor:'rgba(30,27,23,1)',penColor:'#e4ddd3',minWidth:1,maxWidth:2.5});
-});
-function clearSig(){if(sigPad)sigPad.clear();}
+}
+function clearSig(){ if(sigPad) sigPad.clear(); }
 
-// ====== PDF ======
-function genPDF(){
-  const name=document.getElementById('cName').value.trim();
-  const dni=document.getElementById('cDni').value.trim();
-  const phone=document.getElementById('cPhone').value.trim();
-  const email=document.getElementById('cEmail').value.trim();
-  const service=document.getElementById('cService').value;
-  const dateVal=document.getElementById('cDate').value;
-  const loc=document.getElementById('cLoc').value.trim();
-  const dep=document.getElementById('cDep').value.trim();
-  const agreed=document.getElementById('cAgree').checked;
-  if(!name||!dni||!service||!dateVal){toast('Completa nombre, DNI, servicio y fecha.');return;}
-  if(!agreed){toast('Debes aceptar los terminos y condiciones.');return;}
-  if(!sigPad||sigPad.isEmpty()){toast('Por favor firma antes de generar el contrato.');return;}
+let lastPdfDoc = null, lastClientName = '';
 
-  const{jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  const G=[201,169,110],BG=[13,11,9],T=[228,221,211],M=[130,120,112];
+// ====== STEP 1 → STEP 2 ======
+function goToPayment(){
+  const name = document.getElementById('cName').value.trim();
+  const dni  = document.getElementById('cDni').value.trim();
+  const dateVal = document.getElementById('cDate').value;
+  const keys = Object.keys(sel);
+  if(!name||!dni){ toast('Completá nombre y DNI.'); return; }
+  if(!keys.length){ toast('Seleccioná al menos un servicio.'); return; }
+  if(!dateVal){ toast('Seleccioná la fecha del evento.'); return; }
+  if(!document.getElementById('cAgree').checked){ toast('Aceptá los términos y condiciones.'); return; }
+  if(!sigPad||sigPad.isEmpty()){ toast('Firmá el contrato antes de continuar.'); return; }
 
-  doc.setFillColor(...BG);doc.rect(0,0,210,297,'F');
-  doc.setFillColor(...G);doc.rect(0,0,210,5,'F');
+  lastClientName = name;
+  lastPdfDoc = buildPDF();
 
-  doc.setFont('helvetica','bold');doc.setFontSize(22);doc.setTextColor(...T);
-  doc.text('FOTOS ARIAS',20,24);
-  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...M);
-  doc.text('CABA Y PROVINCIA DE BUENOS AIRES',20,31);
-  doc.setTextColor(...G);doc.text('CONTRATO DE SERVICIOS FOTOGRAFICOS',20,38);
-  doc.setDrawColor(...G);doc.setLineWidth(.25);doc.line(20,42,190,42);
+  const total = keys.reduce((s,k)=>s+sel[k].price,0);
+  const dep   = document.getElementById('cDep').value.trim();
+  const evDate = new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR');
+  let rows = keys.map(k=>`<div class="pay-row"><span>${sel[k].name}</span><span>${fmt(sel[k].price)}</span></div>`).join('');
+  rows += `<div class="pay-total-row"><span>Total</span><span>${fmt(total)}</span></div>`;
+  if(dep) rows += `<div class="pay-sena-row"><span>Seña a abonar ahora</span><span>${dep}</span></div>`;
+  rows += `<div class="pay-row" style="margin-top:.5rem"><span style="color:#aaa;font-size:.78rem">Fecha del evento</span><span style="color:#aaa;font-size:.78rem">${evDate}</span></div>`;
+  rows += `<div class="pay-row"><span style="color:#aaa;font-size:.78rem">Cliente</span><span style="color:#aaa;font-size:.78rem">${name}</span></div>`;
+  document.getElementById('paySummary').innerHTML = rows;
+  document.getElementById('payLink').href = PAYMENT_LINK;
 
-  const today=new Date().toLocaleDateString('es-AR');
-  doc.setFontSize(7.5);doc.setTextColor(...M);
-  doc.text(`Fecha de emision: ${today}`,190,48,{align:'right'});
+  setStep(2);
+}
 
-  let cy=58;
-  doc.setFontSize(8.5);doc.setTextColor(...G);doc.text('DATOS DEL CLIENTE',20,cy);
-  doc.setLineWidth(.1);doc.line(20,cy+2,75,cy+2);cy+=10;
+// ====== STEP 2 → STEP 3 ======
+function confirmPayment(){
+  if(lastPdfDoc) lastPdfDoc.save(`Contrato_FotosArias_${lastClientName.replace(/\s+/g,'_')}.pdf`);
 
-  [[' Nombre',name],['DNI',dni],['Telefono',phone||'—'],['Email',email||'—']].forEach(([l,v])=>{
-    doc.setFontSize(7.5);doc.setTextColor(...M);doc.text(l.toUpperCase(),20,cy);
-    doc.setFontSize(9.5);doc.setTextColor(...T);doc.text(v,72,cy);cy+=8;
+  const name  = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const keys  = Object.keys(sel);
+  const total = keys.reduce((s,k)=>s+sel[k].price,0);
+  const dateVal = document.getElementById('cDate').value;
+  const evDate  = dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
+  const dep   = document.getElementById('cDep').value.trim()||'No especificado';
+  const loc   = document.getElementById('cLoc').value.trim()||'No especificado';
+  const services = keys.map(k=>sel[k].name).join(', ');
+
+  const body = `Hola ${name},%0D%0A%0D%0ATu contrato con Fotos Arias quedó registrado.%0D%0A%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha del evento: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal acordado: ${fmt(total)}%0D%0ASeña abonada: ${dep}%0D%0A%0D%0AEl contrato firmado fue descargado en tu dispositivo. Guardalo como comprobante.%0D%0A%0D%0AEntrega: las fotos estarán listas dentro de los 7 días hábiles del evento.%0D%0A%0D%0ACualquier consulta: +54 11 3213-7848 | ariasfotos6@gmail.com%0D%0A%0D%0AFotos Arias`;
+
+  if(email){
+    const aClient = document.createElement('a');
+    aClient.href = `mailto:${email}?subject=Contrato%20Fotos%20Arias%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${body}`;
+    aClient.click();
+  }
+
+  setTimeout(()=>{
+    const bodyFoto = `Nuevo contrato cerrado.%0D%0A%0D%0ACliente: ${encodeURIComponent(name)}%0D%0AEmail cliente: ${encodeURIComponent(email||'no indicado')}%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal: ${fmt(total)}%0D%0ASeña: ${dep}`;
+    const aFoto = document.createElement('a');
+    aFoto.href = `mailto:${FOTO_EMAIL}?subject=Nuevo%20contrato%20%E2%80%94%20${encodeURIComponent(name)}%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${bodyFoto}`;
+    aFoto.click();
+  }, 1200);
+
+  setStep(3);
+}
+
+function downloadPDFAgain(){
+  if(lastPdfDoc) lastPdfDoc.save(`Contrato_FotosArias_${lastClientName.replace(/\s+/g,'_')}.pdf`);
+}
+
+// ====== BUILD PDF ======
+function buildPDF(){
+  const {jsPDF} = window.jspdf;
+  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+
+  const BG=[255,255,255], BK=[17,17,17], GY=[100,100,100], LG=[235,235,235], MD=[160,160,160];
+
+  doc.setFillColor(...BG); doc.rect(0,0,210,297,'F');
+
+  // Header
+  doc.setFillColor(...BK); doc.rect(0,0,210,20,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(255,255,255);
+  doc.text('FOTOS ARIAS',14,12);
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(180,180,180);
+  doc.text('CONTRATO DE SERVICIOS FOTOGRÁFICOS',14,17.5);
+  doc.setTextColor(...MD);
+  doc.text(`Emitido: ${new Date().toLocaleDateString('es-AR')}`,196,12,{align:'right'});
+  doc.text('ariasfotos6@gmail.com  |  +54 11 3213-7848  |  CABA y Pcia. de Buenos Aires',196,17.5,{align:'right'});
+
+  let cy = 32;
+
+  // DATOS CLIENTE
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.text('DATOS DEL CLIENTE',14,cy);
+  doc.setDrawColor(...LG); doc.setLineWidth(.25); doc.line(14,cy+2,100,cy+2);
+  cy += 9;
+
+  const cName  = document.getElementById('cName').value.trim();
+  const cDni   = document.getElementById('cDni').value.trim();
+  const cPhone = document.getElementById('cPhone').value.trim();
+  const cEmail = document.getElementById('cEmail').value.trim();
+
+  [['Nombre',cName],['DNI',cDni],['Teléfono',cPhone||'—'],['Email',cEmail||'—']].forEach(([l,v])=>{
+    doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
+    doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...BK); doc.text(v,60,cy);
+    cy+=7;
   });
 
-  cy+=4;doc.setFontSize(8.5);doc.setTextColor(...G);doc.text('DETALLE DEL SERVICIO',20,cy);
-  doc.line(20,cy+2,88,cy+2);cy+=10;
+  cy += 5;
 
-  const evDate=dateVal?new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR'):'—';
-  [['Servicio',service],['Fecha del evento',evDate],['Lugar',loc||'—'],['Monto de sena',dep||'—']].forEach(([l,v])=>{
-    doc.setFontSize(7.5);doc.setTextColor(...M);doc.text(l.toUpperCase(),20,cy);
-    doc.setFontSize(9.5);doc.setTextColor(...T);
-    const lines=doc.splitTextToSize(v,110);doc.text(lines,72,cy);cy+=8;
+  // SERVICIOS
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.text('SERVICIOS CONTRATADOS',14,cy);
+  doc.setDrawColor(...LG); doc.line(14,cy+2,100,cy+2); cy+=9;
+
+  const keys = Object.keys(sel);
+  const total = keys.reduce((s,k)=>s+sel[k].price,0);
+  const dateVal = document.getElementById('cDate').value;
+  const evDate  = dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
+  const loc     = document.getElementById('cLoc').value.trim()||'—';
+  const dep     = document.getElementById('cDep').value.trim()||'—';
+
+  keys.forEach(k=>{
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...BK);
+    doc.text(sel[k].name,14,cy);
+    doc.text(fmt(sel[k].price),196,cy,{align:'right'});
+    cy+=7;
   });
+  doc.setDrawColor(...BK); doc.setLineWidth(.3); doc.line(130,cy,196,cy); cy+=5;
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...BK);
+  doc.text('TOTAL',130,cy); doc.text(fmt(total),196,cy,{align:'right'}); cy+=5;
 
-  cy+=4;doc.setFontSize(8.5);doc.setTextColor(...G);doc.text('TERMINOS Y CONDICIONES',20,cy);
-  doc.line(20,cy+2,96,cy+2);cy+=10;
+  doc.setDrawColor(...LG); doc.setLineWidth(.25); doc.line(14,cy,196,cy); cy+=10;
 
-  const terms=[
-    '1. La fecha queda reservada unicamente con el pago de la sena acordada (25% o 50%).',
-    '2. Las fotos se entregaran dentro de los 7 dias habiles por email y link privado de Adobe Lightroom.',
-    '3. En servicios de pre boda y pre fiesta, los viaticos de traslado corren por cuenta del cliente.',
-    '4. En caso de cancelacion con menos de 15 dias de anticipacion, la sena no sera reintegrada.',
-    '5. El saldo restante se abona el dia del evento antes del inicio del servicio.',
-    '6. El cliente autoriza el uso de imagenes para portfolio y redes sociales, salvo indicacion contraria.',
-    '7. Las fotos impresas tienen precio adicional y se acuerdan por separado.',
-  ];
-  terms.forEach(t=>{
-    doc.setFontSize(8);doc.setTextColor(...M);
-    const lines=doc.splitTextToSize(t,170);doc.text(lines,20,cy);cy+=lines.length*5+1.5;
+  // EVENTO
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.text('DETALLE DEL EVENTO',14,cy); doc.line(14,cy+2,90,cy+2); cy+=9;
+
+  [['Fecha del evento',evDate],['Lugar / locación',loc],['Monto de seña',dep]].forEach(([l,v])=>{
+    doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
+    doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...BK); doc.text(v,60,cy);
+    cy+=7;
   });
 
   cy+=6;
-  const sigData=sigPad.toDataURL('image/png');
-  try{doc.addImage(sigData,'PNG',18,cy-28,88,28);}catch(e){}
-  doc.setDrawColor(...G);doc.setLineWidth(.2);doc.line(20,cy,108,cy);cy+=5;
-  doc.setFontSize(8);doc.setTextColor(...M);
-  doc.text('FIRMA DEL CLIENTE',20,cy);
-  doc.text(name.toUpperCase(),20,cy+5);
-  doc.text(`DNI: ${dni}`,20,cy+10);
-  doc.text('FOTOS ARIAS — PRESTADOR DEL SERVICIO',125,cy);
-  doc.text('ariasfotos6@gmail.com',125,cy+5);
-  doc.text('+54 11 3213-7848',125,cy+10);
+  doc.setDrawColor(...LG); doc.line(14,cy,196,cy); cy+=10;
 
-  doc.setFillColor(...G);doc.rect(0,292,210,5,'F');
-  doc.save(`Contrato_FotosArias_${name.replace(/\s+/g,'_')}.pdf`);
-  toast('Contrato generado. Revisa tu carpeta de descargas.');
+  // TERMINOS
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.text('TÉRMINOS Y CONDICIONES',14,cy); doc.line(14,cy+2,100,cy+2); cy+=9;
+
+  const terms=[
+    '1. Reserva: fecha confirmada solo con pago de la seña acordada (25% o 50%).',
+    '2. Entrega: 7 días hábiles por mail y Adobe Lightroom. Fotos ilimitadas editadas.',
+    '3. Cancelación: seña no reintegrable si se cancela con menos de 15 días de anticipación.',
+    '4. Saldo: el resto del total se abona el día del evento antes del inicio del servicio.',
+    '5. Viáticos: para sesiones fuera del área habitual, a cargo del cliente.',
+    '6. Derechos: el cliente autoriza uso de imágenes en portfolio y redes, salvo indicación contraria.',
+  ];
+  doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(...GY);
+  terms.forEach(t=>{
+    const lines = doc.splitTextToSize(t,172);
+    doc.text(lines,14,cy); cy += lines.length*5+1.5;
+  });
+
+  // ====== FIRMAS — siempre en la parte inferior de la hoja ======
+  // Reservamos espacio para firmas (58mm de alto) al final de la página
+  const FIRMA_Y = 235; // posición fija en la parte inferior
+  if(cy > FIRMA_Y - 10){ doc.addPage(); doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+
+  const fY = Math.max(cy + 8, FIRMA_Y);
+
+  // Línea separadora antes de firmas
+  doc.setDrawColor(...LG); doc.setLineWidth(.3); doc.line(14, fY, 196, fY);
+
+  // Título sección firmas
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.text('FIRMAS', 14, fY + 7);
+  doc.line(14, fY+8.5, 40, fY+8.5);
+
+  const sigBaseY = fY + 18; // donde van los canvas de firma
+
+  // ---- FIRMA CLIENTE (izquierda) ----
+  const sigData = sigPad ? sigPad.toDataURL('image/png') : null;
+  if(sigData){
+    try{ doc.addImage(sigData,'PNG',14, sigBaseY - 20, 80, 20); }catch(e){}
+  }
+  // Línea de firma cliente
+  doc.setDrawColor(...BK); doc.setLineWidth(.5); doc.line(14, sigBaseY + 2, 98, sigBaseY + 2);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...BK);
+  doc.text('FIRMA DEL CLIENTE', 14, sigBaseY + 8);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GY);
+  doc.text(cName.toUpperCase(), 14, sigBaseY + 14);
+  doc.text(`DNI: ${cDni}`, 14, sigBaseY + 20);
+
+  // ---- FIRMA FOTÓGRAFO (derecha) ----
+  // Espacio en blanco para firma física del fotógrafo
+  doc.setDrawColor(...BK); doc.setLineWidth(.5); doc.line(112, sigBaseY + 2, 196, sigBaseY + 2);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...BK);
+  doc.text('FOTOS ARIAS — PRESTADOR', 112, sigBaseY + 8);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GY);
+  doc.text('Arias Fotografía', 112, sigBaseY + 14);
+  doc.text('ariasfotos6@gmail.com', 112, sigBaseY + 20);
+
+  // Footer
+  doc.setFillColor(...BK); doc.rect(0,289,210,8,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(150,150,150);
+  doc.text('Fotos Arias  |  ariasfotos6@gmail.com  |  +54 11 3213-7848  |  CABA y Provincia de Buenos Aires',105,294,{align:'center'});
+
+  return doc;
 }
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeContract(); });
 </script>
 </body>
 </html>
