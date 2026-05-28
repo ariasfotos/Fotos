@@ -3,354 +3,745 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fotos Arias</title>
+<title>Fotos Arias — Fotografía Cinematográfica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;line-height:1.65;overflow-x:hidden}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:#fff;border-bottom:1px solid #ececec;padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:62px}
-.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#111;text-decoration:none}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:#666;text-decoration:none;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:#111}
-.nav-cta{background:#1a3a6b;color:#fff;padding:.5rem 1.4rem;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .2s;cursor:pointer;border:none;font-family:Arial}
-.nav-cta:hover{background:#0f2648}
-
-/* UTILS */
-.btn{display:inline-block;padding:.8rem 2.2rem;font-family:Arial,Helvetica,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
-.btn-dark{background:#1a3a6b;color:#fff}
-.btn-dark:hover{background:#0f2648}
-.btn-outline{background:transparent;color:#111;border:1.5px solid #111}
-.btn-outline:hover{background:#111;color:#fff}
-.btn-white{background:#fff;color:#111}
-.btn-white:hover{background:#f0f0f0}
-.btn-full{width:100%;display:block;text-align:center}
-
-section{padding:7rem 5%}
-.mx{max-width:1200px;margin:0 auto}
-.sec-label{font-size:.62rem;letter-spacing:.45em;text-transform:uppercase;color:#aaa;margin-bottom:.8rem}
-.sec-title{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:700;line-height:1.05;margin-bottom:1.2rem}
-.sec-line{width:36px;height:2px;background:#1a3a6b;margin-bottom:3rem}
-.muted{color:#888}
-
-/* HERO */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:62px}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 6% 5rem 5%;background:#fff}
-.hero-eyebrow{font-size:.64rem;letter-spacing:.4em;text-transform:uppercase;color:#aaa;margin-bottom:1.8rem}
-.hero-title{font-size:clamp(3rem,6vw,5.8rem);font-weight:700;line-height:.95;margin-bottom:1.8rem;letter-spacing:-.02em}
-.hero-story{font-size:.88rem;color:#555;margin-bottom:.8rem;line-height:1.85;max-width:440px;border-left:2px solid #1a3a6b;padding-left:1.2rem}
-.hero-tagline{font-size:.82rem;color:#111;font-weight:700;margin-bottom:2.5rem;letter-spacing:.04em}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.hero-right{overflow:hidden;position:relative}
-.hero-right-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.04)}
-
-/* ====== FONDOS CON TEXTURA ====== */
-/* Patron de puntos — secciones claras */
-.bg-dots{
-  background-color:#f7f7f7;
-  background-image:radial-gradient(circle,#d0d0d0 1px,transparent 1px);
-  background-size:22px 22px;
+/*=========================================================
+  TOKENS
+=========================================================*/
+:root{
+  --ink:#0e0d0c;
+  --ink-soft:#2a2724;
+  --dust:#f5f0ea;
+  --cream:#faf7f2;
+  --gold:#b8985a;
+  --gold-light:#d4b87a;
+  --warm-grey:#9a9088;
+  --border:rgba(184,152,90,.18);
+  --border-soft:rgba(14,13,12,.08);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --ease-cinema:cubic-bezier(.22,.68,0,1.2);
+  --ease-smooth:cubic-bezier(.4,0,.2,1);
 }
-/* Patron de lineas diagonales — secciones alternadas */
-.bg-lines{
-  background-color:#fafafa;
-  background-image:repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 8px,
-    rgba(0,0,0,.028) 8px,
-    rgba(0,0,0,.028) 9px
+
+/*=========================================================
+  RESET
+=========================================================*/
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:var(--sans)}
+
+/*=========================================================
+  GRAIN OVERLAY
+=========================================================*/
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.35;mix-blend-mode:multiply;
+}
+
+/*=========================================================
+  LOADER
+=========================================================*/
+#loader{
+  position:fixed;inset:0;z-index:8000;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;
+  transition:opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
+}
+#loader.out{opacity:0;transform:translateY(-4px);pointer-events:none}
+.ld-logo{
+  font-family:var(--serif);font-size:1.8rem;font-weight:300;letter-spacing:.25em;
+  text-transform:uppercase;color:#fff;opacity:0;animation:ldIn .8s .2s forwards;
+}
+.ld-sub{font-size:.6rem;letter-spacing:.55em;text-transform:uppercase;color:var(--warm-grey);opacity:0;animation:ldIn .8s .5s forwards}
+.ld-bar-wrap{width:120px;height:1px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:.5rem}
+.ld-bar{height:100%;background:var(--gold);width:0;animation:ldFill 1.6s .6s var(--ease-smooth) forwards}
+@keyframes ldIn{to{opacity:1;transform:none}}
+@keyframes ldFill{to{width:100%}}
+
+/*=========================================================
+  CUSTOM CURSOR
+=========================================================*/
+.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:7999;mix-blend-mode:difference}
+.cursor-dot{width:6px;height:6px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s}
+.cursor-ring{width:32px;height:32px;border:1px solid rgba(255,255,255,.5);border-radius:50%;transform:translate(-50%,-50%);transition:width .35s var(--ease-smooth),height .35s var(--ease-smooth),border-color .3s}
+.cursor-ring.hov{width:56px;height:56px;border-color:rgba(255,255,255,.9)}
+.cursor-dot.hov{width:3px;height:3px}
+@media(hover:none){.cursor{display:none}}
+
+/*=========================================================
+  NAV
+=========================================================*/
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:68px;
+  background:transparent;
+  transition:background .6s var(--ease-smooth),backdrop-filter .6s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(250,247,242,.9);backdrop-filter:blur(20px);border-color:var(--border-soft)}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#fff;transition:color .4s}
+nav.scrolled .nav-logo{color:var(--ink)}
+.nav-links{display:flex;gap:2.4rem;list-style:none}
+.nav-links a{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75);transition:color .3s;font-weight:400}
+nav.scrolled .nav-links a{color:var(--warm-grey)}
+.nav-links a:hover{color:#fff}
+nav.scrolled .nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.3);padding:.55rem 1.4rem;
+  transition:all .3s;font-family:var(--sans);
+}
+.nav-cta:hover{background:#fff;color:var(--ink);border-color:#fff}
+nav.scrolled .nav-cta{color:var(--ink);border-color:var(--border)}
+nav.scrolled .nav-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* Mobile hamburger */
+.nav-menu-btn{display:none;flex-direction:column;gap:5px;padding:.5rem;border:none;background:none;cursor:pointer}
+.nav-menu-btn span{display:block;width:22px;height:1px;background:#fff;transition:all .3s var(--ease-smooth)}
+nav.scrolled .nav-menu-btn span{background:var(--ink)}
+.nav-menu-btn.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-menu-btn.open span:nth-child(2){opacity:0}
+.nav-menu-btn.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/*=========================================================
+  BUTTONS
+=========================================================*/
+.btn{
+  display:inline-block;font-family:var(--sans);font-size:.6rem;letter-spacing:.25em;
+  text-transform:uppercase;padding:.85rem 2.4rem;cursor:pointer;
+  transition:all .4s var(--ease-smooth);position:relative;overflow:hidden;border:none;
+}
+.btn::after{content:'';position:absolute;inset:0;transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-smooth)}
+.btn:hover::after{transform:scaleX(1)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold::after{background:var(--gold-light)}
+.btn-outline-light{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn-outline-light:hover{background:#fff;color:var(--ink)}
+.btn-outline-dark{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-outline-dark:hover{background:var(--ink);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark::after{background:var(--ink-soft)}
+.btn-full{width:100%;display:block;text-align:center}
+.btn-wht{background:#fff;color:var(--ink)}
+.btn-wht:hover{background:var(--dust)}
+
+/*=========================================================
+  HERO
+=========================================================*/
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1800&q=85') center/cover no-repeat;
+  transform:scale(1.08);
+  animation:heroBgIn 1.8s .2s var(--ease-smooth) forwards;
+  will-change:transform;
+}
+@keyframes heroBgIn{to{transform:scale(1)}}
+
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(14,13,12,.15) 0%,
+    rgba(14,13,12,.1) 30%,
+    rgba(14,13,12,.35) 65%,
+    rgba(14,13,12,.82) 100%
   );
 }
-/* Grid fino — secciones blancas */
-.bg-grid{
-  background-color:#fff;
-  background-image:
-    linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);
-  background-size:32px 32px;
+
+.hero-content{
+  position:relative;z-index:2;
+  width:100%;max-width:1280px;margin:0 auto;
+  padding:0 5% 7rem;
 }
-/* COTIZADOR */
-#servicios{background-color:#f7f7f7;background-image:radial-gradient(circle,#d0d0d0 1px,transparent 1px);background-size:22px 22px;}
-.cot-intro{font-size:.84rem;color:#666;margin-bottom:2.5rem;max-width:540px;line-height:1.8}
-.srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8}
-.srv-card{background:#fff;padding:2.4rem 2.2rem;cursor:pointer;user-select:none;transition:background .2s;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.srv-card:hover{background:#f8f8f8}
-.srv-card.active{background:#1a3a6b}
-.srv-check{position:absolute;top:1.2rem;right:1.2rem;width:20px;height:20px;border:1.5px solid #d0d0d0;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:transparent;transition:all .2s}
-.srv-card.active .srv-check{background:#fff;border-color:#fff;color:#1a3a6b}
-.srv-num{font-size:2.6rem;font-weight:700;color:#f0f0f0;line-height:1;margin-bottom:1.2rem;transition:color .2s}
-.srv-card.active .srv-num{color:rgba(255,255,255,.12)}
-.srv-name{font-size:1.2rem;font-weight:700;margin-bottom:.3rem;transition:color .2s}
+
+.hero-eyebrow{
+  font-size:.6rem;letter-spacing:.55em;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:2.4rem;
+  opacity:0;animation:heroUp .8s .8s var(--ease-smooth) forwards;
+}
+
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(3.8rem,9vw,8.5rem);
+  font-weight:300;line-height:.92;
+  color:#fff;letter-spacing:-.01em;
+  margin-bottom:2.5rem;
+  opacity:0;animation:heroUp 1s 1s var(--ease-smooth) forwards;
+}
+.hero-title em{font-style:italic;color:var(--gold-light)}
+
+.hero-subtitle{
+  font-size:.8rem;letter-spacing:.08em;color:rgba(255,255,255,.6);
+  max-width:480px;line-height:2;
+  margin-bottom:3.5rem;
+  opacity:0;animation:heroUp .8s 1.25s var(--ease-smooth) forwards;
+}
+
+.hero-btns{
+  display:flex;gap:1.2rem;flex-wrap:wrap;
+  opacity:0;animation:heroUp .8s 1.45s var(--ease-smooth) forwards;
+}
+
+@keyframes heroUp{to{opacity:1;transform:translateY(0)}}
+
+.hero-scroll-hint{
+  position:absolute;bottom:3rem;right:5%;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;
+  opacity:0;animation:heroUp .8s 1.8s var(--ease-smooth) forwards;
+}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.4));animation:scrollPulse 2s 2.5s infinite}
+.scroll-label{font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.4);writing-mode:vertical-rl}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* Hero film strip accent */
+.hero-film{
+  position:absolute;top:0;right:0;width:4px;height:100%;z-index:2;
+  background:repeating-linear-gradient(to bottom,var(--gold) 0,var(--gold) 16px,transparent 16px,transparent 22px);
+  opacity:.25;
+}
+
+/*=========================================================
+  UTILS
+=========================================================*/
+section{padding:8rem 5%}
+.mx{max-width:1240px;margin:0 auto}
+.label{font-size:.55rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem}
+.serif-title{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;line-height:1.05;letter-spacing:-.01em}
+.serif-title em{font-style:italic}
+.section-rule{width:40px;height:1px;background:var(--gold);margin:2.4rem 0}
+
+/* Reveal animations */
+.rev{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease-smooth),transform .9s var(--ease-smooth)}
+.rev.vis{opacity:1;transform:none}
+.rev-l{opacity:0;transform:translateX(-50px);transition:opacity .9s var(--ease-smooth),transform .9s var(--ease-smooth)}
+.rev-l.vis{opacity:1;transform:none}
+.rev-r{opacity:0;transform:translateX(50px);transition:opacity .9s var(--ease-smooth),transform .9s var(--ease-smooth)}
+.rev-r.vis{opacity:1;transform:none}
+.rev-scale{opacity:0;transform:scale(.95);transition:opacity .9s var(--ease-smooth),transform .9s var(--ease-smooth)}
+.rev-scale.vis{opacity:1;transform:scale(1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.32s}.d4{transition-delay:.44s}.d5{transition-delay:.56s}.d6{transition-delay:.68s}
+
+/*=========================================================
+  SECTION: STATEMENT
+=========================================================*/
+.statement{
+  padding:6rem 5%;
+  background:var(--ink);
+  text-align:center;position:relative;overflow:hidden;
+}
+.statement::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(184,152,90,.12) 0%, transparent 70%);
+}
+.statement-text{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:300;color:#fff;
+  line-height:1.35;max-width:860px;
+  margin:0 auto;
+  position:relative;
+}
+.statement-text em{font-style:italic;color:var(--gold-light)}
+
+/*=========================================================
+  SECTION: SERVICIOS / COTIZADOR
+=========================================================*/
+#servicios{background:var(--cream);padding-bottom:0}
+
+.srv-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:5rem}
+.srv-intro-right{font-size:.82rem;color:var(--warm-grey);line-height:2;max-width:440px;margin-left:auto}
+
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-soft)}
+
+.srv-card{
+  background:var(--cream);padding:3rem 2.4rem;
+  cursor:pointer;user-select:none;
+  transition:background .35s var(--ease-smooth),transform .35s var(--ease-smooth);
+  position:relative;overflow:hidden;
+}
+.srv-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .45s var(--ease-smooth);
+}
+.srv-card:hover{background:var(--dust)}
+.srv-card.active{background:var(--ink)}
+.srv-card.active::before{transform:scaleX(1)}
+.srv-card:hover::before{transform:scaleX(.4)}
+
+.srv-num{
+  font-family:var(--serif);font-size:3.5rem;font-weight:300;
+  color:var(--border-soft);line-height:1;margin-bottom:2rem;
+  transition:color .35s;
+}
+.srv-card.active .srv-num{color:rgba(255,255,255,.07)}
+
+.srv-check{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:22px;height:22px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:transparent;font-size:.7rem;
+  transition:all .3s;
+}
+.srv-card.active .srv-check{background:var(--gold);border-color:var(--gold);color:#fff}
+
+.srv-name{font-family:var(--serif);font-size:1.4rem;font-weight:400;margin-bottom:.3rem;transition:color .3s}
 .srv-card.active .srv-name{color:#fff}
-.srv-price-tag{font-size:.8rem;font-weight:700;color:#888;margin-bottom:.9rem;transition:color .2s}
-.srv-card.active .srv-price-tag{color:#bbb}
-.srv-desc{font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.75;transition:color .2s}
-.srv-card.active .srv-desc{color:#999}
-.srv-det{display:flex;flex-direction:column;gap:.3rem}
-.srv-det span{font-size:.73rem;color:#aaa;display:flex;align-items:baseline;gap:.5rem;transition:color .2s}
-.srv-det span::before{content:'';width:10px;height:1px;background:#ddd;flex-shrink:0}
-.srv-card.active .srv-det span{color:#777}
-.srv-card.active .srv-det span::before{background:#555}
+.srv-price{font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem}
+.srv-card.active .srv-price{color:var(--gold-light)}
+.srv-desc{font-size:.78rem;color:var(--warm-grey);line-height:1.85;margin-bottom:1.2rem;transition:color .3s}
+.srv-card.active .srv-desc{color:rgba(255,255,255,.45)}
+.srv-det{display:flex;flex-direction:column;gap:.4rem}
+.srv-det span{font-size:.68rem;color:var(--warm-grey);display:flex;align-items:center;gap:.6rem;transition:color .3s}
+.srv-det span::before{content:'';width:12px;height:1px;background:var(--border);flex-shrink:0;transition:background .3s}
+.srv-card.active .srv-det span{color:rgba(255,255,255,.35)}
+.srv-card.active .srv-det span::before{background:rgba(184,152,90,.3)}
 
 /* TOTAL BAR */
-.total-bar{position:sticky;bottom:0;z-index:50;background:#1a3a6b;padding:1.1rem 5%;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;transform:translateY(100%);transition:transform .35s}
+.total-bar{
+  position:sticky;bottom:0;z-index:200;
+  background:var(--ink);
+  padding:1.2rem 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  transform:translateY(110%);transition:transform .5s var(--ease-smooth);
+  border-top:1px solid rgba(184,152,90,.2);
+}
 .total-bar.show{transform:translateY(0)}
 .total-info{display:flex;flex-direction:column;gap:.2rem}
-.total-services-txt{font-size:.73rem;color:#888;letter-spacing:.04em}
-.total-price{font-size:1.55rem;font-weight:700;color:#fff}
-.total-actions{display:flex;gap:.8rem;align-items:center}
-.btn-wout{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:.7rem 1.8rem;font-family:Arial;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.btn-wout:hover{border-color:#fff}
-.btn-bar-white{background:#fff;color:#111;padding:.7rem 1.8rem;font-family:Arial;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s}
-.btn-bar-white:hover{background:#eee}
+.total-services-txt{font-size:.62rem;letter-spacing:.12em;color:var(--warm-grey);text-transform:uppercase}
+.total-price{font-family:var(--serif);font-size:2rem;font-weight:300;color:#fff;line-height:1}
+.total-actions{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.btn-bar-a{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15);padding:.7rem 1.8rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-family:var(--sans);transition:all .3s;cursor:pointer}
+.btn-bar-a:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-bar-b{background:var(--gold);color:#fff;border:none;padding:.7rem 1.8rem;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-family:var(--sans);transition:background .3s;cursor:pointer}
+.btn-bar-b:hover{background:var(--gold-light)}
 
-/* PORTFOLIO */
-#portfolio{background-color:#fff;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:32px 32px;padding-bottom:5rem}
-.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin-top:3rem}
-.gi{overflow:hidden}
-.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease,filter .3s;filter:brightness(.96) grayscale(.08)}
-.gi:hover img{transform:scale(1.04);filter:brightness(1) grayscale(0)}
-.g1{grid-column:span 7;height:440px}
-.g2{grid-column:span 5;height:440px}
-.g3,.g4,.g5{grid-column:span 4;height:290px}
+/*=========================================================
+  SECTION: HISTORIAS (PORTFOLIO)
+=========================================================*/
+#portfolio{background:var(--ink);padding:8rem 0}
+#portfolio .mx{padding:0 5%}
 
-/* SOBRE MI */
-#sobre{background-color:#fafafa;background-image:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(0,0,0,.025) 8px,rgba(0,0,0,.025) 9px);}
-.sobre-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3rem}
-.sobre-img{height:520px;overflow:hidden;position:relative}
-.sobre-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
-.sobre-text h3{font-size:1.6rem;font-weight:700;line-height:1.2;margin-bottom:1.2rem}
-.sobre-text p{color:#666;font-size:.86rem;line-height:1.9;margin-bottom:1.2rem}
-.sobre-text strong{color:#111;font-weight:700}
-.sobre-stats{display:flex;gap:2.5rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #ececec}
-.stat-item{display:flex;flex-direction:column;gap:.2rem}
-.stat-n{font-size:2rem;font-weight:700;color:#1a3a6b;line-height:1}
-.stat-l{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#aaa}
+.historias{margin-top:5rem}
 
-/* ENTREGA */
-#entrega{background-color:#fff;background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px);background-size:28px 28px;}
-.del-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;margin-top:3rem}
-.del-item{background:#fff;padding:2.2rem 1.8rem;transition:background .2s;box-shadow:0 2px 10px rgba(0,0,0,.055)}
-.del-item:hover{background:#fafafa}
-.del-n{font-size:2.6rem;font-weight:700;color:#ececec;line-height:1;margin-bottom:1.2rem}
-.del-t{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
-.del-d{font-size:.78rem;color:#777;line-height:1.8}
-
-/* RESERVAS */
-#reservas{background-color:#f5f5f5;background-image:radial-gradient(circle,#c8c8c8 1px,transparent 1px);background-size:20px 20px;}
-.res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
-.cal-widget{border:1px solid #e8e8e8;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.07)}
-.cal-head{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.6rem;border-bottom:1px solid #e8e8e8;background:#fafafa}
-.cal-head h3{font-size:.95rem;font-weight:700;letter-spacing:.04em}
-.cal-nav{display:flex;gap:.4rem}
-.cnav{background:#fff;border:1px solid #e0e0e0;color:#111;width:30px;height:30px;cursor:pointer;transition:all .2s;font-size:.9rem}
-.cnav:hover{background:#111;color:#fff;border-color:#111}
-.cal-body{padding:1.2rem}
-.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#ccc;margin-bottom:.5rem}
-.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cd{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer;transition:all .18s;border:1px solid transparent}
-.cd:hover:not(.dis):not(.bk){border-color:#111;background:#f8f8f8}
-.cd.sel{background:#111;color:#fff}
-.cd.bk{text-decoration:line-through;color:#ddd;cursor:not-allowed}
-.cd.dis{opacity:.3;cursor:not-allowed}
-.cd.emp{cursor:default}
-.cd.tdy{font-weight:700;color:#111}
-.cal-leg{display:flex;gap:1.5rem;padding:.8rem 1.2rem;border-top:1px solid #e8e8e8;font-size:.66rem;color:#aaa;background:#fafafa}
-.ld{display:inline-block;width:8px;height:8px;margin-right:.3rem}
-.bk-form{display:flex;flex-direction:column;gap:1rem}
-.fg{display:flex;flex-direction:column;gap:.3rem}
-.fg label{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#999;font-weight:700}
-.fg input,.fg select,.fg textarea{background:#fff;border:1px solid #e0e0e0;color:#111;padding:.8rem 1rem;font-family:Arial;font-size:.84rem;outline:none;transition:border .2s;width:100%}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#111}
-.fg textarea{resize:vertical;min-height:70px}
-.info-box{font-size:.8rem;color:#777;padding:.8rem 1rem;background:#fafafa;border:1px solid #e8e8e8;min-height:2.8rem;line-height:1.6}
-.info-box strong{color:#111}
-
-/* CONTACTO */
-#contacto{background:#111;color:#fff}
-#contacto .sec-label{color:#666}
-#contacto .sec-title{color:#fff}
-#contacto .sec-line{background:#fff}
-.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:3rem;align-items:center}
-.ct-big{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1;letter-spacing:-.02em;color:#fff}
-.ct-info{display:flex;flex-direction:column;gap:2rem}
-.ct-item{display:flex;flex-direction:column;gap:.25rem}
-.ct-item-l{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#666}
-.ct-item-v{font-size:1.05rem;color:#fff;text-decoration:none;transition:color .2s;font-weight:700}
-.ct-item-v:hover{color:#bbb}
-
-footer{padding:1.5rem 5%;border-top:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:#555;background:#111}
-.fl{font-size:.95rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.14em;text-transform:uppercase}
-
-/* ============================================================
-   CONTRATO — OVERLAY DE PAGINA COMPLETA
-   ============================================================ */
-#ctrOverlay{
-  position:fixed;inset:0;z-index:500;
-  background:#fff;overflow-y:auto;
-  opacity:0;pointer-events:none;transform:translateY(30px);
-  transition:opacity .35s,transform .35s;
+.historia{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:80vh;position:relative;
+  overflow:hidden;
+  margin-bottom:1px;
 }
-#ctrOverlay.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.historia:nth-child(even){direction:rtl}
+.historia:nth-child(even) > *{direction:ltr}
 
-.ctr-nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #ececec;padding:0 5%;height:58px;display:flex;align-items:center;justify-content:space-between}
-.ctr-nav-logo{font-size:.95rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.ctr-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#111;padding:.3rem .6rem;transition:color .2s}
-.ctr-close:hover{color:#e00}
+.historia-img{
+  position:relative;overflow:hidden;
+}
+.historia-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.2s var(--ease-smooth),filter .8s;
+  filter:saturate(.9) brightness(.92);
+  transform:scale(1.06);
+}
+.historia:hover .historia-img img{transform:scale(1);filter:saturate(1) brightness(.95)}
 
-/* Steps */
-.ctr-steps{display:flex;align-items:center;justify-content:center;gap:0;border-bottom:1px solid #ececec;padding:.9rem 5%}
-.step{display:flex;align-items:center;gap:.6rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ccc;padding:.4rem 1.2rem}
-.step.active{color:#111}
-.step.done{color:#888}
-.step-n{width:22px;height:22px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.63rem;flex-shrink:0}
-.step.done .step-n{background:#1a3a6b;border-color:#1a3a6b;color:#fff}
-.step-sep{width:36px;height:1px;background:#e0e0e0}
+.historia-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(14,13,12,.5) 0%,rgba(14,13,12,.1) 100%);
+  transition:opacity .6s;
+}
+.historia:hover .historia-img-overlay{opacity:.5}
 
-/* Step content */
-.ctr-body{max-width:820px;margin:0 auto;padding:3.5rem 5% 5rem}
+.historia-content{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:4rem 4.5rem;background:var(--ink-soft);
+  position:relative;
+}
+.historia-content::before{
+  content:'';position:absolute;top:3rem;left:4.5rem;
+  width:24px;height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .7s .2s var(--ease-smooth);
+}
+.historia:hover .historia-content::before{transform:scaleX(1)}
+
+.historia-num{
+  font-family:var(--serif);font-size:5rem;font-weight:300;
+  color:rgba(255,255,255,.05);line-height:1;
+  position:absolute;top:3rem;right:3rem;
+}
+.historia-cat{font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.historia-title{
+  font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);
+  font-weight:300;color:#fff;line-height:1.1;margin-bottom:1.2rem;
+}
+.historia-title em{font-style:italic;color:var(--gold-light)}
+.historia-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.9;max-width:360px}
+
+/*=========================================================
+  SECTION: SOBRE MÍ
+=========================================================*/
+#sobre{background:var(--dust)}
+
+.sobre-wrap{display:grid;grid-template-columns:5fr 4fr;gap:7rem;align-items:center}
+
+.sobre-img-wrap{position:relative}
+.sobre-img{
+  height:620px;overflow:hidden;position:relative;
+}
+.sobre-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform 1.2s var(--ease-smooth)}
+.sobre-img:hover img{transform:scale(1.03)}
+
+/* Decorative gold accent */
+.sobre-accent{
+  position:absolute;bottom:-2rem;right:-2rem;
+  width:120px;height:120px;
+  border:1px solid var(--gold);opacity:.3;
+  pointer-events:none;
+}
+
+.sobre-text .label{margin-bottom:1.2rem}
+.sobre-name{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);font-weight:300;margin-bottom:.5rem;line-height:1.1}
+.sobre-name em{font-style:italic;color:var(--gold)}
+.sobre-role{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--warm-grey);margin-bottom:2.5rem}
+.sobre-bio{font-size:.84rem;color:var(--warm-grey);line-height:2;margin-bottom:1.5rem}
+.sobre-bio strong{color:var(--ink);font-weight:500}
+
+.sobre-stats{display:flex;gap:3rem;padding:2.4rem 0;border-top:1px solid var(--border-soft);margin-top:1rem}
+.stat{display:flex;flex-direction:column;gap:.3rem}
+.stat-n{font-family:var(--serif);font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--warm-grey)}
+
+/*=========================================================
+  SECTION: ENTREGA
+=========================================================*/
+#entrega{background:var(--cream)}
+
+.entrega-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);margin-top:5rem}
+.entrega-item{
+  background:var(--cream);padding:3.5rem 2.4rem;
+  transition:background .3s var(--ease-smooth),transform .35s var(--ease-smooth);
+}
+.entrega-item:hover{background:var(--dust);transform:translateY(-4px)}
+.entrega-roman{
+  font-family:var(--serif);font-size:2.8rem;font-weight:300;
+  color:var(--border-soft);margin-bottom:2.5rem;line-height:1;
+  transition:color .3s;
+}
+.entrega-item:hover .entrega-roman{color:var(--gold)}
+.entrega-title{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:.7rem}
+.entrega-desc{font-size:.76rem;color:var(--warm-grey);line-height:1.9}
+
+/*=========================================================
+  SECTION: RESERVAS
+=========================================================*/
+#reservas{background:var(--ink);color:#fff}
+#reservas .label{color:var(--gold)}
+
+.res-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem}
+.res-intro-right{font-size:.78rem;color:rgba(255,255,255,.4);max-width:360px;line-height:2;text-align:right}
+
+.res-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+
+/* Calendar */
+.cal-widget{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.cal-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 1.8rem;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.cal-head h3{font-family:var(--serif);font-size:1.1rem;font-weight:300;color:#fff;letter-spacing:.04em}
+.cal-nav{display:flex;gap:.4rem}
+.cnav{
+  background:transparent;border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.6);width:32px;height:32px;
+  cursor:pointer;transition:all .25s;font-size:.9rem;
+}
+.cnav:hover{background:rgba(255,255,255,.08);color:#fff}
+.cal-body{padding:1.5rem 1.8rem}
+.cal-wd{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  text-align:center;font-size:.55rem;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.6rem;
+}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cd{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:.76rem;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.7);
+  border:1px solid transparent;
+}
+.cd:hover:not(.dis):not(.bk){border-color:rgba(255,255,255,.2);color:#fff}
+.cd.sel{background:var(--gold);color:#fff;border-color:var(--gold)}
+.cd.bk{text-decoration:line-through;color:rgba(255,255,255,.15);cursor:not-allowed}
+.cd.dis{opacity:.2;cursor:not-allowed}
+.cd.emp{cursor:default}
+.cd.tdy{font-weight:500;color:#fff}
+.cal-leg{display:flex;gap:1.5rem;padding:.8rem 1.4rem;border-top:1px solid rgba(255,255,255,.06);font-size:.6rem;color:rgba(255,255,255,.3)}
+.ld{display:inline-block;width:7px;height:7px;margin-right:.35rem}
+
+/* Booking form */
+.bk-form{display:flex;flex-direction:column;gap:1.2rem}
+.fg{display:flex;flex-direction:column;gap:.4rem}
+.fg label{font-size:.56rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:400}
+.fg input,.fg select,.fg textarea{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:#fff;padding:.9rem 1.1rem;font-family:var(--sans);font-size:.84rem;
+  outline:none;transition:border .25s,background .25s;width:100%;
+}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.2)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(184,152,90,.4);background:rgba(255,255,255,.06);
+}
+.fg textarea{resize:vertical;min-height:80px}
+.info-box{
+  font-size:.8rem;color:rgba(255,255,255,.35);
+  padding:.9rem 1.1rem;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);min-height:2.8rem;line-height:1.7;
+}
+.info-box strong{color:rgba(255,255,255,.75)}
+
+/*=========================================================
+  SECTION: CONTACTO
+=========================================================*/
+#contacto{background:var(--dust);padding:8rem 5%}
+
+.ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.ct-left .serif-title{margin-bottom:2rem}
+.ct-tagline{font-size:.8rem;color:var(--warm-grey);line-height:2;max-width:400px}
+
+.ct-info{display:flex;flex-direction:column;gap:2.5rem}
+.ct-item{}
+.ct-item-l{font-size:.55rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.4rem}
+.ct-item-v{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--ink);transition:color .3s}
+.ct-item-v:hover{color:var(--gold)}
+.ct-ctas{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+
+/*=========================================================
+  FOOTER
+=========================================================*/
+footer{
+  background:var(--ink);padding:2.5rem 5%;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+  border-top:1px solid rgba(184,152,90,.1);
+}
+.fl{font-family:var(--serif);font-size:1rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.footer-meta{font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.2);text-align:right}
+.footer-meta a{color:rgba(255,255,255,.3);transition:color .3s}
+.footer-meta a:hover{color:rgba(255,255,255,.7)}
+
+/*=========================================================
+  CONTRATO OVERLAY
+=========================================================*/
+#ctrOverlay{
+  position:fixed;inset:0;z-index:600;
+  background:var(--cream);overflow-y:auto;
+  opacity:0;pointer-events:none;
+  transform:translateY(20px);
+  transition:opacity .4s var(--ease-smooth),transform .4s var(--ease-smooth);
+}
+#ctrOverlay.open{opacity:1;pointer-events:all;transform:none}
+
+.ctr-nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(250,247,242,.94);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft);
+  padding:0 5%;height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ctr-nav-logo{font-family:var(--serif);font-size:1rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--ink)}
+.ctr-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--warm-grey);padding:.4rem;transition:color .2s}
+.ctr-close:hover{color:var(--ink)}
+
+.ctr-steps{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  border-bottom:1px solid var(--border-soft);padding:.8rem 5%;
+}
+.step{
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--border-soft);padding:.4rem 1.2rem;transition:color .3s;font-weight:500;
+}
+.step.active{color:var(--ink)}
+.step.done{color:var(--warm-grey)}
+.step-n{
+  width:20px;height:20px;border:1px solid currentColor;
+  display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;
+}
+.step.done .step-n{background:var(--gold);border-color:var(--gold);color:#fff}
+.step-sep{width:30px;height:1px;background:var(--border-soft)}
+
+.ctr-body{max-width:780px;margin:0 auto;padding:4rem 5% 6rem}
 .ctr-step-panel{display:none}
 .ctr-step-panel.active{display:block}
 
-/* Step 1 */
-.ctr-section-title{font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:#aaa;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid #ececec;display:block}
-.fr2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.terms{font-size:.76rem;color:#666;line-height:1.85;padding:1.2rem;background:#fafafa;border:1px solid #ececec;max-height:160px;overflow-y:auto;margin-bottom:1rem}
+.ctr-section-title{
+  font-size:.56rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);display:block;
+  margin-bottom:1.5rem;padding-bottom:.7rem;
+  border-bottom:1px solid var(--border-soft);
+}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+
+/* Contract form inputs (light) */
+.ctr-body .fg label{color:var(--warm-grey)}
+.ctr-body .fg input,
+.ctr-body .fg select,
+.ctr-body .fg textarea{
+  background:#fff;border:1px solid var(--border-soft);
+  color:var(--ink);padding:.85rem 1rem;
+  font-family:var(--sans);font-size:.84rem;
+  outline:none;transition:border .25s,box-shadow .25s;width:100%;
+}
+.ctr-body .fg input:focus,
+.ctr-body .fg select:focus,
+.ctr-body .fg textarea:focus{
+  border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,152,90,.08);
+}
+.ctr-body .info-box{
+  background:var(--dust);border:1px solid var(--border-soft);
+  color:var(--warm-grey);
+}
+.ctr-body .info-box strong{color:var(--ink)}
+
+.terms{
+  font-size:.75rem;color:var(--warm-grey);line-height:1.9;
+  padding:1.4rem;background:var(--dust);
+  border:1px solid var(--border-soft);
+  max-height:160px;overflow-y:auto;margin-bottom:1.2rem;
+}
 .terms::-webkit-scrollbar{width:3px}
-.terms::-webkit-scrollbar-thumb{background:#ddd}
-.check-row{display:flex;align-items:flex-start;gap:.8rem;font-size:.8rem;color:#555;margin-bottom:1.5rem}
-.check-row input{accent-color:#111;width:14px;height:14px;margin-top:3px;flex-shrink:0}
-.sig-wrap{border:1.5px solid #e0e0e0;margin-bottom:.5rem}
-.sig-lbl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#aaa;padding:.6rem 1rem;border-bottom:1px solid #ececec;background:#fafafa;display:flex;justify-content:space-between;align-items:center}
-.sig-clr{background:none;border:none;font-size:.66rem;color:#aaa;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;transition:color .2s}
-.sig-clr:hover{color:#111}
-.sig-wrap canvas{display:block;width:100%;height:130px;background:#fff}
-.sig-note{font-size:.7rem;color:#ccc;margin-bottom:2rem}
+.terms::-webkit-scrollbar-thumb{background:var(--border)}
 
-/* Step 2 — Pago */
-.pay-box{border:1.5px solid #e0e0e0;padding:2.5rem}
-.pay-summary{margin-bottom:2.2rem}
-.pay-row{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid #f0f0f0;font-size:.85rem}
+.check-row{display:flex;align-items:flex-start;gap:.8rem;font-size:.78rem;color:var(--warm-grey);margin-bottom:1.8rem}
+.check-row input{accent-color:var(--gold);width:14px;height:14px;margin-top:3px;flex-shrink:0}
+
+.sig-wrap{border:1px solid var(--border-soft);margin-bottom:.6rem}
+.sig-lbl{
+  font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-grey);
+  padding:.7rem 1rem;border-bottom:1px solid var(--border-soft);background:var(--dust);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.sig-clr{background:none;border:none;font-size:.6rem;color:var(--warm-grey);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;font-family:var(--sans)}
+.sig-clr:hover{color:var(--ink)}
+.sig-wrap canvas{display:block;width:100%;height:140px;background:#fff}
+.sig-note{font-size:.68rem;color:var(--border);margin-bottom:2rem}
+
+.pay-box{border:1px solid var(--border-soft);padding:2.5rem;background:#fff}
+.pay-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border-soft);font-size:.84rem}
 .pay-row:last-child{border-bottom:none}
-.pay-total-row{display:flex;justify-content:space-between;padding:.8rem 0;border-top:2px solid #111;margin-top:.5rem;font-size:1.1rem;font-weight:700}
-.pay-sena-row{display:flex;justify-content:space-between;padding:.5rem 0;font-size:.82rem;color:#777}
-.pay-inst{background:#fafafa;border:1px solid #ececec;padding:1.2rem;font-size:.8rem;color:#555;line-height:1.75;margin-bottom:1.5rem}
-.pay-inst strong{color:#111}
+.pay-total-row{display:flex;justify-content:space-between;padding:.8rem 0;border-top:1px solid var(--ink);margin-top:.5rem}
+.pay-total-row span:first-child{font-weight:500}
+.pay-total-row span:last-child{font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+.pay-sena-row{display:flex;justify-content:space-between;padding:.5rem 0;font-size:.8rem;color:var(--warm-grey)}
+.pay-inst{background:var(--dust);border:1px solid var(--border-soft);padding:1.2rem;font-size:.78rem;color:var(--warm-grey);line-height:1.8;margin-bottom:1.5rem}
+.pay-inst strong{color:var(--ink);font-weight:500}
 
-/* Step 3 — Confirmacion */
-.confirm-box{text-align:center;padding:4rem 2rem}
-.confirm-icon{width:56px;height:56px;border:2px solid #111;display:inline-flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:2rem}
-.confirm-box h3{font-size:1.7rem;font-weight:700;margin-bottom:.8rem}
-.confirm-box p{color:#666;font-size:.88rem;line-height:1.8;max-width:440px;margin:0 auto 2rem}
+.confirm-box{text-align:center;padding:5rem 2rem}
+.confirm-icon{width:52px;height:52px;border:1px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gold);margin-bottom:2rem}
+.confirm-box h3{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:1rem}
+.confirm-box p{color:var(--warm-grey);font-size:.82rem;line-height:1.9;max-width:440px;margin:0 auto 2.5rem}
 .confirm-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
 /* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:#111;color:#fff;padding:1rem 1.5rem;font-size:.78rem;z-index:999;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;max-width:300px;font-family:Arial}
-.toast.show{opacity:1;transform:translateY(0)}
+.toast{
+  position:fixed;bottom:2.5rem;right:2.5rem;z-index:9000;
+  background:var(--ink);color:#fff;
+  padding:1rem 1.5rem;font-size:.75rem;letter-spacing:.04em;
+  opacity:0;transform:translateY(12px);transition:all .35s;pointer-events:none;
+  max-width:300px;border-left:2px solid var(--gold);
+}
+.toast.show{opacity:1;transform:none}
 
-/* ====== CURSOR PERSONALIZADO ====== */
-.cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:difference}
-.cursor-dot{width:8px;height:8px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-.cursor-ring{width:38px;height:38px;border:1.5px solid rgba(255,255,255,.65);border-radius:50%;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
-.cursor-ring.hovered{width:54px;height:54px;border-color:rgba(255,255,255,.95)}
-.cursor-dot.hovered{width:4px;height:4px}
+/*=========================================================
+  MOBILE NAV OVERLAY
+=========================================================*/
+.mobile-nav{
+  position:fixed;inset:0;z-index:400;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+  opacity:0;pointer-events:none;
+  transform:translateY(-20px);
+  transition:opacity .4s var(--ease-smooth),transform .4s var(--ease-smooth);
+}
+.mobile-nav.open{opacity:1;pointer-events:all;transform:none}
+.mobile-nav a{
+  font-family:var(--serif);font-size:2.2rem;font-weight:300;letter-spacing:.06em;
+  color:rgba(255,255,255,.6);transition:color .3s;
+}
+.mobile-nav a:hover{color:#fff}
+.mobile-nav .mobile-cta{
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.2);padding:.75rem 2rem;
+  color:rgba(255,255,255,.7);margin-top:1rem;font-family:var(--sans);
+  transition:all .3s;background:none;cursor:pointer;
+}
+.mobile-nav .mobile-cta:hover{background:#fff;color:var(--ink)}
 
-/* ====== LOADER ====== */
-#loader{position:fixed;inset:0;z-index:9000;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .7s .1s,transform .7s .1s}
-#loader.out{opacity:0;transform:translateY(-100%);pointer-events:none}
-.loader-logo{font-size:1.3rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#111;opacity:0;animation:loaderIn .6s .2s forwards}
-.loader-sub{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:#aaa;opacity:0;animation:loaderIn .6s .4s forwards}
-.loader-bar-wrap{width:180px;height:1px;background:#ececec;overflow:hidden}
-.loader-bar{height:100%;background:#1a3a6b;width:0;animation:loaderFill 1.4s .5s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes loaderIn{to{opacity:1}}
-@keyframes loaderFill{to{width:100%}}
+/*=========================================================
+  RESPONSIVE
+=========================================================*/
+@media(max-width:960px){
+  .nav-links,.nav-cta-desk{display:none}
+  .nav-menu-btn{display:flex}
 
-/* ====== REVEAL ====== */
-.rev{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
-.rev.vis{opacity:1;transform:translateY(0)}
-.rev-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
-.rev-left.vis{opacity:1;transform:translateX(0)}
-.rev-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
-.rev-right.vis{opacity:1;transform:translateX(0)}
-.rev-scale{opacity:0;transform:scale(.93);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
-.rev-scale.vis{opacity:1;transform:scale(1)}
-.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.7s}
+  section{padding:5rem 4%}
+  .hero-content{padding:0 4% 5rem}
 
-/* ====== HERO ANIMACIONES ====== */
-.hero-eyebrow,.hero-title,.hero-story,.hero-tagline,.hero-btns{opacity:0;transform:translateY(24px)}
-.hero-eyebrow{animation:heroIn .75s .35s cubic-bezier(.4,0,.2,1) forwards}
-.hero-title{animation:heroIn .85s .55s cubic-bezier(.4,0,.2,1) forwards}
-.hero-story{animation:heroIn .85s .75s cubic-bezier(.4,0,.2,1) forwards}
-.hero-tagline{animation:heroIn .75s .92s cubic-bezier(.4,0,.2,1) forwards}
-.hero-btns{animation:heroIn .75s 1.08s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes heroIn{to{opacity:1;transform:translateY(0)}}
-.hero-right{overflow:hidden;position:relative}
-.hero-right-img{width:100%;height:100%;background:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&q=85') center/cover no-repeat;transform:scale(1.08);animation:heroImgIn 1.4s .2s cubic-bezier(.4,0,.2,1) forwards;will-change:transform}
-@keyframes heroImgIn{to{transform:scale(1)}}
+  .statement{padding:4rem 4%}
 
-/* ====== NAV SCROLL ====== */
-nav{transition:box-shadow .4s,background .4s,border-color .4s}
-nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
+  .srv-intro{grid-template-columns:1fr;gap:1.5rem;margin-bottom:3rem}
+  .srv-intro-right{margin-left:0;max-width:100%}
+  .srv-grid{grid-template-columns:1fr 1fr}
 
-/* ====== CARDS HOVER ====== */
-.srv-card{transition:background .25s,transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
-.srv-card:hover:not(.active){transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.09)}
-.srv-card.active{transform:translateY(-4px);box-shadow:0 16px 40px rgba(26,58,107,.25)}
-.del-item{transition:background .2s,transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
-.del-item:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.08)}
+  .historia{grid-template-columns:1fr;min-height:auto}
+  .historia-img{height:60vw;min-height:260px}
+  .historia-content{padding:3rem 4%}
+  .historia:nth-child(even){direction:ltr}
 
-/* ====== PORTFOLIO ====== */
-.gi{position:relative;overflow:hidden}
-.gi-overlay{position:absolute;inset:0;background:rgba(26,58,107,.72);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s cubic-bezier(.4,0,.2,1)}
-.gi:hover .gi-overlay{opacity:1}
-.gi-overlay span{color:#fff;font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;transform:translateY(12px);transition:transform .42s cubic-bezier(.4,0,.2,1) .05s;opacity:0;transition:transform .42s cubic-bezier(.4,0,.2,1),opacity .42s cubic-bezier(.4,0,.2,1)}
-.gi:hover .gi-overlay span{transform:translateY(0);opacity:1}
-.gi img{transition:transform .65s cubic-bezier(.4,0,.2,1),filter .4s}
-.gi:hover img{transform:scale(1.07);filter:brightness(1)}
+  .sobre-wrap{grid-template-columns:1fr;gap:3rem}
+  .sobre-img{height:320px}
+  .sobre-accent{display:none}
 
-/* ====== BOTONES RIPPLE ====== */
-.btn{position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.14);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.4,0,.2,1)}
-.btn:hover::after{transform:scaleX(1)}
-.btn-outline::after{background:rgba(26,58,107,.07)}
+  .entrega-grid{grid-template-columns:1fr 1fr}
 
-/* ====== LÍNEA ANIMADA ====== */
-.sec-line{width:0;transition:width .9s .2s cubic-bezier(.4,0,.2,1)}
-.sec-line.vis{width:36px}
+  .res-intro{flex-direction:column;align-items:flex-start;gap:1rem;margin-bottom:3rem}
+  .res-intro-right{text-align:left}
+  .res-wrap{grid-template-columns:1fr;gap:3rem}
 
-/* ====== SOBRE ====== */
-.sobre-img img{transition:transform .8s cubic-bezier(.4,0,.2,1)}
-.sobre-img:hover img{transform:scale(1.04)}
+  .ct-wrap{grid-template-columns:1fr;gap:3.5rem}
+  .ct-ctas{flex-direction:column}
+  .ct-ctas .btn{width:100%;text-align:center}
 
-/* ====== INPUTS ====== */
-.fg input,.fg select,.fg textarea{transition:border .25s,box-shadow .25s}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#1a3a6b;box-shadow:0 0 0 3px rgba(26,58,107,.09)}
+  footer{flex-direction:column;text-align:center}
+  .footer-meta{text-align:center}
 
-/* ====== CONTRATO ====== */
-#ctrOverlay{transition:opacity .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1)}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:0 4%}
-  .nav-links{display:none}
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-left{padding:5rem 4% 3rem}
-  .hero-right{height:55vw;min-height:260px}
-  section{padding:4rem 4%}
-  .srv-grid,.del-grid{grid-template-columns:1fr;background:none;border:none;gap:1px}
-  .srv-card,.del-item{border:1px solid #e8e8e8}
-  .gal{grid-template-columns:1fr 1fr}.g1,.g2,.g3,.g4,.g5{grid-column:span 1;height:180px}
-  .sobre-wrap,.res-wrap,.ct-grid{grid-template-columns:1fr}
-  .sobre-img{height:300px}
   .fr2{grid-template-columns:1fr}
-  .ctr-body{padding:2rem 4% 4rem}
-  footer{flex-direction:column;gap:.6rem;text-align:center}
-  .total-bar{padding:1rem 4%}
+  .ctr-body{padding:2.5rem 4% 5rem}
   .step-sep{width:16px}
   .step span:not(.step-n){display:none}
+  .total-actions{flex-direction:column;width:100%}
+  .btn-bar-a,.btn-bar-b{width:100%;text-align:center}
+}
+
+@media(max-width:620px){
+  .srv-grid{grid-template-columns:1fr}
+  .entrega-grid{grid-template-columns:1fr}
+  .sobre-stats{gap:1.5rem}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .hero-btns .btn{width:auto}
 }
 </style>
 </head>
@@ -364,9 +755,19 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="loader-logo">Fotos Arias</div>
-  <div class="loader-sub">Fotografía</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="ld-logo">Fotos Arias</div>
+  <div class="ld-sub">Fotografía Cinematográfica</div>
+  <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#servicios" onclick="closeMobileNav()">Servicios</a>
+  <a href="#portfolio" onclick="closeMobileNav()">Historias</a>
+  <a href="#sobre" onclick="closeMobileNav()">Sobre mí</a>
+  <a href="#reservas" onclick="closeMobileNav()">Reservar</a>
+  <a href="#contacto" onclick="closeMobileNav()">Contacto</a>
+  <button class="mobile-cta" onclick="closeMobileNav();openContract()">Cerrar contrato</button>
 </div>
 
 <!-- NAV -->
@@ -374,44 +775,76 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
   <a href="#" class="nav-logo">Fotos Arias</a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#portfolio">Historias</a></li>
     <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="#entrega">Entrega</a></li>
     <li><a href="#reservas">Reservar</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <button class="nav-cta" onclick="openContract()">Cerrar contrato</button>
+  <button class="nav-cta nav-cta-desk" onclick="openContract()">Cerrar contrato</button>
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMobileNav()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-left">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-film"></div>
+
+  <div class="hero-content">
     <p class="hero-eyebrow">CABA y Provincia de Buenos Aires</p>
-    <h1 class="hero-title">Tu<br>momento<br>merece<br>quedar.</h1>
-    <p class="hero-tagline">Bodas · Quinceañeras · Sesiones · Invitaciones digitales</p>
+    <h1 class="hero-title">
+      Cada<br>
+      momento<br>
+      <em>merece</em><br>
+      quedar.
+    </h1>
+    <p class="hero-subtitle">
+      Bodas · Quinceañeras · Sesiones · Eventos<br>
+      Fotografía que se siente como película.
+    </p>
     <div class="hero-btns">
-      <a href="#servicios" class="btn btn-dark">Ver qué hago</a>
-      <a href="#reservas" class="btn btn-outline">Reservar fecha</a>
+      <a href="#servicios" class="btn btn-gold">Ver servicios</a>
+      <a href="#reservas" class="btn btn-outline-light">Reservar fecha</a>
     </div>
   </div>
-  <div class="hero-right"><div class="hero-right-img"></div></div>
+
+  <div class="hero-scroll-hint">
+    <span class="scroll-label">scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<div class="statement">
+  <p class="statement-text rev">
+    "No fotografío eventos.<br>
+    Fotografío <em>lo que la gente siente</em><br>
+    mientras vive los suyos."
+  </p>
 </div>
 
 <!-- COTIZADOR -->
 <section id="servicios">
   <div class="mx">
-    <p class="sec-label rev">¿Qué necesitás?</p>
-    <h2 class="sec-title rev">Elegí y listo.</h2>
-    <div class="sec-line rev"></div>
-    <p class="cot-intro rev">Tocá los que necesitás — el precio se calcula solo. Podés combinar todo lo que quieras.</p>
-    <div class="srv-grid rev" id="srvGrid">
+    <div class="srv-intro">
+      <div class="rev">
+        <span class="label">Servicios</span>
+        <h2 class="serif-title">Lo que<br><em>hago para vos</em></h2>
+        <div class="section-rule"></div>
+      </div>
+      <p class="srv-intro-right rev d1">Seleccioná los servicios que necesitás. El precio se calcula solo. Podés combinar todo lo que quieras.</p>
+    </div>
+    <div class="srv-grid" id="srvGrid">
 
-      <div class="srv-card d1" data-id="boda" data-price="560000" data-name="Boda" onclick="toggleSrv(this)">
+      <div class="srv-card d1 rev" data-id="boda" data-price="560000" data-name="Boda" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">01</div>
         <div class="srv-name">Boda</div>
-        <div class="srv-price-tag">$560.000</div>
-        <p class="srv-desc">Cobertura completa del día, desde la preparación hasta el cierre de la fiesta.</p>
+        <div class="srv-price">$560.000</div>
+        <p class="srv-desc">Cobertura completa del día, desde la preparación hasta el cierre de la fiesta. Cada detalle, cada emoción.</p>
         <div class="srv-det">
           <span>Ceremonia civil o religiosa</span>
           <span>Fiesta sin límite de horas</span>
@@ -420,12 +853,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         </div>
       </div>
 
-      <div class="srv-card d2" data-id="preboda" data-price="250000" data-name="Pre boda" onclick="toggleSrv(this)">
+      <div class="srv-card d2 rev" data-id="preboda" data-price="250000" data-name="Pre boda" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">02</div>
         <div class="srv-name">Pre boda</div>
-        <div class="srv-price-tag">$250.000</div>
-        <p class="srv-desc">Sesión artística antes del casamiento en la locación que elijan.</p>
+        <div class="srv-price">$250.000</div>
+        <p class="srv-desc">Sesión artística antes del casamiento en la locación que elijan. Un capítulo antes de la gran historia.</p>
         <div class="srv-det">
           <span>Duración: 2 horas</span>
           <span>Locación a elección</span>
@@ -434,12 +867,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         </div>
       </div>
 
-      <div class="srv-card d3" data-id="quince" data-price="560000" data-name="15 años" onclick="toggleSrv(this)">
+      <div class="srv-card d3 rev" data-id="quince" data-price="560000" data-name="15 años" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">03</div>
         <div class="srv-name">15 años</div>
-        <div class="srv-price-tag">$560.000</div>
-        <p class="srv-desc">Cobertura completa de la fiesta de quince, desde la llegada hasta el cierre.</p>
+        <div class="srv-price">$560.000</div>
+        <p class="srv-desc">Cobertura completa de la fiesta de quince. Desde la llegada hasta el último abrazo de la noche.</p>
         <div class="srv-det">
           <span>Fiesta completa</span>
           <span>Fotos ilimitadas editadas</span>
@@ -447,12 +880,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         </div>
       </div>
 
-      <div class="srv-card d4" data-id="prefiesta" data-price="150000" data-name="Pre fiesta 15" onclick="toggleSrv(this)">
+      <div class="srv-card d4 rev" data-id="prefiesta" data-price="150000" data-name="Pre fiesta 15" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">04</div>
         <div class="srv-name">Pre fiesta 15</div>
-        <div class="srv-price-tag">$150.000</div>
-        <p class="srv-desc">Sesión antes del festejo en la locación que elijan. Un recuerdo antes de la gran noche.</p>
+        <div class="srv-price">$150.000</div>
+        <p class="srv-desc">Sesión antes del festejo. Un recuerdo íntimo antes de la gran noche, en la locación que elijan.</p>
         <div class="srv-det">
           <span>Duración: 2 horas</span>
           <span>Locación a elección</span>
@@ -460,12 +893,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         </div>
       </div>
 
-      <div class="srv-card d5" data-id="sesion" data-price="180000" data-name="Sesion de fotos" onclick="toggleSrv(this)">
+      <div class="srv-card d5 rev" data-id="sesion" data-price="180000" data-name="Sesión de fotos" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">05</div>
         <div class="srv-name">Sesión de fotos</div>
-        <div class="srv-price-tag">$180.000</div>
-        <p class="srv-desc">Para parejas, familias o individuos. Natural, sin poses forzadas, en locación a elección.</p>
+        <div class="srv-price">$180.000</div>
+        <p class="srv-desc">Para parejas, familias o individuos. Natural, sin poses forzadas, en la locación que elijas.</p>
         <div class="srv-det">
           <span>Duración: 3 horas</span>
           <span>Fotos ilimitadas editadas</span>
@@ -473,12 +906,12 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         </div>
       </div>
 
-      <div class="srv-card d6" data-id="invitacion" data-price="40000" data-name="Invitacion digital" onclick="toggleSrv(this)">
+      <div class="srv-card d6 rev" data-id="invitacion" data-price="40000" data-name="Invitación digital" onclick="toggleSrv(this)">
         <div class="srv-check">&#10003;</div>
         <div class="srv-num">06</div>
         <div class="srv-name">Invitación digital</div>
-        <div class="srv-price-tag">$40.000</div>
-        <p class="srv-desc">Página web personalizada para tu evento. Elegante, animada y lista para compartir.</p>
+        <div class="srv-price">$40.000</div>
+        <p class="srv-desc">Página web personalizada para tu evento. Elegante, animada y lista para compartir por WhatsApp.</p>
         <div class="srv-det">
           <span>Diseño personalizado</span>
           <span>Animaciones y música</span>
@@ -497,47 +930,88 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
     <span class="total-price" id="totalPrice"></span>
   </div>
   <div class="total-actions">
-    <button class="btn-wout" onclick="document.getElementById('reservas').scrollIntoView({behavior:'smooth'})">Reservar fecha</button>
-    <button class="btn-bar-white" onclick="openContract()">Cerrar contrato</button>
+    <button class="btn-bar-a" onclick="document.getElementById('reservas').scrollIntoView({behavior:'smooth'})">Reservar fecha</button>
+    <button class="btn-bar-b" onclick="openContract()">Cerrar contrato</button>
   </div>
 </div>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
+<!-- HISTORIAS / PORTFOLIO -->
+<section id="portfolio" style="padding-bottom:0">
   <div class="mx">
-    <p class="sec-label rev">Portfolio</p>
-    <h2 class="sec-title rev">Las fotos no mienten.</h2>
-    <div class="sec-line rev"></div>
-    <div class="gal rev">
-      <div class="gi g1"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Boda"><div class="gi-overlay"><span>Boda</span></div></div>
-      <div class="gi g2"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=80" alt="Quinceañera"><div class="gi-overlay"><span>Quinceañera</span></div></div>
-      <div class="gi g3"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Sesion"><div class="gi-overlay"><span>Sesión</span></div></div>
-      <div class="gi g4"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Boda 2"><div class="gi-overlay"><span>Boda</span></div></div>
-      <div class="gi g5"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Pareja"><div class="gi-overlay"><span>Pareja</span></div></div>
+    <span class="label rev">Historias</span>
+    <h2 class="serif-title rev" style="color:#fff">Las fotos<br><em>no mienten.</em></h2>
+    <div class="section-rule rev"></div>
+  </div>
+
+  <div class="historias">
+
+    <div class="historia rev-scale">
+      <div class="historia-img">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Sofi & Nico">
+        <div class="historia-img-overlay"></div>
+      </div>
+      <div class="historia-content">
+        <div class="historia-num">01</div>
+        <p class="historia-cat">Boda</p>
+        <h3 class="historia-title">Sofi <em>&</em> Nico</h3>
+        <p class="historia-desc">Dos personas que se encontraron y eligieron quedarse. Ese día, lo fotografiamos todo.</p>
+      </div>
     </div>
+
+    <div class="historia rev-scale d1">
+      <div class="historia-img">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=80" alt="Valen XV">
+        <div class="historia-img-overlay"></div>
+      </div>
+      <div class="historia-content">
+        <div class="historia-num">02</div>
+        <p class="historia-cat">Quinceañera</p>
+        <h3 class="historia-title">Valen<br><em>XV años</em></h3>
+        <p class="historia-desc">Una noche que merecía ser recordada para siempre. Cada risa, cada baile, cada abrazo.</p>
+      </div>
+    </div>
+
+    <div class="historia rev-scale d2">
+      <div class="historia-img">
+        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=700&q=80" alt="Una sesión">
+        <div class="historia-img-overlay"></div>
+      </div>
+      <div class="historia-content">
+        <div class="historia-num">03</div>
+        <p class="historia-cat">Sesión de pareja</p>
+        <h3 class="historia-title">Una tarde<br><em>para recordar</em></h3>
+        <p class="historia-desc">A veces no hace falta un gran evento. Solo dos personas, buena luz y una cámara.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- SOBRE MI -->
+<!-- SOBRE MÍ -->
 <section id="sobre">
   <div class="mx">
-    <p class="sec-label rev">Sobre mí</p>
-    <h2 class="sec-title rev">Hola, soy Elias.</h2>
-    <div class="sec-line rev"></div>
     <div class="sobre-wrap">
-      <div class="sobre-img rev-left">
-        <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80" alt="Fotografo trabajando">
-      </div>
-      <div class="sobre-text rev-right">
-        <h3>Fotógrafo de eventos<br>en CABA y toda la provincia.</h3>
-        <p>Bodas, quinceañeras, sesiones de pareja o familia. Trabajo en <strong>CABA y toda la provincia de Buenos Aires</strong> con un solo objetivo: que cada foto sea un recuerdo que valga la pena guardar.</p>
-        <p>Sin poses raras. Sin fotos aburridas. Solo momentos reales, bien capturados.</p>
-        <div class="sobre-stats">
-          <div class="stat-item"><span class="stat-n">100+</span><span class="stat-l">Eventos</span></div>
-          <div class="stat-item"><span class="stat-n">7</span><span class="stat-l">Días de entrega</span></div>
-          <div class="stat-item"><span class="stat-n">∞</span><span class="stat-l">Fotos editadas</span></div>
+      <div class="sobre-img-wrap rev-l">
+        <div class="sobre-img">
+          <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&q=80" alt="Elias Arias, fotógrafo">
         </div>
-        <a href="#reservas" class="btn btn-outline" style="margin-top:1.5rem">Reservar fecha</a>
+        <div class="sobre-accent"></div>
+      </div>
+      <div class="rev-r">
+        <span class="label">Sobre mí</span>
+        <h2 class="sobre-name">Hola,<br>soy <em>Elias.</em></h2>
+        <p class="sobre-role">Fotógrafo de eventos · CABA y Provincia de Buenos Aires</p>
+        <p class="sobre-bio">Trabajo con bodas, quinceañeras, sesiones de pareja y familia. No me interesa hacer fotos perfectas — me interesa hacer fotos <strong>verdaderas</strong>.</p>
+        <p class="sobre-bio">Trabajo en <strong>CABA y toda la provincia de Buenos Aires</strong>. Sin poses forzadas, sin clichés, sin apuro. Solo momentos reales, bien capturados, bien editados.</p>
+        <div class="sobre-stats">
+          <div class="stat"><span class="stat-n">100+</span><span class="stat-l">Eventos</span></div>
+          <div class="stat"><span class="stat-n">7</span><span class="stat-l">Días de entrega</span></div>
+          <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Fotos editadas</span></div>
+        </div>
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="#reservas" class="btn btn-gold">Reservar fecha</a>
+          <a href="https://wa.me/541132137848" target="_blank" class="btn btn-outline-dark">WhatsApp</a>
+        </div>
       </div>
     </div>
   </div>
@@ -546,29 +1020,29 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <!-- ENTREGA -->
 <section id="entrega">
   <div class="mx">
-    <p class="sec-label rev">Entrega</p>
-    <h2 class="sec-title rev">Así recibís todo.</h2>
-    <div class="sec-line rev"></div>
-    <div class="del-grid rev">
-      <div class="del-item">
-        <div class="del-n">I</div>
-        <div class="del-t">Por mail y Lightroom</div>
-        <p class="del-d">Todas las fotos por un link privado de Adobe Lightroom y por mail. Acceso desde cualquier dispositivo.</p>
+    <span class="label rev">Entrega</span>
+    <h2 class="serif-title rev">Así recibís<br><em>todo lo tuyo.</em></h2>
+    <div class="section-rule rev"></div>
+    <div class="entrega-grid rev d1">
+      <div class="entrega-item">
+        <div class="entrega-roman">I</div>
+        <div class="entrega-title">Por mail y Lightroom</div>
+        <p class="entrega-desc">Todas las fotos por un link privado de Adobe Lightroom y por mail. Acceso desde cualquier dispositivo, sin vencimiento.</p>
       </div>
-      <div class="del-item">
-        <div class="del-n">II</div>
-        <div class="del-t">Fotos ilimitadas</div>
-        <p class="del-d">Todas las fotos del evento editadas en alta resolución, sin marcas de agua. Listas para imprimir o publicar.</p>
+      <div class="entrega-item">
+        <div class="entrega-roman">II</div>
+        <div class="entrega-title">Fotos ilimitadas</div>
+        <p class="entrega-desc">Todas las fotos del evento editadas en alta resolución, sin marcas de agua. Listas para imprimir o publicar.</p>
       </div>
-      <div class="del-item">
-        <div class="del-n">III</div>
-        <div class="del-t">En 7 días hábiles</div>
-        <p class="del-d">Plazo de entrega desde el evento o sesión. Si incluye invitación digital puede variar.</p>
+      <div class="entrega-item">
+        <div class="entrega-roman">III</div>
+        <div class="entrega-title">En 7 días hábiles</div>
+        <p class="entrega-desc">Plazo de entrega desde el evento o sesión. Si incluye invitación digital puede variar.</p>
       </div>
-      <div class="del-item">
-        <div class="del-n">IV</div>
-        <div class="del-t">Fotos impresas</div>
-        <p class="del-d">Podés agregar un pack de fotos impresas. Precio y tamaños a consultar.</p>
+      <div class="entrega-item">
+        <div class="entrega-roman">IV</div>
+        <div class="entrega-title">Fotos impresas</div>
+        <p class="entrega-desc">Podés agregar un pack de fotos impresas de alta calidad. Precio y tamaños a consultar.</p>
       </div>
     </div>
   </div>
@@ -577,9 +1051,14 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <!-- RESERVAS -->
 <section id="reservas">
   <div class="mx">
-    <p class="sec-label rev">Disponibilidad</p>
-    <h2 class="sec-title rev">¿Cuándo es tu evento?</h2>
-    <div class="sec-line rev"></div>
+    <div class="res-intro">
+      <div class="rev">
+        <span class="label">Disponibilidad</span>
+        <h2 class="serif-title" style="color:#fff">¿Cuándo es<br><em>tu evento?</em></h2>
+        <div class="section-rule"></div>
+      </div>
+      <p class="res-intro-right rev d1">Elegí una fecha, seleccioná tus servicios y escribime. Te confirmo disponibilidad por WhatsApp.</p>
+    </div>
     <div class="res-wrap">
       <div class="cal-widget rev">
         <div class="cal-head">
@@ -594,11 +1073,11 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
           <div class="cal-days" id="calDays"></div>
         </div>
         <div class="cal-leg">
-          <span><span class="ld" style="background:#111"></span>Seleccionado</span>
-          <span><span class="ld" style="background:#ddd"></span>No disponible</span>
+          <span><span class="ld" style="background:var(--gold)"></span>Seleccionado</span>
+          <span><span class="ld" style="background:rgba(255,255,255,.15)"></span>No disponible</span>
         </div>
       </div>
-      <div class="bk-form rev">
+      <div class="bk-form rev d1">
         <div class="fg">
           <label>Fecha seleccionada</label>
           <div class="info-box" id="dateDisp">Seleccioná una fecha en el calendario</div>
@@ -611,7 +1090,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         <div class="fg"><label>WhatsApp</label><input type="tel" id="bPhone" placeholder="11 xxxx-xxxx"></div>
         <div class="fg"><label>Email</label><input type="email" id="bEmail" placeholder="tu@email.com"></div>
         <div class="fg"><label>Mensaje (opcional)</label><textarea id="bMsg" placeholder="Contame sobre tu evento..."></textarea></div>
-        <button class="btn btn-dark btn-full" onclick="submitBooking()">Enviar consulta por WhatsApp</button>
+        <button class="btn btn-gold btn-full" onclick="submitBooking()">Enviar consulta por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -620,12 +1099,14 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="mx">
-    <div class="ct-grid">
+    <div class="ct-wrap">
       <div class="rev">
-        <p class="sec-label">Contacto</p>
-        <h2 class="ct-big">¿Hablamos<br>de tu<br>evento?</h2>
+        <span class="label">Contacto</span>
+        <h2 class="serif-title">¿Hablamos<br>de tu <em>evento?</em></h2>
+        <div class="section-rule"></div>
+        <p class="ct-tagline">Escribime por WhatsApp o mail. Respondo rápido y te cuento todo lo que necesitás saber para reservar tu fecha.</p>
       </div>
-      <div class="ct-info rev">
+      <div class="ct-info rev d1">
         <div class="ct-item">
           <span class="ct-item-l">WhatsApp</span>
           <a href="https://wa.me/541132137848" target="_blank" class="ct-item-v">+54 11 3213-7848</a>
@@ -638,7 +1119,10 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
           <span class="ct-item-l">Zona de cobertura</span>
           <span class="ct-item-v" style="cursor:default">CABA y Provincia de Buenos Aires</span>
         </div>
-        <a href="https://wa.me/541132137848?text=Hola%2C%20me%20interesa%20consultar%20por%20un%20servicio%20de%20fotografia" target="_blank" class="btn btn-white" style="display:inline-block;padding:.8rem 2.2rem;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer">Escribir por WhatsApp</a>
+        <div class="ct-ctas">
+          <a href="https://wa.me/541132137848?text=Hola%2C%20me%20interesa%20consultar%20por%20un%20servicio%20de%20fotografia" target="_blank" class="btn btn-dark">Escribir por WhatsApp</a>
+          <button class="btn btn-outline-dark" onclick="openContract()">Cerrar contrato</button>
+        </div>
       </div>
     </div>
   </div>
@@ -646,37 +1130,33 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 
 <footer>
   <a href="#" class="fl">Fotos Arias</a>
-  <span>CABA y Provincia de Buenos Aires</span>
-  <span>ariasfotos6@gmail.com</span>
+  <div class="footer-meta">
+    CABA y Provincia de Buenos Aires<br>
+    <a href="mailto:ariasfotos6@gmail.com">ariasfotos6@gmail.com</a>
+  </div>
 </footer>
 
 <!-- ============================================================
-     CONTRATO — OVERLAY PAGINA COMPLETA
-     ============================================================ -->
+     CONTRATO OVERLAY
+============================================================ -->
 <div id="ctrOverlay">
 
   <div class="ctr-nav">
     <span class="ctr-nav-logo">Fotos Arias — Contrato</span>
-    <button class="ctr-close" onclick="closeContract()" title="Cerrar">&#215;</button>
+    <button class="ctr-close" onclick="closeContract()">&#215;</button>
   </div>
 
   <div class="ctr-steps">
-    <div class="step active" id="step-ind-1">
-      <div class="step-n">1</div><span>Datos y firma</span>
-    </div>
+    <div class="step active" id="step-ind-1"><div class="step-n">1</div><span>Datos y firma</span></div>
     <div class="step-sep"></div>
-    <div class="step" id="step-ind-2">
-      <div class="step-n">2</div><span>Pago de seña</span>
-    </div>
+    <div class="step" id="step-ind-2"><div class="step-n">2</div><span>Pago de seña</span></div>
     <div class="step-sep"></div>
-    <div class="step" id="step-ind-3">
-      <div class="step-n">3</div><span>Confirmación</span>
-    </div>
+    <div class="step" id="step-ind-3"><div class="step-n">3</div><span>Confirmación</span></div>
   </div>
 
   <div class="ctr-body">
 
-    <!-- STEP 1: FORMULARIO -->
+    <!-- STEP 1 -->
     <div class="ctr-step-panel active" id="ctr-panel-1">
       <span class="ctr-section-title">Datos del cliente</span>
       <div class="fr2">
@@ -689,7 +1169,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
       </div>
 
       <span class="ctr-section-title" style="margin-top:2rem">Servicios contratados</span>
-      <div class="fg" style="margin-bottom:1rem">
+      <div class="fg" style="margin-bottom:1.2rem">
         <div class="info-box" id="cServicesDisp" style="cursor:pointer" onclick="closeContract();setTimeout(()=>document.getElementById('servicios').scrollIntoView({behavior:'smooth'}),400)">
           Ningún servicio seleccionado. Cerrá este panel y elegí arriba.
         </div>
@@ -699,7 +1179,7 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         <div class="fg"><label>Lugar / locación</label><input type="text" id="cLoc" placeholder="Salón, dirección..."></div>
       </div>
       <div class="fr2">
-        <div class="fg"><label>Total acordado</label><input type="text" id="cTotal" readonly placeholder="Se calcula automáticamente" style="cursor:default;background:#fafafa"></div>
+        <div class="fg"><label>Total acordado</label><input type="text" id="cTotal" readonly placeholder="Se calcula automáticamente" style="cursor:default;background:var(--dust)"></div>
         <div class="fg"><label>Monto de seña</label><input type="text" id="cDep" placeholder="$ 00.000"></div>
       </div>
 
@@ -716,7 +1196,6 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         8. SALDO FINAL: El saldo restante debe abonarse el día del evento antes del inicio del servicio.<br><br>
         9. VIGENCIA: Este contrato tiene vigencia desde su firma hasta el cumplimiento total de las obligaciones de ambas partes.
       </div>
-
       <div class="check-row">
         <input type="checkbox" id="cAgree">
         <label for="cAgree">Leí, entendí y acepto los términos y condiciones del contrato de servicio fotográfico de Fotos Arias.</label>
@@ -731,11 +1210,10 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
         <canvas id="sigCanvas"></canvas>
       </div>
       <p class="sig-note">Al firmar confirmás que los datos son correctos y aceptás los términos.</p>
-
-      <button class="btn btn-dark btn-full" onclick="goToPayment()">Cerrar contrato y pagar seña &rarr;</button>
+      <button class="btn btn-dark btn-full" onclick="goToPayment()">Continuar al pago de seña &rarr;</button>
     </div>
 
-    <!-- STEP 2: PAGO -->
+    <!-- STEP 2 -->
     <div class="ctr-step-panel" id="ctr-panel-2">
       <span class="ctr-section-title">Resumen del contrato</span>
       <div class="pay-box">
@@ -746,29 +1224,29 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
           <strong>Paso 3:</strong> Se descarga el contrato firmado y te llega una copia por mail.
         </div>
         <div style="display:flex;flex-direction:column;gap:.8rem">
-          <a id="payLink" href="#" target="_blank" class="btn btn-dark btn-full" style="text-align:center">Pagar seña ahora →</a>
-          <button class="btn btn-outline btn-full" onclick="confirmPayment()">Ya pagué — confirmar y enviar contrato</button>
+          <a id="payLink" href="#" target="_blank" class="btn btn-gold btn-full" style="text-align:center">Pagar seña ahora →</a>
+          <button class="btn btn-outline-dark btn-full" onclick="confirmPayment()">Ya pagué — confirmar y enviar contrato</button>
         </div>
       </div>
-      <p style="font-size:.73rem;color:#aaa;margin-top:1rem;text-align:center">Dudas antes de pagar: <a href="https://wa.me/541132137848" target="_blank" style="color:#111">+54 11 3213-7848</a></p>
+      <p style="font-size:.7rem;color:var(--warm-grey);margin-top:1rem;text-align:center">Dudas: <a href="https://wa.me/541132137848" target="_blank" style="color:var(--ink)">+54 11 3213-7848</a></p>
     </div>
 
-    <!-- STEP 3: CONFIRMACION -->
+    <!-- STEP 3 -->
     <div class="ctr-step-panel" id="ctr-panel-3">
       <div class="confirm-box">
         <div class="confirm-icon">&#10003;</div>
         <h3>¡Contrato cerrado!</h3>
-        <p>El contrato fue generado y descargado. Se enviaron los mails de confirmación a vos y al fotógrafo. Tu fecha queda reservada una vez acreditado el pago.</p>
+        <p>El contrato fue generado y descargado. Se enviaron los mails de confirmación. Tu fecha queda reservada una vez acreditado el pago de la seña.</p>
         <div class="confirm-actions">
-          <button class="btn btn-dark" onclick="downloadPDFAgain()">Descargar PDF de nuevo</button>
-          <button class="btn btn-outline" onclick="closeContract()">Volver a la página</button>
+          <button class="btn btn-gold" onclick="downloadPDFAgain()">Descargar PDF de nuevo</button>
+          <button class="btn btn-outline-dark" onclick="closeContract()">Volver a la página</button>
         </div>
-        <p style="font-size:.72rem;color:#ccc;margin-top:2rem">Recibís las fotos dentro de los 7 días hábiles del evento por mail y Adobe Lightroom.</p>
+        <p style="font-size:.68rem;color:var(--warm-grey);margin-top:2.5rem">Recibís las fotos dentro de los 7 días hábiles del evento.</p>
       </div>
     </div>
 
-  </div><!-- /ctr-body -->
-</div><!-- /ctrOverlay -->
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -777,139 +1255,149 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.06)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js"></script>
 <script>
 /* ============================================================
-   ANIMACIONES
-   ============================================================ */
-
-// ====== LOADER ======
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('out');
-  }, 1900);
-});
-
-// ====== CURSOR ======
-const ring = document.getElementById('cursorRing');
-const dot  = document.getElementById('cursorDot');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left  = mx + 'px';
-  dot.style.top   = my + 'px';
-});
-
-(function animCursor(){
-  rx += (mx - rx) * 0.13;
-  ry += (my - ry) * 0.13;
-  ring.style.left = rx + 'px';
-  ring.style.top  = ry + 'px';
-  requestAnimationFrame(animCursor);
-})();
-
-document.querySelectorAll('a,button,.srv-card,.gi,.del-item,.cd:not(.dis):not(.bk)').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.classList.add('hovered'); dot.classList.add('hovered'); });
-  el.addEventListener('mouseleave', () => { ring.classList.remove('hovered'); dot.classList.remove('hovered'); });
-});
-
-// ====== NAV SCROLL ======
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
-}, {passive:true});
-
-// ====== PARALLAX HERO ======
-const heroImg = document.querySelector('.hero-right-img');
-window.addEventListener('scroll', () => {
-  if(heroImg && window.scrollY < window.innerHeight) {
-    heroImg.style.transform = `scale(1) translateY(${window.scrollY * 0.18}px)`;
-  }
-}, {passive:true});
-
-/* ============================================================
-   CONFIGURACION — EDITÁ ESTOS VALORES
-   ============================================================ */
+   CONFIG
+============================================================ */
 const PAYMENT_LINK = 'https://link.mercadopago.com.ar/elcielitoaqui';
 const FOTO_EMAIL   = 'ariasfotos6@gmail.com';
 const FOTO_PHONE   = '541132137848';
-/* ============================================================ */
 
-// REVEAL
-const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis') }), {threshold:.08});
-document.querySelectorAll('.rev,.rev-left,.rev-right,.rev-scale,.sec-line').forEach(el => obs.observe(el));
+/* ============================================================
+   LOADER
+============================================================ */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('out'), 2000);
+});
 
-// ====== COTIZADOR ======
+/* ============================================================
+   CURSOR
+============================================================ */
+const ring = document.getElementById('cursorRing');
+const dot  = document.getElementById('cursorDot');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function animCursor(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor)})();
+document.querySelectorAll('a,button,.srv-card,.historia,.cd:not(.dis):not(.bk)').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.classList.add('hov');dot.classList.add('hov')});
+  el.addEventListener('mouseleave',()=>{ring.classList.remove('hov');dot.classList.remove('hov')});
+});
+
+/* ============================================================
+   NAV
+============================================================ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* ============================================================
+   PARALLAX HERO
+============================================================ */
+window.addEventListener('scroll',()=>{
+  const bg = document.getElementById('heroBg');
+  if(bg && window.scrollY < window.innerHeight){
+    bg.style.transform=`scale(1) translateY(${window.scrollY*.15}px)`;
+  }
+},{passive:true});
+
+/* ============================================================
+   MOBILE NAV
+============================================================ */
+function toggleMobileNav(){
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('menuBtn');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileNav(){
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('menuBtn').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ============================================================
+   REVEAL
+============================================================ */
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.06});
+document.querySelectorAll('.rev,.rev-l,.rev-r,.rev-scale').forEach(el=>obs.observe(el));
+
+/* ============================================================
+   COTIZADOR
+============================================================ */
 let sel = {};
-function fmt(n){ return '$' + n.toLocaleString('es-AR') }
+function fmt(n){ return '$'+n.toLocaleString('es-AR') }
 
 function toggleSrv(card){
-  const id = card.dataset.id, price = parseInt(card.dataset.price), name = card.dataset.name;
+  const id=card.dataset.id, price=parseInt(card.dataset.price), name=card.dataset.name;
   if(sel[id]){ delete sel[id]; card.classList.remove('active'); }
-  else { sel[id] = {price, name}; card.classList.add('active'); }
+  else { sel[id]={price,name}; card.classList.add('active'); }
   updateTotal(); syncSelToContract();
 }
 
 function updateTotal(){
-  const keys = Object.keys(sel);
-  const bar = document.getElementById('totalBar');
+  const keys=Object.keys(sel);
+  const bar=document.getElementById('totalBar');
   if(!keys.length){ bar.classList.remove('show'); return; }
   bar.classList.add('show');
-  const total = keys.reduce((s,k) => s + sel[k].price, 0);
-  document.getElementById('totalServicesTxt').textContent = keys.map(k=>sel[k].name).join(' + ');
-  document.getElementById('totalPrice').textContent = fmt(total);
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  document.getElementById('totalServicesTxt').textContent=keys.map(k=>sel[k].name).join(' + ');
+  document.getElementById('totalPrice').textContent=fmt(total);
 }
 
 function syncSelToContract(){
-  const keys = Object.keys(sel);
-  const total = keys.reduce((s,k) => s + sel[k].price, 0);
-  const html = keys.length
-    ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>')
-    : 'Ningún servicio seleccionado. Cerrá este panel y elegí arriba.';
-  document.getElementById('cServicesDisp').innerHTML = html;
-  document.getElementById('bkServDisp').innerHTML = keys.length
-    ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>')
-    : 'Ningún servicio seleccionado. Elegir arriba.';
-  if(keys.length) document.getElementById('cTotal').value = fmt(total);
+  const keys=Object.keys(sel);
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  const html=keys.length ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>') : 'Ningún servicio seleccionado.';
+  document.getElementById('cServicesDisp').innerHTML=html;
+  document.getElementById('bkServDisp').innerHTML=keys.length ? keys.map(k=>`<strong>${sel[k].name}</strong> — ${fmt(sel[k].price)}`).join('<br>') : 'Ningún servicio seleccionado. Elegir arriba.';
+  if(keys.length) document.getElementById('cTotal').value=fmt(total);
 }
 
-// ====== CALENDAR ======
-let curDate = new Date(), selDate = null;
-const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const booked = [];
+/* ============================================================
+   CALENDAR
+============================================================ */
+let curDate=new Date(), selDate=null;
+const MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const booked=[];
 
 function renderCal(){
-  const y = curDate.getFullYear(), m = curDate.getMonth();
-  document.getElementById('calTitle').textContent = `${MONTHS[m]} ${y}`;
-  const firstDay = new Date(y,m,1).getDay();
-  const total = new Date(y,m+1,0).getDate();
-  const today = new Date(); today.setHours(0,0,0,0);
-  let html = '';
-  for(let i=0;i<firstDay;i++) html += '<div class="cd emp"></div>';
+  const y=curDate.getFullYear(), m=curDate.getMonth();
+  document.getElementById('calTitle').textContent=`${MONTHS[m]} ${y}`;
+  const firstDay=new Date(y,m,1).getDay();
+  const total=new Date(y,m+1,0).getDate();
+  const today=new Date(); today.setHours(0,0,0,0);
+  let html='';
+  for(let i=0;i<firstDay;i++) html+='<div class="cd emp"></div>';
   for(let d=1;d<=total;d++){
-    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dt = new Date(y,m,d);
-    let cls = 'cd';
-    if(dt < today) cls += ' dis';
-    else if(booked.includes(ds)) cls += ' bk';
-    else if(selDate === ds) cls += ' sel';
-    if(dt.getTime() === today.getTime()) cls += ' tdy';
-    html += `<div class="${cls}" data-d="${ds}" onclick="pickDate(this)">${d}</div>`;
+    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dt=new Date(y,m,d);
+    let cls='cd';
+    if(dt<today) cls+=' dis';
+    else if(booked.includes(ds)) cls+=' bk';
+    else if(selDate===ds) cls+=' sel';
+    if(dt.getTime()===today.getTime()) cls+=' tdy';
+    html+=`<div class="${cls}" data-d="${ds}" onclick="pickDate(this)">${d}</div>`;
   }
-  document.getElementById('calDays').innerHTML = html;
+  document.getElementById('calDays').innerHTML=html;
 }
 function pickDate(el){
   if(el.classList.contains('dis')||el.classList.contains('bk')||el.classList.contains('emp')) return;
   document.querySelectorAll('.cd').forEach(d=>d.classList.remove('sel'));
-  el.classList.add('sel'); selDate = el.dataset.d;
-  const [y,m,d] = selDate.split('-');
-  document.getElementById('dateDisp').innerHTML = `<strong>${d} de ${MONTHS[parseInt(m)-1]} de ${y}</strong>`;
+  el.classList.add('sel'); selDate=el.dataset.d;
+  const [y,m,d]=selDate.split('-');
+  document.getElementById('dateDisp').innerHTML=`<strong>${d} de ${MONTHS[parseInt(m)-1]} de ${y}</strong>`;
 }
-document.getElementById('calP').onclick = () => { curDate.setMonth(curDate.getMonth()-1); renderCal(); };
-document.getElementById('calN').onclick = () => { curDate.setMonth(curDate.getMonth()+1); renderCal(); };
+document.getElementById('calP').onclick=()=>{curDate.setMonth(curDate.getMonth()-1);renderCal()};
+document.getElementById('calN').onclick=()=>{curDate.setMonth(curDate.getMonth()+1);renderCal()};
 renderCal();
 
-// ====== TOAST ======
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),4500); }
+/* ============================================================
+   TOAST
+============================================================ */
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4500)}
 
-// ====== BOOKING ======
+/* ============================================================
+   BOOKING / WHATSAPP
+============================================================ */
 function submitBooking(){
   const n=document.getElementById('bName').value.trim();
   const p=document.getElementById('bPhone').value.trim();
@@ -926,19 +1414,20 @@ function submitBooking(){
   window.open(`https://wa.me/${FOTO_PHONE}?text=${msg}`,'_blank');
 }
 
-// ====== CONTRATO OVERLAY ======
+/* ============================================================
+   CONTRATO
+============================================================ */
 function openContract(){
   syncSelToContract();
   document.getElementById('ctrOverlay').classList.add('open');
   document.body.style.overflow='hidden';
-  initSigPad();
-  setStep(1);
+  initSigPad(); setStep(1);
 }
 function closeContract(){ document.getElementById('ctrOverlay').classList.remove('open'); document.body.style.overflow=''; }
 
 function setStep(n){
   [1,2,3].forEach(i=>{
-    document.getElementById(`ctr-panel-${i}`).classList.toggle('active', i===n);
+    document.getElementById(`ctr-panel-${i}`).classList.toggle('active',i===n);
     const ind=document.getElementById(`step-ind-${i}`);
     ind.classList.remove('active','done');
     if(i===n) ind.classList.add('active');
@@ -947,142 +1436,132 @@ function setStep(n){
   document.getElementById('ctrOverlay').scrollTo({top:0,behavior:'smooth'});
 }
 
-// ====== SIGNATURE PAD ======
-let sigPad = null;
+/* ============================================================
+   SIGNATURE PAD
+============================================================ */
+let sigPad=null;
 function initSigPad(){
-  const cv = document.getElementById('sigCanvas');
+  const cv=document.getElementById('sigCanvas');
   function resize(){
-    const r = Math.max(window.devicePixelRatio||1,1);
-    const rect = cv.getBoundingClientRect();
-    cv.width = rect.width*r; cv.height = rect.height*r;
+    const r=Math.max(window.devicePixelRatio||1,1);
+    const rect=cv.getBoundingClientRect();
+    cv.width=rect.width*r; cv.height=rect.height*r;
     cv.getContext('2d').scale(r,r);
     if(sigPad) sigPad.clear();
   }
   if(!sigPad){
-    sigPad = new SignaturePad(cv,{backgroundColor:'rgba(255,255,255,1)',penColor:'#111',minWidth:1.2,maxWidth:2.8});
+    sigPad=new SignaturePad(cv,{backgroundColor:'rgba(255,255,255,1)',penColor:'#0e0d0c',minWidth:1.2,maxWidth:2.8});
   }
   resize();
 }
 function clearSig(){ if(sigPad) sigPad.clear(); }
 
-let lastPdfDoc = null, lastClientName = '';
+let lastPdfDoc=null, lastClientName='';
 
-// ====== STEP 1 → STEP 2 ======
+/* ============================================================
+   STEP 1 → 2
+============================================================ */
 function goToPayment(){
-  const name = document.getElementById('cName').value.trim();
-  const dni  = document.getElementById('cDni').value.trim();
-  const dateVal = document.getElementById('cDate').value;
-  const keys = Object.keys(sel);
+  const name=document.getElementById('cName').value.trim();
+  const dni=document.getElementById('cDni').value.trim();
+  const dateVal=document.getElementById('cDate').value;
+  const keys=Object.keys(sel);
   if(!name||!dni){ toast('Completá nombre y DNI.'); return; }
   if(!keys.length){ toast('Seleccioná al menos un servicio.'); return; }
   if(!dateVal){ toast('Seleccioná la fecha del evento.'); return; }
   if(!document.getElementById('cAgree').checked){ toast('Aceptá los términos y condiciones.'); return; }
   if(!sigPad||sigPad.isEmpty()){ toast('Firmá el contrato antes de continuar.'); return; }
 
-  lastClientName = name;
-  lastPdfDoc = buildPDF();
+  lastClientName=name;
+  lastPdfDoc=buildPDF();
 
-  const total = keys.reduce((s,k)=>s+sel[k].price,0);
-  const dep   = document.getElementById('cDep').value.trim();
-  const evDate = new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR');
-  let rows = keys.map(k=>`<div class="pay-row"><span>${sel[k].name}</span><span>${fmt(sel[k].price)}</span></div>`).join('');
-  rows += `<div class="pay-total-row"><span>Total</span><span>${fmt(total)}</span></div>`;
-  if(dep) rows += `<div class="pay-sena-row"><span>Seña a abonar ahora</span><span>${dep}</span></div>`;
-  rows += `<div class="pay-row" style="margin-top:.5rem"><span style="color:#aaa;font-size:.78rem">Fecha del evento</span><span style="color:#aaa;font-size:.78rem">${evDate}</span></div>`;
-  rows += `<div class="pay-row"><span style="color:#aaa;font-size:.78rem">Cliente</span><span style="color:#aaa;font-size:.78rem">${name}</span></div>`;
-  document.getElementById('paySummary').innerHTML = rows;
-  document.getElementById('payLink').href = PAYMENT_LINK;
-
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  const dep=document.getElementById('cDep').value.trim();
+  const evDate=new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR');
+  let rows=keys.map(k=>`<div class="pay-row"><span>${sel[k].name}</span><span>${fmt(sel[k].price)}</span></div>`).join('');
+  rows+=`<div class="pay-total-row"><span>Total</span><span>${fmt(total)}</span></div>`;
+  if(dep) rows+=`<div class="pay-sena-row"><span>Seña a abonar ahora</span><span>${dep}</span></div>`;
+  rows+=`<div class="pay-row" style="margin-top:.5rem"><span style="color:var(--warm-grey);font-size:.76rem">Fecha del evento</span><span style="color:var(--warm-grey);font-size:.76rem">${evDate}</span></div>`;
+  rows+=`<div class="pay-row"><span style="color:var(--warm-grey);font-size:.76rem">Cliente</span><span style="color:var(--warm-grey);font-size:.76rem">${name}</span></div>`;
+  document.getElementById('paySummary').innerHTML=rows;
+  document.getElementById('payLink').href=PAYMENT_LINK;
   setStep(2);
 }
 
-// ====== STEP 2 → STEP 3 ======
+/* ============================================================
+   STEP 2 → 3
+============================================================ */
 function confirmPayment(){
   if(lastPdfDoc) lastPdfDoc.save(`Contrato_FotosArias_${lastClientName.replace(/\s+/g,'_')}.pdf`);
-
-  const name  = document.getElementById('cName').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const keys  = Object.keys(sel);
-  const total = keys.reduce((s,k)=>s+sel[k].price,0);
-  const dateVal = document.getElementById('cDate').value;
-  const evDate  = dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
-  const dep   = document.getElementById('cDep').value.trim()||'No especificado';
-  const loc   = document.getElementById('cLoc').value.trim()||'No especificado';
-  const services = keys.map(k=>sel[k].name).join(', ');
-
-  const body = `Hola ${name},%0D%0A%0D%0ATu contrato con Fotos Arias quedó registrado.%0D%0A%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha del evento: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal acordado: ${fmt(total)}%0D%0ASeña abonada: ${dep}%0D%0A%0D%0AEl contrato firmado fue descargado en tu dispositivo. Guardalo como comprobante.%0D%0A%0D%0AEntrega: las fotos estarán listas dentro de los 7 días hábiles del evento.%0D%0A%0D%0ACualquier consulta: +54 11 3213-7848 | ariasfotos6@gmail.com%0D%0A%0D%0AFotos Arias`;
-
-  if(email){
-    const aClient = document.createElement('a');
-    aClient.href = `mailto:${email}?subject=Contrato%20Fotos%20Arias%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${body}`;
-    aClient.click();
-  }
-
+  const name=document.getElementById('cName').value.trim();
+  const email=document.getElementById('cEmail').value.trim();
+  const keys=Object.keys(sel);
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  const dateVal=document.getElementById('cDate').value;
+  const evDate=dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
+  const dep=document.getElementById('cDep').value.trim()||'No especificado';
+  const loc=document.getElementById('cLoc').value.trim()||'No especificado';
+  const services=keys.map(k=>sel[k].name).join(', ');
+  const body=`Hola ${name},%0D%0A%0D%0ATu contrato con Fotos Arias quedó registrado.%0D%0A%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha del evento: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal acordado: ${fmt(total)}%0D%0ASeña abonada: ${dep}%0D%0A%0D%0AEl contrato firmado fue descargado en tu dispositivo.%0D%0A%0D%0AFotos Arias`;
+  if(email){const a=document.createElement('a');a.href=`mailto:${email}?subject=Contrato%20Fotos%20Arias%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${body}`;a.click();}
   setTimeout(()=>{
-    const bodyFoto = `Nuevo contrato cerrado.%0D%0A%0D%0ACliente: ${encodeURIComponent(name)}%0D%0AEmail cliente: ${encodeURIComponent(email||'no indicado')}%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal: ${fmt(total)}%0D%0ASeña: ${dep}`;
-    const aFoto = document.createElement('a');
-    aFoto.href = `mailto:${FOTO_EMAIL}?subject=Nuevo%20contrato%20%E2%80%94%20${encodeURIComponent(name)}%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${bodyFoto}`;
-    aFoto.click();
-  }, 1200);
-
+    const bodyF=`Nuevo contrato cerrado.%0D%0A%0D%0ACliente: ${encodeURIComponent(name)}%0D%0AEmail: ${encodeURIComponent(email||'no indicado')}%0D%0AServicios: ${encodeURIComponent(services)}%0D%0AFecha: ${evDate}%0D%0ALugar: ${encodeURIComponent(loc)}%0D%0ATotal: ${fmt(total)}%0D%0ASeña: ${dep}`;
+    const a=document.createElement('a');a.href=`mailto:${FOTO_EMAIL}?subject=Nuevo%20contrato%20%E2%80%94%20${encodeURIComponent(name)}%20%E2%80%94%20${encodeURIComponent(evDate)}&body=${bodyF}`;a.click();
+  },1200);
   setStep(3);
 }
 
-function downloadPDFAgain(){
-  if(lastPdfDoc) lastPdfDoc.save(`Contrato_FotosArias_${lastClientName.replace(/\s+/g,'_')}.pdf`);
-}
+function downloadPDFAgain(){ if(lastPdfDoc) lastPdfDoc.save(`Contrato_FotosArias_${lastClientName.replace(/\s+/g,'_')}.pdf`); }
 
-// ====== BUILD PDF ======
+/* ============================================================
+   BUILD PDF
+============================================================ */
 function buildPDF(){
-  const {jsPDF} = window.jspdf;
-  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-
-  const BG=[255,255,255], BK=[17,17,17], GY=[100,100,100], LG=[235,235,235], MD=[160,160,160];
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const BG=[250,247,242],BK=[14,13,12],GY=[120,110,100],LG=[230,225,218],GD=[184,152,90];
 
   doc.setFillColor(...BG); doc.rect(0,0,210,297,'F');
-
-  // Header
-  doc.setFillColor(...BK); doc.rect(0,0,210,20,'F');
-  doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(255,255,255);
+  doc.setFillColor(...BK); doc.rect(0,0,210,22,'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(255,255,255);
   doc.text('FOTOS ARIAS',14,12);
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(180,180,180);
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(160,145,125);
   doc.text('CONTRATO DE SERVICIOS FOTOGRÁFICOS',14,17.5);
-  doc.setTextColor(...MD);
+  doc.setTextColor(130,120,110);
   doc.text(`Emitido: ${new Date().toLocaleDateString('es-AR')}`,196,12,{align:'right'});
   doc.text('ariasfotos6@gmail.com  |  +54 11 3213-7848  |  CABA y Pcia. de Buenos Aires',196,17.5,{align:'right'});
 
-  let cy = 32;
+  // Gold accent line
+  doc.setFillColor(...GD); doc.rect(0,22,210,1.5,'F');
 
-  // DATOS CLIENTE
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  let cy=34;
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); doc.setTextColor(...GD);
   doc.text('DATOS DEL CLIENTE',14,cy);
-  doc.setDrawColor(...LG); doc.setLineWidth(.25); doc.line(14,cy+2,100,cy+2);
-  cy += 9;
+  doc.setDrawColor(...LG); doc.setLineWidth(.2); doc.line(14,cy+2,100,cy+2); cy+=9;
 
-  const cName  = document.getElementById('cName').value.trim();
-  const cDni   = document.getElementById('cDni').value.trim();
-  const cPhone = document.getElementById('cPhone').value.trim();
-  const cEmail = document.getElementById('cEmail').value.trim();
+  const cName=document.getElementById('cName').value.trim();
+  const cDni=document.getElementById('cDni').value.trim();
+  const cPhone=document.getElementById('cPhone').value.trim();
+  const cEmail=document.getElementById('cEmail').value.trim();
 
   [['Nombre',cName],['DNI',cDni],['Teléfono',cPhone||'—'],['Email',cEmail||'—']].forEach(([l,v])=>{
-    doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
+    doc.setFont('helvetica','normal'); doc.setFontSize(6); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
     doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...BK); doc.text(v,60,cy);
     cy+=7;
   });
 
-  cy += 5;
-
-  // SERVICIOS
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  cy+=6;
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); doc.setTextColor(...GD);
   doc.text('SERVICIOS CONTRATADOS',14,cy);
   doc.setDrawColor(...LG); doc.line(14,cy+2,100,cy+2); cy+=9;
 
-  const keys = Object.keys(sel);
-  const total = keys.reduce((s,k)=>s+sel[k].price,0);
-  const dateVal = document.getElementById('cDate').value;
-  const evDate  = dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
-  const loc     = document.getElementById('cLoc').value.trim()||'—';
-  const dep     = document.getElementById('cDep').value.trim()||'—';
+  const keys=Object.keys(sel);
+  const total=keys.reduce((s,k)=>s+sel[k].price,0);
+  const dateVal=document.getElementById('cDate').value;
+  const evDate=dateVal ? new Date(dateVal+'T00:00:00').toLocaleDateString('es-AR') : '—';
+  const loc=document.getElementById('cLoc').value.trim()||'—';
+  const dep=document.getElementById('cDep').value.trim()||'—';
 
   keys.forEach(k=>{
     doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...BK);
@@ -1090,27 +1569,23 @@ function buildPDF(){
     doc.text(fmt(sel[k].price),196,cy,{align:'right'});
     cy+=7;
   });
-  doc.setDrawColor(...BK); doc.setLineWidth(.3); doc.line(130,cy,196,cy); cy+=5;
+  doc.setDrawColor(...BK); doc.setLineWidth(.25); doc.line(130,cy,196,cy); cy+=5;
   doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...BK);
   doc.text('TOTAL',130,cy); doc.text(fmt(total),196,cy,{align:'right'}); cy+=5;
+  doc.setDrawColor(...LG); doc.setLineWidth(.2); doc.line(14,cy,196,cy); cy+=10;
 
-  doc.setDrawColor(...LG); doc.setLineWidth(.25); doc.line(14,cy,196,cy); cy+=10;
-
-  // EVENTO
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); doc.setTextColor(...GD);
   doc.text('DETALLE DEL EVENTO',14,cy); doc.line(14,cy+2,90,cy+2); cy+=9;
 
   [['Fecha del evento',evDate],['Lugar / locación',loc],['Monto de seña',dep]].forEach(([l,v])=>{
-    doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
+    doc.setFont('helvetica','normal'); doc.setFontSize(6); doc.setTextColor(...GY); doc.text(l.toUpperCase(),14,cy);
     doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...BK); doc.text(v,60,cy);
     cy+=7;
   });
 
-  cy+=6;
-  doc.setDrawColor(...LG); doc.line(14,cy,196,cy); cy+=10;
+  cy+=6; doc.setDrawColor(...LG); doc.line(14,cy,196,cy); cy+=10;
 
-  // TERMINOS
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); doc.setTextColor(...GD);
   doc.text('TÉRMINOS Y CONDICIONES',14,cy); doc.line(14,cy+2,100,cy+2); cy+=9;
 
   const terms=[
@@ -1122,60 +1597,42 @@ function buildPDF(){
     '6. Derechos: el cliente autoriza uso de imágenes en portfolio y redes, salvo indicación contraria.',
   ];
   doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(...GY);
-  terms.forEach(t=>{
-    const lines = doc.splitTextToSize(t,172);
-    doc.text(lines,14,cy); cy += lines.length*5+1.5;
-  });
+  terms.forEach(t=>{ const lines=doc.splitTextToSize(t,172); doc.text(lines,14,cy); cy+=lines.length*5+1.5; });
 
-  // ====== FIRMAS — siempre en la parte inferior de la hoja ======
-  // Reservamos espacio para firmas (58mm de alto) al final de la página
-  const FIRMA_Y = 235; // posición fija en la parte inferior
-  if(cy > FIRMA_Y - 10){ doc.addPage(); doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+  const FIRMA_Y=235;
+  if(cy>FIRMA_Y-10){ doc.addPage(); doc.setFillColor(...BG); doc.rect(0,0,210,297,'F'); }
+  const fY=Math.max(cy+8,FIRMA_Y);
 
-  const fY = Math.max(cy + 8, FIRMA_Y);
+  doc.setDrawColor(...LG); doc.setLineWidth(.3); doc.line(14,fY,196,fY);
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5); doc.setTextColor(...GD);
+  doc.text('FIRMAS',14,fY+7); doc.line(14,fY+8.5,40,fY+8.5);
 
-  // Línea separadora antes de firmas
-  doc.setDrawColor(...LG); doc.setLineWidth(.3); doc.line(14, fY, 196, fY);
-
-  // Título sección firmas
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...MD);
-  doc.text('FIRMAS', 14, fY + 7);
-  doc.line(14, fY+8.5, 40, fY+8.5);
-
-  const sigBaseY = fY + 18; // donde van los canvas de firma
-
-  // ---- FIRMA CLIENTE (izquierda) ----
-  const sigData = sigPad ? sigPad.toDataURL('image/png') : null;
-  if(sigData){
-    try{ doc.addImage(sigData,'PNG',14, sigBaseY - 20, 80, 20); }catch(e){}
-  }
-  // Línea de firma cliente
-  doc.setDrawColor(...BK); doc.setLineWidth(.5); doc.line(14, sigBaseY + 2, 98, sigBaseY + 2);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...BK);
-  doc.text('FIRMA DEL CLIENTE', 14, sigBaseY + 8);
+  const sigBaseY=fY+18;
+  const sigData=sigPad ? sigPad.toDataURL('image/png') : null;
+  if(sigData){ try{ doc.addImage(sigData,'PNG',14,sigBaseY-20,80,20); }catch(e){} }
+  doc.setDrawColor(...BK); doc.setLineWidth(.4); doc.line(14,sigBaseY+2,98,sigBaseY+2);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...BK);
+  doc.text('FIRMA DEL CLIENTE',14,sigBaseY+8);
   doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GY);
-  doc.text(cName.toUpperCase(), 14, sigBaseY + 14);
-  doc.text(`DNI: ${cDni}`, 14, sigBaseY + 20);
+  doc.text(cName.toUpperCase(),14,sigBaseY+14);
+  doc.text(`DNI: ${cDni}`,14,sigBaseY+20);
 
-  // ---- FIRMA FOTÓGRAFO (derecha) ----
-  // Espacio en blanco para firma física del fotógrafo
-  doc.setDrawColor(...BK); doc.setLineWidth(.5); doc.line(112, sigBaseY + 2, 196, sigBaseY + 2);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(...BK);
-  doc.text('FOTOS ARIAS — PRESTADOR', 112, sigBaseY + 8);
+  doc.setDrawColor(...BK); doc.setLineWidth(.4); doc.line(112,sigBaseY+2,196,sigBaseY+2);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...BK);
+  doc.text('FOTOS ARIAS — PRESTADOR',112,sigBaseY+8);
   doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GY);
-  doc.text('Elias Arias', 112, sigBaseY + 14);
-  doc.text('DNI: 42.663.250', 112, sigBaseY + 20);
-  doc.text('ariasfotos6@gmail.com', 112, sigBaseY + 20);
+  doc.text('Elias Arias',112,sigBaseY+14);
+  doc.text('DNI: 42.663.250',112,sigBaseY+20);
 
-  // Footer
   doc.setFillColor(...BK); doc.rect(0,289,210,8,'F');
-  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(150,150,150);
+  doc.setFillColor(...GD); doc.rect(0,289,210,1.5,'F');
+  doc.setFont('helvetica','normal'); doc.setFontSize(6); doc.setTextColor(130,120,110);
   doc.text('Fotos Arias  |  ariasfotos6@gmail.com  |  +54 11 3213-7848  |  CABA y Provincia de Buenos Aires',105,294,{align:'center'});
 
   return doc;
 }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeContract(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeContract(); });
 </script>
 </body>
 </html>
